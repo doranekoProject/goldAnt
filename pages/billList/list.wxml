@@ -1,0 +1,12 @@
+<!--billList/list.wxml-->
+<view class="bill-list">
+  <scroll-view scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
+    <view class="bill-list_row" wx:for="{{list}}" wx:key="item">
+      <view class="bill-list_row--desc">
+        {{item.desc}}
+        <view class="bill-list_row--time"> {{item.time}}</view>
+      </view>
+      <view class="bill-list_row--cost">￥{{item.cost}}</view>
+    </view>
+  </scroll-view>
+</view>

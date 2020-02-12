@@ -1,0 +1,79 @@
+<!--profile.wxml-->
+<view class="profile">
+  <view class="profile-header">
+    <block wx:if="{{isLogin}}">
+      <view class="profile-info">
+        <view class="profile-info_left"><open-data type="userAvatarUrl"></open-data></view>
+        <view class="profile-info_right">
+          <open-data type="userNickName"></open-data>
+          <view class="profile-info_phone">1111111111</view>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <button class="btn-orange" open-type="getUserInfo" bindgetuserinfo="getUserInfo">请登录</button>
+    </block>
+    <view class="profile-header_bar">
+      <view class="profile-header_bar--main">
+        <view class="profile-header_bar--tag"><view class="profile-header_bar--icon"></view>VIP店长</view>
+          <block wx:if="{{!isLogin}}">
+            <view class="profile-header_bar--right profile-header_bar--yellow">到期时间： 2020-10-10</view>
+          </block>
+          <block wx:else>
+            <view class="profile-header_bar--right">立即开通</view>
+          </block>
+      </view>
+    </view>
+  </view>
+  <view class="profile-module">
+    <view class="profile-module_row">
+      <navigator url="/pages/profile/bill"class="profile-module_row--title">账单</navigator>
+      <view class="profile-module_row--main">
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--cost">￥0</view>余额
+        </view>
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--cost">￥0</view>金币
+        </view>
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--cost">￥0</view>佣金
+        </view>
+      </view>
+    </view>
+    <view class="profile-module_row">
+      <view class="profile-module_row--title">订单</view>
+      <view class="profile-module_row--main">
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--desc icon-ad">广告订单</view>
+        </view>
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--desc icon-product">商品订单</view>
+        </view>
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--desc icon-like">我的收藏</view>
+        </view>
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--desc icon-address">地址管理</view>
+        </view>
+      </view>
+    </view>
+    <view class="profile-module_row">
+      <view class="profile-module_row--title">服务</view>
+      <view class="profile-module_row--main">
+        <view class="profile-module_row--item">
+          <button open-type="contact" class="profile-module_row--desc icon-service">在线客服</button>
+        </view>
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--desc icon-us">关于我们</view>
+        </view>
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--desc icon-business">商家中心</view>
+        </view>
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--desc icon-entry">商家入驻</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <footer-menu number="3"></footer-menu>
+</view>

@@ -1,0 +1,27 @@
+/**billList/list.wxss**/
+page {
+  background: #fff;
+}
+.bill-list_row {
+  position: relative;
+  margin: 0 38rpx;
+  padding: 40rpx 0 28rpx; 
+  color: #262626;
+  font-size: 30rpx;
+  border-bottom: 1px solid #DBDBDB;
+}
+.bill-list_row:last-child {
+  border: none;
+}
+.bill-list_row--time {
+  margin-top: 20rpx;
+  color: #A5A5A5;
+  font-size: 22rpx;
+}
+.bill-list_row--cost {
+  position: absolute;
+  right: 0;
+  top: 40rpx;
+  font-size: 36rpx;
+  color: #FE4B11;
+}

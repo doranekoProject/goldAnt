@@ -41,57 +41,60 @@ Component({
    */
   methods: {
     getData() {
+      const systemInfo = wx.getSystemInfoSync();
+      console.log(systemInfo)
       this._hasLoadData = true;
       this.setData({
+        listHeight: systemInfo.windowHeight - 50,
         infoList: [{
           imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
           title: '湛江市赤坎区安铺人鸡饭店',
           address: '广东省湛江市赤坎区金城新区127号'
         }, {
-            imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
-            title: '湛江市赤坎区安铺人鸡饭店',
-            address: '广东省湛江市赤坎区金城新区127号'
-          }, {
-            imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
-            title: '湛江市赤坎区安铺人鸡饭店',
-            address: '广东省湛江市赤坎区金城新区127号'
-          }, {
-            imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
-            title: '湛江市赤坎区安铺人鸡饭店',
-            address: '广东省湛江市赤坎区金城新区127号'
-          }, {
-            imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
-            title: '湛江市赤坎区安铺人鸡饭店',
-            address: '广东省湛江市赤坎区金城新区127号'
-          }, {
-            imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
-            title: '湛江市赤坎区安铺人鸡饭店',
-            address: '广东省湛江市赤坎区金城新区127号'
-          }, {
-            imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
-            title: '湛江市赤坎区安铺人鸡饭店',
-            address: '广东省湛江市赤坎区金城新区127号'
-          }, {
-            imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
-            title: '湛江市赤坎区安铺人鸡饭店',
-            address: '广东省湛江市赤坎区金城新区127号'
-          }, {
-            imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
-            title: '湛江市赤坎区安铺人鸡饭店',
-            address: '广东省湛江市赤坎区金城新区127号'
-          }, {
-            imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
-            title: '湛江市赤坎区安铺人鸡饭店',
-            address: '广东省湛江市赤坎区金城新区127号'
-          }, {
-            imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
-            title: '湛江市赤坎区安铺人鸡饭店',
-            address: '广东省湛江市赤坎区金城新区127号'
-          }, {
-            imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
-            title: '湛江市赤坎区安铺人鸡饭店',
-            address: '广东省湛江市赤坎区金城新区127号'
-          }]
+          imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
+          title: '湛江市赤坎区安铺人鸡饭店',
+          address: '广东省湛江市赤坎区金城新区127号'
+        }, {
+          imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
+          title: '湛江市赤坎区安铺人鸡饭店',
+          address: '广东省湛江市赤坎区金城新区127号'
+        }, {
+          imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
+          title: '湛江市赤坎区安铺人鸡饭店',
+          address: '广东省湛江市赤坎区金城新区127号'
+        }, {
+          imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
+          title: '湛江市赤坎区安铺人鸡饭店',
+          address: '广东省湛江市赤坎区金城新区127号'
+        }, {
+          imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
+          title: '湛江市赤坎区安铺人鸡饭店',
+          address: '广东省湛江市赤坎区金城新区127号'
+        }, {
+          imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
+          title: '湛江市赤坎区安铺人鸡饭店',
+          address: '广东省湛江市赤坎区金城新区127号'
+        }, {
+          imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
+          title: '湛江市赤坎区安铺人鸡饭店',
+          address: '广东省湛江市赤坎区金城新区127号'
+        }, {
+          imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
+          title: '湛江市赤坎区安铺人鸡饭店',
+          address: '广东省湛江市赤坎区金城新区127号'
+        }, {
+          imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
+          title: '湛江市赤坎区安铺人鸡饭店',
+          address: '广东省湛江市赤坎区金城新区127号'
+        }, {
+          imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
+          title: '湛江市赤坎区安铺人鸡饭店',
+          address: '广东省湛江市赤坎区金城新区127号'
+        }, {
+          imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
+          title: '湛江市赤坎区安铺人鸡饭店',
+          address: '广东省湛江市赤坎区金城新区127号'
+        }]
       })
     }
   }
