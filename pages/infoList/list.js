@@ -10,32 +10,35 @@ Page({
     tabItem: [{
       isShow: true
     }, {
-      isShow: true
+      isShow: false
     }, {
-      isShow: true
+      isShow: false
     }, {
-      isShow: true
+      isShow: false
     }]
   },
   onLoad: function () {
   },
   // 处理事件
   onTab(event) {
-    console.log(event)
+    console.log('ddd')
     var cur = event.currentTarget.dataset.current;
     if (this.data.currentTab == cur) {
       return false;
     } else {
+      this.data.tabItem[cur].isShow = true;
       this.setData({
-        currentTab: cur
+        currentTab: cur,
+        tabItem: this.data.tabItem
       })
     }
   },
   switchTab(event) {
-    console.log(event);
     var cur = event.detail.current;
+    this.data.tabItem[cur].isShow = true;
     this.setData({
-      currentTab: cur
+      currentTab: cur,
+      tabItem: this.data.tabItem
     });
   }
 })

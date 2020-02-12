@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "info-list": "../components/info-list"
+    "info-list": "../components/infoList/info-list"
   }
 }

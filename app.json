@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/infoList/list",
+    "pages/infoList/details",
     "pages/bill/bill",
     "pages/billList/list",
     "pages/profile/profile",
