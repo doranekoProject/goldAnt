@@ -1,0 +1,31 @@
+/**index.wxss**/
+.tab-hide {
+  display: none;
+}
+.tab-list {
+  font-family: Source Han Sans CN;
+  position: relative;
+  height: 180rpx;
+  padding: 20rpx 20rpx 20rpx 208rpx;
+  border-bottom: 2rpx solid #EFEFF4;
+}
+.tab-img {
+  position: absolute;
+  left: 20rpx;
+  top: 20rpx;
+  width: 160rpx;
+  height: 160rpx;
+}
+.tab-left-info {
+  float: left;
+}
+.tab-left-info .title {
+  font-size: 32rpx;
+  color: #262626;
+  line-height: 54rpx;
+}
+.tab-left-info .address {
+  font-size: 28rpx;
+  color: #A5A5A5;
+  line-height: 48rpx;
+}
