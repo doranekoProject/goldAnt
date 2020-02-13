@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/adOrder/list",
+    "pages/adOrder/details",
     "pages/infoList/list",
     "pages/infoList/details",
     "pages/bill/bill",

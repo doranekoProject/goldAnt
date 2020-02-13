@@ -14,6 +14,10 @@ Component({
     isShow: {
       type: Boolean,
       value: false
+    },
+    type: {
+      type: String,
+      value: 'list'
     }
   },
   observers: {

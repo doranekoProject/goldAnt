@@ -1,7 +1,7 @@
 <!-- 组件模板 -->
 <view class="tab-content" class="{{showClass}}">
   <scroll-view bindscrolltoupper="upper" bindscrolltolower="lower" scroll-y="true" class="scroll-view" bindscrolltoupper="upper" bindscrolltolower="lower" style="height:{{listHeight}}px">
-    <navigator class="tab-list" wx:key="index" wx:for="{{infoList}}" url="/pages/infoList/details">
+    <navigator wx:if="{{type === 'list'}}" class="tab-list" wx:key="index" wx:for="{{infoList}}" url="/pages/infoList/details">
       <image class="tab-img" src="{{item.imgUrl}}"></image>
       <view class="tab-left-info">
         <text class="title">{{item.title}}</text>
@@ -10,6 +10,23 @@
         </text>
       </view>
     </navigator>
+    <view wx:if="{{type === 'ads'}}" class="ads-list" wx:key="index" wx:for="{{infoList}}">
+      <navigator  url="/pages/infoList/details">
+        <view class="state">待付款</view>
+        <view class="ads-wrap">
+          <image class="tab-img" src="{{item.imgUrl}}"></image>
+          <view class="tab-left-info">
+            <text class="title">北欧现代简约餐厅吊灯创意三头 餐厅灯具</text>
+            <view class="price-wrap">
+              共计10件商品  合计：<text class="price">￥6.50</text>
+            </view>
+          </view>
+        </view>
+      </navigator>
+      <view class="button-warp">
+        <button bindtap="onTap" class="button">待付款</button>
+      </view>
+    </view>
   </scroll-view>
   
 </view>
