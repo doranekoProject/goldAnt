@@ -1,0 +1,23 @@
+.details-warp {
+  font-family: Source Han Sans CN;
+  padding: 38rpx;
+}
+.details-warp .details-header {
+  border-bottom: 2rpx solid #DBDBDB;
+  padding-bottom: 30rpx;
+  margin-bottom: 30rpx;
+}
+.details-warp .details-title {
+  display: block;
+  color: #262626;
+  font-size: 40rpx;
+  line-height: 68rpx;
+}
+.details-warp .details-date{
+  color: #A5A5A5;
+  font-size: 20rpx;
+  line-height: 41rpx;
+}
+.details-content img {
+  max-width: 100%;
+}

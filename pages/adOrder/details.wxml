@@ -1,0 +1,8 @@
+<!-- 组件模板 -->
+<view class="details-warp">
+  <view class="details-header">
+    <text class="details-title">{{title}}</text>
+    <text class="details-date">{{date}}</text>
+  </view>
+  <rich-text class="details-content" nodes="{{content}}"></rich-text>
+</view>
