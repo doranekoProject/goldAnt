@@ -11,7 +11,7 @@
       </view>
     </navigator>
     <view wx:if="{{type === 'ads'}}" class="ads-list" wx:key="index" wx:for="{{infoList}}">
-      <navigator  url="/pages/infoList/details">
+      <navigator  url="/pages/adOrder/details">
         <view class="state">待付款</view>
         <view class="ads-wrap">
           <image class="tab-img" src="{{item.imgUrl}}"></image>
