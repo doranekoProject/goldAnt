@@ -18,6 +18,10 @@ Component({
     type: {
       type: String,
       value: 'list'
+    },
+    paddingTop: {
+      type: Number,
+      value: 50
     }
   },
   observers: {
@@ -56,7 +60,7 @@ Component({
       const systemInfo = wx.getSystemInfoSync();
       this._hasLoadData = true;
       this.setData({
-        listHeight: systemInfo.windowHeight - 50,
+        listHeight: systemInfo.windowHeight - this.data.paddingTop,
         infoList: [{
           imgUrl: 'https://img-blog.csdnimg.cn/20190927151132530.png',
           title: '湛江市赤坎区安铺人鸡饭店',

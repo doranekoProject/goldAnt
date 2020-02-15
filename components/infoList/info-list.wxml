@@ -10,7 +10,7 @@
         </text>
       </view>
     </navigator>
-    <view wx:if="{{type === 'ads'}}" class="ads-list" wx:key="index" wx:for="{{infoList}}">
+    <view wx:if="{{type === 'ads' && infoList.length > 0}}" class="ads-list" wx:key="index" wx:for="{{infoList}}">
       <navigator  url="/pages/adOrder/details">
         <view class="state">待付款</view>
         <view class="ads-wrap">
@@ -27,6 +27,7 @@
         <button bindtap="onTap" class="button">待付款</button>
       </view>
     </view>
+    <view wx:if="{{type === 'ads' && infoList.length <1}}" class="no-data"> 亲，你还没有相关订单哟！ </view>
   </scroll-view>
   
 </view>

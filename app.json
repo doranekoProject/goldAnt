@@ -1,5 +1,10 @@
 {
   "pages": [
+    "pages/address/list",
+    "pages/address/edit",
+    "pages/myFavorite/list",
+    "pages/goods/list",
+    "pages/goods/details",
     "pages/adOrder/list",
     "pages/adOrder/details",
     "pages/infoList/list",
