@@ -4,6 +4,7 @@
     "pages/adOrder/details",
     "pages/infoList/list",
     "pages/infoList/details",
+    "pages/homepage/homepage",
     "pages/bill/bill",
     "pages/billList/list",
     "pages/profile/profile",

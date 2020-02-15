@@ -1,0 +1,60 @@
+<!--homepage.wxml-->
+<view>
+  <view class="home-bar">
+    <view class="home-bar_area"><text>广州市</text></view>
+    <view class="home-bar_seach"><input class="" value="" placeholder="输入关键字" placeholder-class="placeholder"></input></view>
+    <button open-type="contact" class="home-bar_contact"></button>
+  </view>
+  <view class="home-filter">
+    <view class="home-filter_item {{tabType == 1 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="1"><text>地区</text></view>
+    <view class="home-filter_item {{tabType == 2 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="2"><text>场所</text></view>
+    <view class="home-filter_item {{tabType == 3 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="3"><text>线下</text></view>
+    <view class="home-filter_item {{tabType == 4 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="4"><text>批量购买</text></view>
+  </view>
+  <scroll-view class="home-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
+    <view class="home-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item">
+      <image class="home-list_item--img" src="{{item.cover}}"></image>
+      <view class="home-list_info">
+        <view class="home-list_title">{{item.title}}</view>
+        <view class="home-list_desc">{{item.desc}}</view>
+        <view>￥<text class="home-list_cost">{{item.cost}}</text></view>
+        <view class="home-list_bot">
+          距离{{item.location}}km
+          <view class="home-list_bot--cart"></view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="drop-down" hidden="{{tabType == 0}}">
+    <view class="drop-down_layer"></view>
+    <view class="drop-down_box {{tabType == 1 ? 'drop-down_col' : ''}}">
+      <view class="drop-down_box--col">
+        <view class="drop-down_box--item" wx:for="{{downList}}" wx:key="item">{{item.name}}</view>
+      </view>
+      <view class="drop-down_box--col" hidden="{{isSub}}">
+        <view class="drop-down_box--item  drop-down_box--active">全部</view>
+        <view class="drop-down_box--item">全部</view>
+      </view>
+      <view class="drop-down_bot" hidden="{{tabType != 4}}">
+        <view>
+          <view class="drop-down_bot--name">投放时长/节</view>
+          <view class="drop-down_bot--item">15秒</view>
+          <view class="drop-down_bot--item">30秒</view>
+          <view class="drop-down_bot--item">45秒</view>
+          <view class="drop-down_bot--item">60秒</view>
+        </view>
+        <view><view class="drop-down_bot--name">投放周期</view>
+          <view class="drop-down_bot--item">周/7天</view>
+        </view>
+        <view>
+          <view class="drop-down_bot--name">数量</view>
+          <view class="drop-down_bot--reduce"></view>
+          <input class="drop-down_bot--input" value="{{quantity}}"></input>
+          <view class="drop-down_bot--add"></view>
+        </view>
+        <view class="drop-down_bot--btn">加入购物车</view>
+      </view>
+    </view>
+  </view>
+  <footer-menu number="0"></footer-menu>
+</view>
