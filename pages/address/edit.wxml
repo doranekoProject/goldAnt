@@ -1,0 +1,27 @@
+<!-- 组件模板 -->
+<view class="form">
+  <view class="section">
+    <view class="section-title">收货人</view>
+    <input class="input" bindinput="bindKeyInput" data-modal='userName' name="userName" value="{{addressInfo.userName}}" />
+  </view>
+  <view class="section">
+    <view class="section-title">省/市/区</view>
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+    <view class="picker">
+      {{region[0]}}，{{region[1]}}，{{region[2]}}
+    </view>
+  </picker>
+  </view>
+  <view class="section">
+    <view class="section-title">详细地址</view>
+    <input class="input" bindinput="bindKeyInput" data-modal='detailInfo' name="detailInfo" value="{{addressInfo.detailInfo}}" placeholder="请输入详细地址" />
+  </view>
+  <view class="section">
+    <view class="section-title">手机号码</view>
+    <input class="input" bindinput="bindKeyInput" data-modal='telNumber' name="telNumber" value="{{addressInfo.telNumber}}" />
+  </view>
+  <view class="btn-area">
+    <view class="submit button" bindtap="save">保存</view>
+    <view bindtap="chooseAddress" class="wei-xin button">一键获取微信地址</view>
+  </view>
+</view>

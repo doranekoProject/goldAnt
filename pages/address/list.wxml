@@ -1,0 +1,50 @@
+<!-- 组件模板 -->
+<view class="address-wrap">
+  <view class="address-list">
+    <view class="form">
+      <text class="label">收货人:</text>
+      <text>李世鹏</text>
+    </view>
+    <view class="form">
+      <text class="label">收货地址:</text>
+      <text>广东省湛江市徐闻县徐闻广场农贸市场109号1109房</text>
+    </view>
+    <view class="form">
+      <text class="label">手机号:</text>
+      <text>18002090381</text>
+    </view>
+    <view class="button-warp">
+      <view class="left flex-item">
+        <text class="button">默认地址</text>
+      </view>
+      <view class="right flex-item">
+        <text class="button">编辑</text>
+        <text class="button">删除</text>
+      </view>
+    </view>
+  </view>
+  <view class="address-list">
+    <view class="form">
+      <text class="label">收货人:</text>
+      <text>李世鹏</text>
+    </view>
+    <view class="form">
+      <text class="label">收货地址:</text>
+      <text>广东省湛江市徐闻县徐闻广场农贸市场109号1109房</text>
+    </view>
+    <view class="form">
+      <text class="label">手机号:</text>
+      <text>18002090381</text>
+    </view>
+    <view class="button-warp">
+      <view class="left flex-item">
+        <text class="button">设为默认</text>
+      </view>
+      <view class="right flex-item">
+        <text class="button">编辑</text>
+        <text class="button">删除</text>
+      </view>
+    </view>
+  </view>
+  <navigator class="add-button" url="/pages/address/edit">添加新地址</navigator>
+</view>

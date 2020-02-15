@@ -1,0 +1,43 @@
+.form {
+  font-family: Source Han Sans CN;
+  background: #fff;
+  padding: 30rpx 36rpx 73rpx;
+}
+.section {
+  position: relative;
+  padding-left: 140rpx;
+  height: 105rpx;
+  border-bottom: 1rpx solid #DBDBDB;
+  line-height: 105rpx;
+}
+.section-title{
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #262626;
+  font-size: 30rpx;
+}
+.input, .picker{
+  height: 105rpx;
+  text-align: right;
+  color: #A5A5A5;
+  font-size: 30rpx;
+}
+.button {
+  width: 100%;
+  height: 88rpx;
+  text-align: center;
+  line-height: 88rpx;
+  font-size: 30rpx;
+}
+.submit {
+  margin-top: 44rpx;
+  background: #4987D8;
+  color: #fff;
+}
+.wei-xin {
+  margin-top: 30rpx;
+  background: #fff;
+  color: #019806;
+  border: 2rpx solid #019806;
+}
