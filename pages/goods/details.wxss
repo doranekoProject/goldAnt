@@ -1,0 +1,88 @@
+.clearfix:after,
+.clearfix:before {
+  display: table;
+  content: ' ';
+}
+.clearfix:after {
+  clear: both;
+}
+
+.tab-img {
+  position: absolute;
+  left: 20rpx;
+  top: 20rpx;
+  width: 160rpx;
+  height: 160rpx;
+}
+.tab-left-info {
+  float: left;
+}
+.tab-left-info .title {
+  font-size: 32rpx;
+  color: #262626;
+  line-height: 54rpx;
+}
+.tab-left-info .price-wrap {
+  display: block;
+  font-size: 24rpx;
+  line-height: 41rpx;
+  color: #A5A5A5;
+  text-align: right;
+}
+.tab-left-info .price {
+  color: #FE4B11;
+}
+.ads-list {
+  font-family: Source Han Sans CN;
+  padding: 20rpx 20rpx 20rpx 20px;
+  background: #fff;
+  height: 356rpx;
+  margin-bottom: 2rpx;
+}
+.ads-list .ads-wrap {
+  position: relative;
+  height: 160rpx;
+  padding-left: 188rpx;
+}
+.ads-list .state {
+  color: #FE4B11;
+  font-size: 24rpx;
+  text-align: right;
+  line-height: 41rpx;
+  margin-bottom: 25rpx;
+}
+.ads-list .tab-img {
+  left: 0;
+  top: 0;
+}
+.button-warp {
+  display: block;
+  margin-top: 40rpx;
+  text-align: right;
+}
+.button-warp .button {
+  display: inline-block;
+  color: #FE4B11;
+  font-size: 24rpx;
+  padding: 11rpx 24rpx;
+  border:1rpx solid rgba(254,75,17,1);
+  border-radius: 30rpx;
+  background: #fff;
+  width: auto;
+}
+.price-details {
+  background: #fff;
+  padding: 40rpx 45rpx 45rpx 20rpx;
+  margin-bottom: 4rpx;
+}
+.price-list {
+  font-size: 28rpx;
+  line-height: 60rpx;
+  color: #A5A5A5;
+}
+.price-list .text-left {
+  float: left;
+}
+.price-list .text-right {
+  float: right;
+}

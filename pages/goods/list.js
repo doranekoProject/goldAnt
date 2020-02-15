@@ -1,18 +1,19 @@
-//index.js
-//资讯列表
+// 商品订单
 const app = getApp()
 
 Page({
   data: {
     isShow: true,
     currentTab: 0,
-    menuData: ['新闻', '资讯', '视频', '招聘'],
+    menuData: ['全部', '待付款', '待发货', '待收货', '已完成'],
     tabItem: [{
       isShow: true
     }, {
       isShow: false
     }, {
       isShow: false
+    }, {
+    isShow: false
     }, {
       isShow: false
     }]

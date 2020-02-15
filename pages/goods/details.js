@@ -1,5 +1,5 @@
 //index.js
-//广告订单详情
+//商品订单详情
 const app = getApp()
 
 Page({

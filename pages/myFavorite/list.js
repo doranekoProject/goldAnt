@@ -1,5 +1,4 @@
 //index.js
-//资讯列表
 const app = getApp()
 
 Page({
