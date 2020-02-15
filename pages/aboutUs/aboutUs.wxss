@@ -1,0 +1,23 @@
+page{
+  height: 100%;
+}
+.details-warp {
+  font-family: Source Han Sans CN;
+  padding: 38rpx;
+  background: #fff;
+  min-height: 100%;
+}
+.details-warp .details-header {
+  border-bottom: 2rpx solid #DBDBDB;
+  padding-bottom: 30rpx;
+  margin-bottom: 30rpx;
+}
+.details-warp .details-title {
+  display: block;
+  color: #000;
+  font-size: 36rpx;
+  line-height: 61rpx;
+}
+.details-content img {
+  max-width: 100%;
+}

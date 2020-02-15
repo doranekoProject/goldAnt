@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/aboutUs/aboutUs",
     "pages/address/list",
     "pages/address/edit",
     "pages/myFavorite/list",
