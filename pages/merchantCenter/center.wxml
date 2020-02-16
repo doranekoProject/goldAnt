@@ -1,0 +1,37 @@
+<!--profile.wxml-->
+<view class="profile">
+  <view class="profile-module">
+    <view class="profile-module_row">
+      <navigator url="/pages/profile/bill"class="profile-module_row--title">账单</navigator>
+      <view class="profile-module_row--main">
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--cost">￥0</view>余额
+        </view>
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--cost">￥0</view>金币
+        </view>
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--cost">￥0</view>佣金
+        </view>
+      </view>
+    </view>
+    <view class="profile-module_row">
+      <view class="profile-module_row--title">订单</view>
+      <view class="profile-module_row--main">
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--desc icon-ad">广告订单</view>
+        </view>
+        <view class="profile-module_row--item">
+          <view class="profile-module_row--desc icon-product">商品订单</view>
+        </view>
+        <view class="profile-module_row--item">
+          <navigator url="/pages/billList/list?type=2" class="profile-module_row--desc icon-address">我要提现</navigator>
+        </view>
+        <view class="profile-module_row--item">
+          <navigator url="/pages/billList/list?type=3" class="profile-module_row--desc icon-address">账单明细</navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+  <footer-menu number="3"></footer-menu>
+</view>

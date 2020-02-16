@@ -1,0 +1,24 @@
+<!-- 组件模板 -->
+<view class="merchants-warp">
+  <image class="img" src="./images/merchants.png"></image>
+  <view class="form">
+    <view class="title">商家信息</view>
+    <view class="section">
+      <view class="section-title">商铺名称</view>
+      <input class="input" bindinput="bindKeyInput" data-modal='userName' name="userName" value="{{addressInfo.userName}}" />
+    </view>
+    <view class="section">
+      <view class="section-title">联系人</view>
+      <input class="input" bindinput="bindKeyInput" data-modal='userName' name="userName" value="{{addressInfo.userName}}" />
+    </view>
+    <view class="section">
+      <view class="section-title">联系电话</view>
+      <input class="input" bindinput="bindKeyInput" data-modal='userName' name="userName" value="{{addressInfo.userName}}" />
+    </view>
+    <view class="section">
+      <view class="section-title">地址</view>
+      <input class="input" bindinput="bindKeyInput" data-modal='userName' name="userName" value="{{addressInfo.userName}}" />
+    </view>
+    <view class="button">申请提交</view>
+  </view>
+</view>
