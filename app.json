@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/merchantsSettled/merchants-settled",
+    "pages/membership/open-membership",
     "pages/aboutUs/aboutUs",
     "pages/address/list",
     "pages/address/edit",

@@ -1,0 +1,88 @@
+.membership-wrap {
+  padding: 20rpx;
+  font-family:Source Han Sans CN;
+}
+.vip-wrap {
+  position: relative;
+  width: 100%;
+  height: 298rpx;
+  background: linear-gradient(159deg,rgba(73,135,216,1) 0%,rgba(37,68,108,1) 100%);
+  border-radius: 10px;
+}
+.user-warp {
+  position: absolute;
+  padding-left: 85rpx;
+  left: 25rpx;
+  top: 25rpx;
+  width: 400rpx;
+}
+.user-warp .img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  width: 68rpx;
+  height: 68rpx;
+  border: 0 none;
+  border-radius: 34rpx;
+}
+.user-warp .name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #fff;
+}
+.user-warp .state{
+  font-size: 20rpx;
+  font-weight:400;
+  color:rgba(169,198,235,1);
+  vertical-align: 13rpx;
+}
+.vip-tag {
+  position: absolute;
+  right: 32rpx;
+  top: 23rpx;
+  font-size:111rpx;
+  font-weight:bold;
+  line-height:189rpx;
+  color:rgba(255,255,255,1);
+  text-shadow:0px 3px 6px rgba(0,0,0,0.16);
+}
+.msg-wrap {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 73rpx;
+  text-align: center;
+  line-height: 73rpx;
+}
+.msg-wrap .mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 73rpx;
+  width: 100%;
+  background: rgba(0,0,0,1);
+  opacity: 0.45;
+  z-index: 1;
+  border-radius: 0px 0px 10px 10px;
+}
+.msg-wrap .msg {
+  position: relative;
+  z-index: 2;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: rgba(144,192,255,1);
+}
+.open-vip {
+  margin-top: 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: rgba(255,196,0,1);
+  border-radius: 90px;
+  font-size: 36rpx; 
+  font-weight: 500;
+  text-align: center;
+  color: rgba(255,255,255,1);
+}
