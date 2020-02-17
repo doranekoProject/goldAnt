@@ -1,0 +1,59 @@
+<!--homepage.wxml-->
+<view>
+  <swiper class="detail-banner" indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{banner}}" wx:key="*this">
+      <swiper-item>
+        <view class="swiper-item"><image mode="widthFix" src="{{item}}"></image></view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="detail-info">
+    <view class="detail-info_title">湛江市赤坎区安铺人鸡饭店</view>
+    <view class="detail-info_desc">广东省湛江市赤坎区金城新区127号</view>
+    <view class="detail-info_cost">￥<text>38</text></view>
+  </view>
+  <view class="detail-type">
+    <view class="detail-type_title">商家</view> 
+    <view class="detail-type_text">湛江市祥顺机动车检测有限公司</view>
+   </view>
+  <view class="detail-type">
+    <view class="detail-type_title">选择</view>
+    <view class="detail-type_text">尺寸</view>
+    <view class="detail-mian">
+      <view class="detail-mian_desc"><view>行业</view> 娱乐休闲</view>
+      <view class="detail-mian_desc"><view>屏幕</view> 1980 x 1024</view>   
+    </view>
+  </view>
+  <view class="detail-bot">
+    <button open-type="contact" class="home-bar_contact">客服</button>
+    <view class="detail-favorite">收藏</view>
+    <view class="detail-bot_right">
+      <view class="detail-bot_btn btn-orange">加入购物车</view>
+      <view class="detail-bot_btn btn-blue">立即购买</view>
+    </view>
+  </view>
+  <view class="selete-pop">
+    <view class="selete-pop_main">
+      <view class="selete-pop_main--title">
+        选择尺寸时长
+        <view class="selete-pop_main--close"></view>
+      </view> 
+      <view class="selete-pop_main--row">
+        <view class="selete-pop_main--name">展示尺寸：</view>
+        <view class="selete-pop_main--item">1080*1920</view>
+      </view>
+      <view class="selete-pop_main--row">
+        <view class="selete-pop_main--name">投放周期：</view>
+        <view class="selete-pop_main--item">周/7天</view>
+      </view>
+      <view class="selete-pop_main--row">
+        <view class="selete-pop_main--name">投放时长：</view>
+        <view class="selete-pop_main--item">15秒</view>
+        <view class="selete-pop_main--item">30秒</view>
+        <view class="selete-pop_main--item">45秒</view>
+        <view class="selete-pop_main--item">60秒</view>
+      </view>  
+      <view class="selete-pop_main--btn">加入购物车</view>
+    </view>
+  </view>
+</view>

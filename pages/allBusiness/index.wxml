@@ -1,0 +1,18 @@
+<!--all business.wxml-->
+<view>
+  <scroll-view class="business-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
+    <view class="business-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item">
+      <image class="business-list_item--img" src="{{item.cover}}"></image>
+      <view class="business-list_info">
+        <view class="business-list_title">{{item.title}}</view>
+        <view class="business-list_desc">{{item.desc}}</view>
+        <view>￥<text class="business-list_cost">{{item.cost}}</text></view>
+        <view class="business-list_bot">
+          距离{{item.location}}km
+          <view class="business-list_bot--cart"></view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <footer-menu number="0"></footer-menu>
+</view>

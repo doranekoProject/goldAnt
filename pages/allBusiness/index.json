@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "footer-menu": "../components/menu/menu"
+  },
+  "navigationBarTitleText" : "所属商家"
+}

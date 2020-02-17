@@ -17,6 +17,9 @@
     "pages/bill/bill",
     "pages/billList/list",
     "pages/profile/profile",
+    "pages/allBusiness/index",
+    "pages/submitOrder/index",
+    "pages/detail/detail",
     "pages/index/index",
     "pages/logs/logs"
   ],
