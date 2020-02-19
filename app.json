@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/showroom/index",
     "pages/detail/detail",
     "pages/shop/index",
     "pages/allBusiness/index",

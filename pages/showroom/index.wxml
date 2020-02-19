@@ -1,0 +1,40 @@
+<!--showroom.wxml-->
+<view>
+  <view class="showroom-bar">
+    <view class="showroom-bar_area"><text>广州市</text></view>
+    <view class="showroom-bar_seach"><input class="" value="" placeholder="输入关键字" placeholder-class="placeholder"></input></view>
+  </view>
+  <view class="showroom-filter">
+    <view class="showroom-filter_item {{tabType == 1 ? 'showroom-filter_item--active' : ''}}" bindtap="tab" data-type="1"><text>地区</text></view>
+    <view class="showroom-filter_item {{tabType == 2 ? 'showroom-filter_item--active' : ''}}" bindtap="tab" data-type="2"><text>行业</text></view>
+    <view class="showroom-filter_item {{tabType == 3 ? 'showroom-filter_item--active' : ''}}" bindtap="tab" data-type="3"><text>招商加盟</text></view>
+    <view class="showroom-filter_item {{tabType == 4 ? 'showroom-filter_item--active' : ''}}" bindtap="tab" data-type="4"><text>招聘</text></view>
+  </view>
+  <scroll-view class="showroom-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
+    <view class="showroom-banner">
+      <image src="https://image.seedit.com/sys/2020/02/08/b54dd7cee43fa8c5b353c9184e3f7658693628.jpg"></image>
+    </view>
+    <view class="showroom-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item">
+      <image class="showroom-list_item--img" src="{{item.cover}}"></image>
+      <view class="showroom-list_info">
+        <view class="showroom-list_title">{{item.title}}</view>
+        <view class="showroom-list_bot">
+          距离{{item.location}}km
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="drop-down" hidden="{{tabType == 0}}">
+    <view class="drop-down_layer"></view>
+    <view class="drop-down_box {{tabType == 1 ? 'drop-down_col' : ''}}">
+      <view class="drop-down_box--col">
+        <view class="drop-down_box--item" wx:for="{{downList}}" wx:key="item">{{item.name}}</view>
+      </view>
+      <view class="drop-down_box--col" hidden="{{isSub}}">
+        <view class="drop-down_box--item  drop-down_box--active">全部</view>
+        <view class="drop-down_box--item">全部</view>
+      </view>
+    </view>
+  </view>
+  <footer-menu number="0"></footer-menu>
+</view>
