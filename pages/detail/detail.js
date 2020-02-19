@@ -10,12 +10,23 @@ Page({
     vertical: false,
     autoplay: false,
     interval: 2000,
-    duration: 500
+    duration: 500,
+    isSeletePop: false,
+    quantity: 1
   },
   onReady: function () {
    
   },
-  onLoad: function () {
+  onLoad: function (e) {
+    const page = e.type || 1;
+    this.setData({
+      page: page
+    })
     
+  },
+  seletePop: function() {
+    this.setData({
+      isSeletePop: !this.data.isSeletePop
+    })
   }
 })

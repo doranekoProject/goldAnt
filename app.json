@@ -2,6 +2,10 @@
   "pages": [
     "pages/shopCart/shop-cart",
     "pages/logistics/logistics-info",
+    "pages/showroom/index",
+    "pages/detail/detail",
+    "pages/shop/index",
+    "pages/allBusiness/index",
     "pages/merchantCenter/center",
     "pages/merchantsSettled/merchants-settled",
     "pages/membership/open-membership",
@@ -19,9 +23,7 @@
     "pages/bill/bill",
     "pages/billList/list",
     "pages/profile/profile",
-    "pages/allBusiness/index",
     "pages/submitOrder/index",
-    "pages/detail/detail",
     "pages/index/index",
     "pages/logs/logs"
   ],

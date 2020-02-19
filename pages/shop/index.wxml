@@ -1,0 +1,43 @@
+<!--shop.wxml-->
+<view>
+<scroll-view class="shop-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
+    <swiper class="shop-banner" indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{banner}}" wx:key="*this">
+        <swiper-item>
+          <view class="swiper-item"><image mode="widthFix" src="{{item}}"></image></view>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="shop-sort">
+      <view class="shop-sort_item">
+        <image></image>
+        <view>美妆护肤</view>
+      </view>
+      <view class="shop-sort_item">
+        <image></image>
+        <view>美妆护肤</view>
+      </view>
+      <view class="shop-sort_item">
+        <image></image>
+        <view>美妆护肤</view>
+      </view>
+      <view class="shop-sort_item">
+        <image></image>
+        <view>美妆护肤</view>
+      </view>
+    </view>
+    <view class="shop-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item">
+      <image class="shop-list_item--img" src="{{item.cover}}"></image>
+      <view class="shop-list_info">
+        <view class="shop-list_title">{{item.title}}</view>
+        <view class="shop-list_desc">{{item.desc}}</view>
+        <view>￥<text class="shop-list_cost">{{item.cost}}</text></view>
+        <view class="shop-list_bot">
+          距离{{item.location}}km
+          <view class="shop-list_bot--cart"></view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <footer-menu number="1"></footer-menu>
+</view>
