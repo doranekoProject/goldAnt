@@ -1,5 +1,11 @@
 <!--submit order.wxml-->
 <view>
+  <view class="add-address">
+    <view>
+      <view>请添加收货地址</view>
+       <view class="add-address_add"></view>
+    </view>
+  </view>
   <view class="order-info">
     <image class="order-info_img" src="{{list.cover}}"></image>
     <view class="order-info_box">
