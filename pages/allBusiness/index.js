@@ -9,6 +9,7 @@ Page({
   onReady: function () {
   },
   onLoad: function () {
+    const type = !e.type ? 0 : e.type;
     const dataList = [];
     const data = {
       cover: 'https://profile.csdnimg.cn/5/D/E/3_a772116804',
@@ -23,6 +24,9 @@ Page({
     this.setData({
       list: dataList,
     })
+    wx.setNavigationBarTitle({
+      title: type == 0 ? '所属商家' : type
+    });
   },
   lower: function () {
     const list = this.data.list;

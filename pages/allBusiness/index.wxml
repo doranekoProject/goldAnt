@@ -14,5 +14,11 @@
       </view>
     </view>
   </scroll-view>
+  <view class="aaaa">
+    <view>
+      <image src="https://profile.csdnimg.cn/5/D/E/3_a772116804"></image>
+      <view class="close">x</view>
+    </view>
+  </view>
   <footer-menu number="0"></footer-menu>
 </view>
