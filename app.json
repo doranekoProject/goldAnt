@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/shopCart/shop-cart",
+    "pages/logistics/logistics-info",
     "pages/merchantCenter/center",
     "pages/merchantsSettled/merchants-settled",
     "pages/membership/open-membership",

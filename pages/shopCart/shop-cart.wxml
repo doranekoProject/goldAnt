@@ -1,0 +1,24 @@
+<!-- 组件模板 -->
+<view wx:if="{{!isLogin}}" class="no-login">
+  <view class="cart-icon"></view>
+  <view class="text">亲，你需要登录才能查看购物车哟</view>
+  <view class="login-button">立即登录</view>
+</view>
+<view class="cart-warp">
+  <view class="cart-list"  wx:for-index="idx" wx:for="{{cartList}}">
+    <view bindtap="onTap"  data-index="{{idx}}" class="radio {{item.isChecked ? 'selected' : ''}}" ></view>
+    <navigator url="/pages/infoList/details"><image class="img" src="{{item.imgUrl}}"></image></navigator>
+    <view class="left-con">
+      <navigator class="title" url="/pages/infoList/details">{{item.title}}</navigator>
+      <view class="box">
+        <view class="price">￥{{item.price}}</view>
+        <view class="num-wrap">
+          <view bindtap="modified" data-index="{{idx}}" data-action="-" class="minus">-</view>
+          <input bindblur="bindblur" bindinput="bindKeyInput" class="input" data-index="{{idx}}" value="{{item.num}}"></input>
+          <view bindtap="modified" data-index="{{idx}}" data-action="+" class="add">+</view>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+</view>

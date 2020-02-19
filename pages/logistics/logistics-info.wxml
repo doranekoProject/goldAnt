@@ -1,0 +1,23 @@
+<!-- 组件模板 -->
+<view class="address-wrap">
+  <view class="address-list">
+    <view class="form">
+      <text class="label">收货人:</text>
+      <text>李世鹏</text>
+    </view>
+    <view class="form">
+      <text class="label">收货地址:</text>
+      <text>广东省湛江市徐闻县徐闻广场农贸市场109号1109房</text>
+    </view>
+    <view class="form">
+      <text class="label">手机号:</text>
+      <text>18002090381</text>
+    </view>
+  </view>
+  <view class="logistics">
+    <view class="title">物流信息</view>
+    <view class="info">
+     
+    </view>
+  </view>
+</view>

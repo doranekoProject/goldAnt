@@ -1,0 +1,20 @@
+.address-wrap {
+  padding: 20rpx;
+}
+.address-list, .logistics{
+  margin-bottom: 20rpx;
+  padding: 25rpx;
+  height: 300rpx;
+  background: #fff;
+  color: #545454;
+  font-size: 28rpx;
+  line-height: 50rpx;
+  border-radius: 8rpx;
+  font-family: Source Han Sans CN;
+}
+.address-list .label {
+  padding-right: 5rpx;
+}
+.logistics {
+  height: 770rpx;
+}
