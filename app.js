@@ -1,5 +1,18 @@
 //app.js
+const apiUrl = 'https://45.195.203.65:8050/Services/c_server.aspx';
 App({
+  api: {
+    reg: `${apiUrl}?t=reg`,
+    login: `${apiUrl}?t=login`,
+    userinfo: `${apiUrl}?t=userinfo`,
+    ads: `${apiUrl}?t=ads`,
+    adsinfo: `${apiUrl}?t=adsinfo`,
+    pros: `${apiUrl}?t=pros`,
+    getarea: `${apiUrl}?t=getarea`,
+    addr: `${apiUrl}?t=addr`,
+    updaddr: `${apiUrl}?t=updaddr`,
+    deladdr: `${apiUrl}?t=deladdr`
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []

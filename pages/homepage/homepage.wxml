@@ -57,4 +57,5 @@
     </view>
   </view>
   <footer-menu number="0"></footer-menu>
+  <!--<list-html data="{{city}}" binddetail="bindtap" my-city config="{{config}}"></list-html>-->
 </view>

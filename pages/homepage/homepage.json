@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "footer-menu": "../components/menu/menu"
+    "footer-menu": "../components/menu/menu",
+    "list-html": "../components/wx-index-list/wx-index-list"
   },
   "navigationBarTitleText" : "广告商城"
 }

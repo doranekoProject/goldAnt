@@ -1,12 +1,19 @@
 //homepage.js
-const app = getApp()
-
+const app = getApp();
+const api = app.api;
 Page({
   data: {
     list: [],
     height: 0,
     quantity: 1,
-    tabType: 0
+    tabType: 0,
+    config: {
+      horizontal: false, 
+      animation: true, // 过渡动画是否开启
+      search: true, // 是否开启搜索
+      searchHeight: 45, // 搜索条高度
+      suctionTop: true // 是否开启标题吸顶
+    }
   },
   onReady: function () {
     const that = this;
@@ -19,6 +26,17 @@ Page({
     })
   },
   onLoad: function () {
+
+    wx.request({
+      url: api.login,
+      data: {
+        code:''
+      },
+      method: 'POST',
+      header: {},
+      success: function () { },
+      fail: function () { },
+    });
     const dataList = [];
     const area =  [{
       name: '广州市',
@@ -64,6 +82,9 @@ Page({
       place: place,
       online: online
     })
+  },
+  bindtap(e) {
+    console.log(e.detail)
   },
   tab: function(e) {
     const type = e.currentTarget.dataset.type;
