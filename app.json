@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/shopCart/shop-cart",
+    "pages/logistics/logistics-info",
     "pages/showroom/index",
     "pages/detail/detail",
     "pages/shop/index",
