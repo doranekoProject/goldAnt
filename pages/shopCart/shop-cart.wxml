@@ -4,21 +4,36 @@
   <view class="text">亲，你需要登录才能查看购物车哟</view>
   <view class="login-button">立即登录</view>
 </view>
-<view class="cart-warp">
-  <view class="cart-list"  wx:for-index="idx" wx:for="{{cartList}}">
-    <view bindtap="onTap"  data-index="{{idx}}" class="radio {{item.isChecked ? 'selected' : ''}}" ></view>
-    <navigator url="/pages/infoList/details"><image class="img" src="{{item.imgUrl}}"></image></navigator>
-    <view class="left-con">
-      <navigator class="title" url="/pages/infoList/details">{{item.title}}</navigator>
-      <view class="box">
-        <view class="price">￥{{item.price}}</view>
-        <view class="num-wrap">
-          <view bindtap="modified" data-index="{{idx}}" data-action="-" class="minus">-</view>
-          <input bindblur="bindblur" bindinput="bindKeyInput" class="input" data-index="{{idx}}" value="{{item.num}}"></input>
-          <view bindtap="modified" data-index="{{idx}}" data-action="+" class="add">+</view>
+<view wx:if="{{cartList.length < 1}}" class="no-login">
+  <view class="cart-icon"></view>
+  <view class="text">亲，您的购物车空空哦</view>
+  <view class="login-button">继续购物</view>
+</view>
+<view wx:if="{{cartList.length > 0}}" class="cart-warp">
+  <scroll-view bindscrolltoupper="upper" bindscrolltolower="lower" scroll-y="true" class="scroll-view" bindscrolltoupper="upper" bindscrolltolower="lower" style="height:{{listHeight}}px">
+    <view class="cart-list"  wx:for-index="idx" wx:for="{{cartList}}">
+      <view bindtap="onTap"  data-index="{{idx}}" class="radio {{item.isChecked ? 'selected' : ''}}" ></view>
+      <navigator url="/pages/infoList/details"><image class="img" src="{{item.Img}}"></image></navigator>
+      <view class="left-con">
+        <navigator class="title" url="/pages/infoList/details">{{item.Name}}</navigator>
+        <view class="box">
+          <view class="price">￥{{item.Price}}</view>
+          <view class="num-wrap">
+            <view bindtap="modified" data-index="{{idx}}" data-action="-" class="minus">-</view>
+            <input bindblur="bindblur" bindinput="bindKeyInput" class="input" data-index="{{idx}}" value="{{item.Count}}"></input>
+            <view bindtap="modified" data-index="{{idx}}" data-action="+" class="add">+</view>
+          </view>
         </view>
       </view>
+      
     </view>
-    
+  </scroll-view>
+  <view class="calcul-wrap">
+    <view class="select-all">
+      <view bindtap="setAll"  class="radio {{allSelect ? 'selected' : ''}}" ></view>
+      全选
+    </view>
+    <view class="total">合计:<text class="price">￥{{totalCount}}</text></view>
+    <view class="count">去结算</view>
   </view>
 </view>

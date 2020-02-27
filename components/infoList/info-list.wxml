@@ -1,6 +1,6 @@
 <!-- 组件模板 -->
 <view class="tab-content" class="{{showClass}}">
-  <scroll-view bindscrolltoupper="upper" bindscrolltolower="lower" scroll-y="true" class="scroll-view" bindscrolltoupper="upper" bindscrolltolower="lower" style="height:{{listHeight}}px">
+  <scroll-view scroll-y="true" class="scroll-view"  style="height:{{listHeight}}px">
     <navigator wx:if="{{type === 'list'}}" class="tab-list" wx:key="index" wx:for="{{infoList}}" url="/pages/infoList/details">
       <image class="tab-img" src="{{item.imgUrl}}"></image>
       <view class="tab-left-info">

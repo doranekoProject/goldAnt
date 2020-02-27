@@ -40,7 +40,7 @@
   padding-right: 40rpx;
   padding-top: 40rpx;
 }
-.cart-list .radio {
+.cart-list .radio,.calcul-wrap .radio {
   position: absolute;
   display: inline-block;
   border: 2rpx solid rgba(219,219,219,1);
@@ -51,7 +51,7 @@
   height: 32rpx;
   background-color: #fff;
 }
-.cart-list .selected {
+.cart-list .selected,.calcul-wrap .selected {
   background: #4987D8;
 }
 .cart-list .left-con {
@@ -111,4 +111,47 @@
   line-height: 41rpx;
   color:rgba(84,84,84,1);
   text-align: center;
+}
+.calcul-wrap {
+  text-align: center;
+  position: absolute;
+  background: #fff;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  font-size: 28rpx;
+  font-weight: 400;
+  line-height: 48rpx;
+  color:rgba(165,165,165,1);
+}
+.calcul-wrap .select-all {
+  position: absolute;
+  left: 38rpx;
+  top: 32rpx;
+}
+.calcul-wrap .radio {
+  position: static;
+  vertical-align: -3rpx;
+}
+.calcul-wrap .total {
+  padding-top: 28rpx;
+  display: inline-block;
+}
+.calcul-wrap .price {
+  padding-left: 10rpx;
+  color: #FE4B11;
+  font-weight: bold;
+}
+.calcul-wrap .count {
+  position: absolute;
+  right: 0;
+  top: 0; 
+  width: 230rpx;
+  height: 100rpx;
+  background: rgba(73,135,216,1);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight:400;
+  line-height: 100rpx;
 }

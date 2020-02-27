@@ -1,17 +1,19 @@
 //app.js
-const apiUrl = 'http://45.195.203.65:8050/Services/c_server.aspx';
+const apiUrl = 'http://hzkzd.com:8050/Services/c_server.aspx';
 App({
   api: {
     reg: `${apiUrl}?t=reg`,
     login: `${apiUrl}?t=login`,
     userinfo: `${apiUrl}?t=userinfo`,
-    ads: `${apiUrl}?t=ads`,
-    adsinfo: `${apiUrl}?t=adsinfo`,
+    ads: `${apiUrl}?t=ads`, // 获取广告列表
+    adsinfo: `${apiUrl}?t=adsinfo`, // 获取广告详情
     pros: `${apiUrl}?t=pros`,
     getarea: `${apiUrl}?t=getarea`,
     addr: `${apiUrl}?t=addr`, //，  获取收货地址
     updaddr: `${apiUrl}?t=updaddr`, // 编辑收货地址
-    deladdr: `${apiUrl}?t=deladdr` // 删除收货地址
+    deladdr: `${apiUrl}?t=deladdr`, // 删除收货地址
+    cartlist: `${apiUrl}?t=updaddr`, // 购物车列表
+    deladdr: `${apiUrl}?t=delcart`, // 删除购物车: 
   },
   onLaunch: function () {
     // 展示本地存储能力
