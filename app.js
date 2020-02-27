@@ -1,5 +1,5 @@
 //app.js
-const apiUrl = 'https://45.195.203.65:8050/Services/c_server.aspx';
+const apiUrl = 'http://45.195.203.65:8050/Services/c_server.aspx';
 App({
   api: {
     reg: `${apiUrl}?t=reg`,
@@ -9,9 +9,9 @@ App({
     adsinfo: `${apiUrl}?t=adsinfo`,
     pros: `${apiUrl}?t=pros`,
     getarea: `${apiUrl}?t=getarea`,
-    addr: `${apiUrl}?t=addr`,
-    updaddr: `${apiUrl}?t=updaddr`,
-    deladdr: `${apiUrl}?t=deladdr`
+    addr: `${apiUrl}?t=addr`, //，  获取收货地址
+    updaddr: `${apiUrl}?t=updaddr`, // 编辑收货地址
+    deladdr: `${apiUrl}?t=deladdr` // 删除收货地址
   },
   onLaunch: function () {
     // 展示本地存储能力

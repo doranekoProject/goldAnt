@@ -26,6 +26,7 @@
   text-align: right;
 }
 .button-warp .right .button {
+  display: inline;
   padding-left: 40rpx;
 }
 .add-button {

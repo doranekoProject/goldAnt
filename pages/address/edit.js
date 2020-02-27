@@ -3,18 +3,31 @@ const app = getApp()
 
 Page({
   data: {
-    region: ['广东省', '广州市', '海珠区'],
+    region: [],
     customItem: '全部',
     addressInfo: {
-      userName: '',
-      provinceName: '',
-      cityName: '',
-      countyName: '',
-      detailInfo: '',
-      telNumber: ''
+      family: '',
+      name: '',//收货人姓名
+      address: '',//详细地址
+      phone: ''//收货电话
     }
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    if (options.action === 'edit') {
+      let  d = app.addressItem;
+      let data = {
+        name: d.TrueName,
+        family: d.AreaID, 
+        address: d.Address, 
+        phone: d.Phone
+      };
+      let region = d.AreaID.split(',');
+      this.setData({
+        addressInfo: data,
+        region: region
+      })
+    }
+    
   },
   bindRegionChange: function (e) {
     this.setData({
@@ -22,10 +35,19 @@ Page({
     })
   },
   save() {
-    this.data.addressInfo.provinceName = this.data.region[0];
-    this.data.addressInfo.cityName = this.data.region[1];
-    this.data.addressInfo.countyName = this.data.region[2];
-    console.log(this.data);
+    this.data.family = this.data.region.join(',');
+    wx.request({
+      url: app.api.updaddr,
+      success(res) {
+        if (res.data.code == 1) {
+          wx.showToast({
+            title: '成功',
+            icon: 'success',
+            duration: 2000
+          });
+        }
+      }
+    });
   },
   bindKeyInput: function (e) {
     var name = e.currentTarget.dataset.modal;
@@ -34,7 +56,11 @@ Page({
   chooseAddress() {
     wx.chooseAddress({
       success: (res) => {
-        console.log(res);
+        var data = {
+          name: res.userName,
+          adress: res.detailInfo,
+          phone: res.telNumber
+        }
         this.setData({
           addressInfo: res
         });

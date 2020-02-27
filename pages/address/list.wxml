@@ -1,48 +1,27 @@
 <!-- 组件模板 -->
 <view class="address-wrap">
-  <view class="address-list">
+  <view class="address-list" wx:key="{{item.ID}}" wx:for="{{addressList}}">
     <view class="form">
       <text class="label">收货人:</text>
-      <text>李世鹏</text>
+      <text>{{item.TrueName}}</text>
     </view>
     <view class="form">
       <text class="label">收货地址:</text>
-      <text>广东省湛江市徐闻县徐闻广场农贸市场109号1109房</text>
+      <text>{{item.detailsInfo}}</text>
     </view>
     <view class="form">
       <text class="label">手机号:</text>
-      <text>18002090381</text>
+      <text>{{item.Phone}}</text>
     </view>
     <view class="button-warp">
       <view class="left flex-item">
-        <text class="button">默认地址</text>
+        <text class="button" wx:if="{{item.isdefault}}">默认地址</text>
+        <text class="button" wx:else>设为默认</text>
       </view>
       <view class="right flex-item">
-        <text class="button">编辑</text>
-        <text class="button">删除</text>
-      </view>
-    </view>
-  </view>
-  <view class="address-list">
-    <view class="form">
-      <text class="label">收货人:</text>
-      <text>李世鹏</text>
-    </view>
-    <view class="form">
-      <text class="label">收货地址:</text>
-      <text>广东省湛江市徐闻县徐闻广场农贸市场109号1109房</text>
-    </view>
-    <view class="form">
-      <text class="label">手机号:</text>
-      <text>18002090381</text>
-    </view>
-    <view class="button-warp">
-      <view class="left flex-item">
-        <text class="button">设为默认</text>
-      </view>
-      <view class="right flex-item">
-        <text class="button">编辑</text>
-        <text class="button">删除</text>
+        <!-- <navigator class="button" url="/pages/address/edit">编辑</navigator> --> 
+        <text class="button" data-item="{{item}}" bindtap="edit">编辑</text>
+        <text bindtap="remove" data-aid="{{item.ID}}"class="button">删除</text>
       </view>
     </view>
   </view>
