@@ -1,6 +1,7 @@
 //homepage.js
 const app = getApp();
 const api = app.api;
+const globalData = app.globalData;
 Page({
   data: {
     list: [],
@@ -25,15 +26,26 @@ Page({
       })
     })
   },
-  onLoad: function () {
-
+  getArea: function () {
     wx.request({
-      url: api.login,
+      url: api.getarea,
+      data: {},
+      method: 'POST',
+      success: function (res) { 
+        console.log(res)
+      },
+      fail: function () { },
+    });
+  },
+  onLoad: function () {
+    if (globalData.area === null) this.getArea();
+    wx.request({
+      url: api.pros,
       data: {
-        code:''
+        key: '',
+        index: 1
       },
       method: 'POST',
-      header: {},
       success: function () { },
       fail: function () { },
     });

@@ -6,7 +6,7 @@
         <view class="profile-info_left"><open-data type="userAvatarUrl"></open-data></view>
         <view class="profile-info_right">
           <open-data type="userNickName"></open-data>
-          <view class="profile-info_phone">1111111111</view>
+          <view class="profile-info_phone"></view>
         </view>
       </view>
     </block>
@@ -16,7 +16,7 @@
     <view class="profile-header_bar">
       <view class="profile-header_bar--main">
         <view class="profile-header_bar--tag"><view class="profile-header_bar--icon"></view>VIP店长</view>
-          <block wx:if="{{!isLogin}}">
+          <block wx:if="{{isLogin}}">
             <view class="profile-header_bar--right profile-header_bar--yellow">到期时间： 2020-10-10</view>
           </block>
           <block wx:else>
