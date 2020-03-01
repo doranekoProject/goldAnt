@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/profile/profile",
     "pages/homepage/homepage",
+    "pages/profile/profile",
     "pages/shopCart/shop-cart",
     "pages/logistics/logistics-info",
     "pages/showroom/index",
@@ -21,14 +21,17 @@
     "pages/adOrder/details",
     "pages/infoList/list",
     "pages/infoList/details",
-   
     "pages/bill/bill",
     "pages/billList/list",
-    
     "pages/submitOrder/index",
     "pages/index/index",
     "pages/logs/logs"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

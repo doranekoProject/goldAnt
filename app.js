@@ -5,6 +5,7 @@ App({
     reg: `${apiUrl}?t=reg`,
     login: `${apiUrl}?t=login`,
     userinfo: `${apiUrl}?t=userinfo`,
+    category: `${apiUrl}?t=category`, // 获取所有商品或广告分类类型
     ads: `${apiUrl}?t=ads`, // 获取广告列表
     adsinfo: `${apiUrl}?t=adsinfo`, // 获取广告详情
     pros: `${apiUrl}?t=pros`,

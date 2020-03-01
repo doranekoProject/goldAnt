@@ -12,12 +12,12 @@
     <view class="home-filter_item {{tabType == 4 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="4"><text>批量购买</text></view>
   </view>
   <scroll-view class="home-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
-    <view class="home-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item">
-      <image class="home-list_item--img" src="{{item.cover}}"></image>
+    <view class="home-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item" data-id="{{item.ID}}" data-shopID="{{item.shopID}}">
+      <image class="home-list_item--img" src="{{item.Img}}"></image>
       <view class="home-list_info">
-        <view class="home-list_title">{{item.title}}</view>
+        <view class="home-list_title">{{item.Name}}</view>
         <view class="home-list_desc">{{item.desc}}</view>
-        <view>￥<text class="home-list_cost">{{item.cost}}</text></view>
+        <view>￥<text class="home-list_cost">{{item.Price}}</text></view>
         <view class="home-list_bot">
           距离{{item.location}}km
           <view class="home-list_bot--cart"></view>
@@ -29,7 +29,7 @@
     <view class="drop-down_layer"></view>
     <view class="drop-down_box {{tabType == 1 ? 'drop-down_col' : ''}}">
       <view class="drop-down_box--col">
-        <view class="drop-down_box--item" wx:for="{{downList}}" wx:key="item">{{item.name}}</view>
+        <view class="drop-down_box--item" wx:for="{{downList}}" wx:key="item" id="{{item.id}}">{{item.name}}</view>
       </view>
       <view class="drop-down_box--col" hidden="{{isSub}}">
         <view class="drop-down_box--item  drop-down_box--active">全部</view>

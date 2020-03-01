@@ -1,5 +1,6 @@
 //detail.js
 const app = getApp()
+const api = app.api;
 
 Page({
   data: {
@@ -19,9 +20,32 @@ Page({
   },
   onLoad: function (e) {
     const page = e.type || 1;
+    const that =  this;
     this.setData({
       page: page
     })
+    wx.request({
+      url: api.adsinfo,
+      data: {
+        pid: page
+      },
+      method: 'POST',
+      success: function (res) { 
+        if (res.data.code === 1) {
+          that.setData({
+            detail: res.data.msg
+          })
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: "none"
+          })
+        }
+      },
+      fail: function () { },
+
+    })
+    
     
   },
   seletePop: function() {
