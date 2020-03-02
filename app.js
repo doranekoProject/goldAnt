@@ -12,7 +12,7 @@ App({
     addr: `${apiUrl}?t=addr`, //，  获取收货地址
     updaddr: `${apiUrl}?t=updaddr`, // 编辑收货地址
     deladdr: `${apiUrl}?t=deladdr`, // 删除收货地址
-    cartlist: `${apiUrl}?t=updaddr`, // 购物车列表
+    cartlist: `${apiUrl}?t=cartlist`, // 购物车列表
     deladdr: `${apiUrl}?t=delcart`, // 删除购物车: 
   },
   onLaunch: function () {
