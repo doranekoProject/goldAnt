@@ -1,12 +1,14 @@
 //homepage.js
 const app = getApp();
 const api = app.api;
+const globalData = app.globalData;
 Page({
   data: {
     list: [],
     height: 0,
     quantity: 1,
     tabType: 0,
+    adsPage: 1,
     config: {
       horizontal: false, 
       animation: true, // 过渡动画是否开启
@@ -25,18 +27,88 @@ Page({
       })
     })
   },
-  onLoad: function () {
-
+  getArea: function () {
     wx.request({
-      url: api.login,
-      data: {
-        code:''
-      },
+      url: api.getarea,
+      data: {},
       method: 'POST',
-      header: {},
-      success: function () { },
+      success: function (res) { 
+        console.log(res)
+      },
       fail: function () { },
     });
+  },
+  getAds: function () {
+    const that = this;
+    wx.request({
+      url: api.ads,
+      data: {
+        key: '',
+        area: '',
+        category: '',
+        otype: '',
+        index: this.data.adsPage
+      },
+      method: 'POST',
+      success: function (res) {
+        if(res.data.code === 1) {
+          const data = res.data;
+          const obj = {};
+          obj.list = that.data.list.concat(data.list);
+        } else {
+          wx.showModal({
+            title: '获取列表失败',
+            content: res.data.msg
+          });
+        }
+      },
+      fail: function (res) { 
+        console.log(res)
+      },
+    });
+  },
+  getCategory: function () {
+    wx.request({
+      url: api.category,
+      data: {
+        type: 0
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.code === 1) {
+          
+        } else {
+          wx.showModal({
+            title: '获取类型列表失败',
+            content: res.data.msg
+          });
+        }
+      },
+      fail: function (res) {
+        console.log(res)
+      },
+    });
+  },
+  onLoad: function () {
+    if (globalData.area === null) this.getArea();
+    this.getAds()
+    wx.getLocation({
+      type: 'wgs84',
+      success(res) {
+        const latitude = res.latitude
+        const longitude = res.longitude
+        const speed = res.speed
+        const accuracy = res.accuracy
+        console.log(res);
+        globalData.location = res;
+      },
+      fail: function(res) {
+        wx.showToast({
+          title: '授权失败,将无法显示距离',
+          icon: "none"
+        })
+      }
+    })
     const dataList = [];
     const area =  [{
       name: '广州市',
@@ -55,14 +127,18 @@ Page({
         name: '机场'
       },
     ]
-    const online = [
+    // 全选为空， 1为线上，0为线下
+    const otype = [
       {
+        id: '',
         name: '全选'
       },
       {
+        id: 1,
         name: '线上'
       },
       {
+        id: 0,
         name: '线下'
       },
     ]
@@ -80,7 +156,7 @@ Page({
       list: dataList,
       area: area,
       place: place,
-      online: online
+      otype: otype
     })
   },
   bindtap(e) {
@@ -94,7 +170,7 @@ Page({
     } else {
       obj.tabType = type;
       obj.isSub = type != 1 ;
-      obj.downList = type == 1 ? this.data.area : (type == 2 ? this.data.place : this.data.online);
+      obj.downList = type == 1 ? this.data.area : (type == 2 ? this.data.place : this.data.otype);
     }
     this.setData(obj);
   }
