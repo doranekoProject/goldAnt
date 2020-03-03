@@ -6,9 +6,11 @@
   </view>
   <view class="section">
     <view class="section-title">省/市/区</view>
-    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-    <view class="picker">
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}">
+    <view class="picker" wx:if="{{region.length>0}}">
       {{region[0]}}，{{region[1]}}，{{region[2]}}
+    </view>
+    <view class="picker" wx:if="{{region.length<1}}">
     </view>
   </picker>
   </view>

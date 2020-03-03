@@ -6,7 +6,9 @@ Page({
     region: [],
     customItem: '全部',
     addressInfo: {
+      aid: '',
       family: '',
+      isdefault: '',
       name: '',//收货人姓名
       address: '',//详细地址
       phone: ''//收货电话
@@ -15,12 +17,12 @@ Page({
   onLoad: function (options) {
     if (options.action === 'edit') {
       let  d = app.addressItem;
-      let data = {
+      let data = Object.assign({}, this.data.addressInfo, {
         name: d.TrueName,
-        family: d.AreaID, 
-        address: d.Address, 
+        family: d.AreaID,
+        address: d.Address,
         phone: d.Phone
-      };
+      });
       let region = d.AreaID.split(',');
       this.setData({
         addressInfo: data,
@@ -35,17 +37,18 @@ Page({
     })
   },
   save() {
-    this.data.family = this.data.region.join(',');
-    wx.request({
+    this.data.addressInfo.family = this.data.region.join(',');
+    app.ajax({
       url: app.api.updaddr,
-      success(res) {
-        if (res.data.code == 1) {
-          wx.showToast({
-            title: '成功',
-            icon: 'success',
-            duration: 2000
-          });
-        }
+      data: this.data.addressInfo,
+      method: 'POST'
+    }).then((res)=>{
+      if (res.data.code == 1) {
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        });
       }
     });
   },
@@ -56,15 +59,14 @@ Page({
   chooseAddress() {
     wx.chooseAddress({
       success: (res) => {
-        var data = {
+        console.log(res);
+        var data = Object.assign({}, this.data.addressInfo, {
           name: res.userName,
           adress: res.detailInfo,
           phone: res.telNumber
-        }
-        this.setData({
-          addressInfo: res
         });
         this.setData({
+          addressInfo: data,
           region: [res.provinceName, res.cityName, res.countyName]
         });
       },

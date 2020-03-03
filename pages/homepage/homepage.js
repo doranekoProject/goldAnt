@@ -40,7 +40,7 @@ Page({
   },
   getAds: function () {
     const that = this;
-    wx.request({
+    app.ajax({
       url: api.ads,
       data: {
         key: '',
@@ -49,22 +49,20 @@ Page({
         otype: '',
         index: this.data.adsPage
       },
-      method: 'POST',
-      success: function (res) {
-        if(res.data.code === 1) {
-          const data = res.data;
-          const obj = {};
-          obj.list = that.data.list.concat(data.list);
-        } else {
-          wx.showModal({
-            title: '获取列表失败',
-            content: res.data.msg
-          });
-        }
-      },
-      fail: function (res) { 
-        console.log(res)
-      },
+      method: 'POST'
+    }).then((res) => {
+      if (res.data.code === 1) {
+        const data = res.data;
+        const obj = {};
+        obj.list = that.data.list.concat(data.list);
+      } else {
+        wx.showModal({
+          title: '获取列表失败',
+          content: res.data.msg
+        });
+      }
+    }).catch((res) => {
+      console.log(res)
     });
   },
   getCategory: function () {

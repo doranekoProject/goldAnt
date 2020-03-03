@@ -49,6 +49,83 @@ App({
       }
     })
   },
+  getUser() {
+    var _this = this;
+    wx.login({
+      success: function (res) {
+        const code = res.code;
+        if (!!code) {
+          wx.getUserInfo({
+            success: function (data) {
+              wx.request({
+                url: _this.api.login,
+                data: {
+                  code: res.code,
+                  nickname: data.userInfo.nickName,
+                  img: data.userInfo.avatarUrl,
+                  fid: '',
+                  phone: ''
+                },
+                method: 'POST',
+                success: function (data) {
+                  if (data.data.code === 1) {
+                    wx.setStorageSync('userid', data.data.msg.id);
+                  }
+                },
+                fail: function (faildata) {
+                  wx.showModal({
+                    title: '登录失败',
+                    content: `请重试`,
+                    success: function (success) {
+                      _this.getUser();
+                    },
+                    fail: function (e) { }
+                  });
+                },
+              });
+            }
+          })
+        } else {
+          wx.showModal({
+            title: '登录失败',
+            content: `请退出小程序后重新登录`
+          });
+        }
+      },
+      fail: function (data) {
+        console.log(data)
+      },
+    });
+  },
+  ajax(params, tokenNotShow) {
+    var _this = this;
+    params.data = params.data || {};
+    if (!tokenNotShow) {
+      params.data.token = wx.getStorageSync('userid');
+    }
+    return new Promise((suc, err) => {
+      params.success = function(data) {
+        if (data.data.code == -98) {
+          wx.showModal({
+            title: '未登录',
+            content: data.data.msg,
+            success: function(){
+              _this.getUser();
+            },
+            fail: function() {
+              wx.clearStorageSync();
+            }
+          });
+          return;
+        }
+        suc(data);
+      };
+      params.fail = function(errM) {
+        err(errM);
+      };
+      wx.request(params);
+    });
+  },
   globalData: {
     userInfo: null,
     area: null,

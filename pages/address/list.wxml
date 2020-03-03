@@ -25,5 +25,5 @@
       </view>
     </view>
   </view>
-  <navigator class="add-button" url="/pages/address/edit">添加新地址</navigator>
+  <navigator class="add-button" url="/pages/address/edit?action=add">添加新地址</navigator>
 </view>
