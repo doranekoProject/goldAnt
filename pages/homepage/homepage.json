@@ -1,7 +1,6 @@
 {
   "usingComponents": {
-    "footer-menu": "../components/menu/menu",
-    "list-html": "../components/wx-index-list/wx-index-list"
+    "footer-menu": "../components/menu/menu"
   },
-  "navigationBarTitleText" : "广告商城"
+  "navigationBarTitleText" : "金蚁同城"
 }

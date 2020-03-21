@@ -1,5 +1,6 @@
 // bill.js
 const app = getApp()
+const api = app.api;
 Page({
   data: {
     isRecharge: false,
@@ -19,14 +20,25 @@ Page({
     })
   },
   submit: function () {
-    if (this.data.cost) {
+    const cost = this.data.cost;
+    if (cost) {
       this.setData({
         isRecharge: !this.data.isRecharge,
-      })
-      wx.showToast({
-        icon: "none",
-        title: '操作成功~'
-      })
+      });
+      app.ajax({
+        url: api.recharge,
+        data: {
+          money: cost
+        },
+        method: 'POST',
+      }).then(res => {
+        wx.showToast({
+          icon: "none",
+          title: res.data.code === 1 ? '操作成功~' : res.data.msg
+        })
+      }).catch(res => {
+        console.log(res);
+      });
     } else {
       wx.showToast({
         icon: "none",

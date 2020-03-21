@@ -27,6 +27,7 @@ Page({
     wx.login({
       success: function (res) {
         const code = res.code;
+        console.log('code' ,code)
         if (!!code) {
           wx.getUserInfo({
             success: function (data) {

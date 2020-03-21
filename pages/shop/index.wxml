@@ -26,15 +26,15 @@
         <view>美妆护肤</view>
       </view>
     </view>
-    <view class="shop-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item">
-      <image class="shop-list_item--img" src="{{item.cover}}"></image>
+    <view class="shop-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item" data-id="{{item.ID}}" data-shopID="{{item.ShopID}}" bindtap="bindToPage" bindscrolltolower='lower'>
+      <image class="shop-list_item--img" src="{{item.Img}}"></image>
       <view class="shop-list_info">
-        <view class="shop-list_title">{{item.title}}</view>
-        <view class="shop-list_desc">{{item.desc}}</view>
-        <view>￥<text class="shop-list_cost">{{item.cost}}</text></view>
+        <view class="shop-list_title">{{item.Name}}</view>
+       <!-- <view class="shop-list_desc" wx:if="{{item.item}}">{{item.desc}}</view>-->
+        <view>￥<text class="shop-list_cost">{{item.Price}}</text></view>
         <view class="shop-list_bot">
-          距离{{item.location}}km
-          <view class="shop-list_bot--cart"></view>
+          <text wx:if="{{!!item.location}}">距离{{item.location}}km</text>
+          <view class="shop-list_bot--cart" catchtap="catchShopCart" data-id="{{item.ID}}"></view>
         </view>
       </view>
     </view>
