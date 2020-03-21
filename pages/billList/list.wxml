@@ -2,17 +2,16 @@
 <view class="{{type == 2 ? 'cash-out' : 'bill-list'}}">
   <block wx:if="{{type != 2}}">
     <scroll-view scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
-      <view class="bill-list_row" wx:for="{{list}}" wx:key="item">
+      <view class="bill-list_row" wx:for="{{list}}" wx:key="item" data-id="{{item.ID}}">
         <view class="bill-list_row--desc">
-          {{item.desc}}
-          <view class="bill-list_row--time"> {{item.time}}</view>
+          {{item.Remark}}
+          <view class="bill-list_row--time"> {{item.CreateTime}}</view>
         </view>
-        <view class="bill-list_row--cost">{{item.symbolTag}}<text class="price">￥{{item.cost}}</text></view>
+        <view class="bill-list_row--cost">{{item.symbolTag}}<text class="price">￥{{item.Val}}</text></view>
       </view>
     </scroll-view>
   </block>
   <block wx:if="{{type == 2}}">
-
       <view class="cash-out_box">
         <view>
           ￥<view class="cash-out_number">1000</view>

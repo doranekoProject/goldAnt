@@ -1,8 +1,11 @@
 // billList/list.js
 const app = getApp()
+const api = app.api
 Page({
   data: {
+    type: 0 ,// 1为收入，0为支出，
     list: [],
+    page: 1,
     height: wx.getSystemInfoSync().windowHeight
   },
   onLoad: function (e) {
@@ -28,16 +31,35 @@ Page({
       type: type
     })
   },
+  getList: function (e) {
+    const that = this;
+    app.ajax({
+      url: api.paylist,
+      data: {
+        date: '',
+        inout: that.data.type,
+        index: that.data.page
+      },
+      method: 'POST',
+    }).then(res => {
+      if (res.data.code === 1) {
+        that.setData({
+          list: that.data.list.concat(res.data.list)
+        })
+      } else {
+        wx.showToast({
+          icon: "none",
+          title: res.data.msg
+        })
+      }
+    }).catch(res => {
+      console.elog(res);
+    });
+  },
   lower: function() {
-    const data = this.data.list;
-    data.push({
-      desc: `新增成功`,
-      time: '2010.10.10',
-      symbolTag: '-',
-      cost: Math.ceil(10 * (Math.random() * 8))
-    })
     this.setData({
-      list: data
+      page: this.data.page + 1
     })
+    this.getList();
   }
 })

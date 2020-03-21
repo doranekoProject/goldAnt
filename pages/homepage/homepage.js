@@ -2,6 +2,12 @@
 const app = getApp();
 const api = app.api;
 const globalData = app.globalData;
+const curCityID = {
+  province: 1963,
+  city: 2021,
+  area: 0,
+  county: 0,
+}
 Page({
   data: {
     list: [],
@@ -9,13 +15,11 @@ Page({
     quantity: 1,
     tabType: 0,
     adsPage: 1,
-    config: {
-      horizontal: false, 
-      animation: true, // 过渡动画是否开启
-      search: true, // 是否开启搜索
-      searchHeight: 45, // 搜索条高度
-      suctionTop: true // 是否开启标题吸顶
-    }
+    curCity: '湛江',
+    key:"",
+    address:[],
+    multiArray: [],
+    isNext: true
   },
   onReady: function () {
     const that = this;
@@ -27,26 +31,57 @@ Page({
       })
     })
   },
+  lower: function () {
+    if(this.data.isNext)  this.getAds();
+  },
   getArea: function () {
-    wx.request({
+    app.ajax({
       url: api.getarea,
       data: {},
       method: 'POST',
-      success: function (res) { 
-        console.log(res)
-      },
-      fail: function () { },
-    });
+    }, '',).then((res) => {
+      const position = {
+        province: [],
+        city: {},
+        area: {},
+        county: {}
+      };
+      for(let i = 0; i < res.data.msg.length; i += 1) {
+        const data = res.data.msg[i];
+        switch(data.LV) {
+          case 2:
+            position.province.push(data)
+          break;
+          case 3:
+            if (!position.city[data.HeadID]) position.city[data.HeadID] = [];
+            position.city[data.HeadID].push(data)
+          break;
+          case 4:
+            if (!position.area[data.HeadID]) position.area[data.HeadID] = [];
+            position.area[data.HeadID].push(data)
+          break;
+          case 5:
+            if (!position.county[data.HeadID]) position.county[data.HeadID] = [];
+            position.county[data.HeadID].push(data)
+          break;
+        }
+      }
+      wx.setStorageSync('position', position);
+      this.position();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   getAds: function () {
     const that = this;
+    const addr = this.data.address.toString().replace(/\,/ig, '')
     app.ajax({
       url: api.ads,
       data: {
-        key: '',
-        area: '',
-        category: '',
-        otype: '',
+        key: this.data.key || '',
+        area: addr,
+        category: !!this.data.getCategory ? this.data.getCategory.current : '',
+        otype: !!this.data.otype ? this.data.otype.current : '',
         index: this.data.adsPage
       },
       method: 'POST'
@@ -54,7 +89,9 @@ Page({
       if (res.data.code === 1) {
         const data = res.data;
         const obj = {};
-        obj.list = that.data.list.concat(data.list);
+        obj.list = that.data.list.length > 0 ? that.data.list.concat(data.list) : data.list;
+        if(obj.list.length > 10 ) obj.adsPage = obj.adsPage  + 1;
+        this.setData(obj)
       } else {
         wx.showModal({
           title: '获取列表失败',
@@ -66,29 +103,87 @@ Page({
     });
   },
   getCategory: function () {
-    wx.request({
+    app.ajax({
       url: api.category,
       data: {
         type: 0
       },
       method: 'POST',
-      success: function (res) {
-        if (res.data.code === 1) {
-          
-        } else {
-          wx.showModal({
-            title: '获取类型列表失败',
-            content: res.data.msg
-          });
-        }
-      },
-      fail: function (res) {
-        console.log(res)
-      },
+    }).then(res => {
+      console.log(res)
+      if (res.data.code === 1) {
+        res.data.msg.current = 0;
+        this.setData({
+          getCategory:  res.data.msg
+        })
+      } else {
+        wx.showModal({
+          title: '获取类型列表失败',
+          content: res.data.msg
+        });
+      }
+    }).catch(res => {
+      console.log(res)
     });
   },
+  bindColChange: function (e) {
+    const index =  e.detail.value;
+    if (e.detail.column === 0) {
+      const position = wx.getStorageSync('position');
+      const cityName =  this.getName(position.city[position.province[index].ID]);
+      this.setData({
+        multiArray: [this.data.multiArray[0], cityName],
+
+      })
+    }
+  },
+  bindCityChange: function (e) {
+    const position = wx.getStorageSync('position');
+    curCityID.province = position.province[e.detail.value[0]].ID;
+    curCityID.city = position.city[curCityID.province][e.detail.value[1]].ID;
+    const area =  {
+      area: this.getName(position.area[curCityID.city], 'all'),
+      county: ['全部'],
+      select: [0,0]
+    }
+    const obj = {};
+    obj.curCity = this.data.multiArray[1][e.detail.value[1]],
+    obj.area = area;
+    if (this.data.tabType == 1) obj.downList = area;
+    this.setData(obj);
+    this.getAds();
+  },
+  getName: function (data, type) {
+    let result = [];
+    for (let j = 0; j < data.length; j += 1) {
+      if (j === 0 && type === 'all') result.push('全部');
+      result.push(data[j].Name);
+    }
+    return result;
+  },
+  position: function() {
+    const position = wx.getStorageSync('position');
+    const provinceName = this.getName(position.province);
+    const cityName = this.getName(position.city[curCityID.province]);
+    const area =  {
+      area: this.getName(position.area[curCityID.city], 'all'),
+      county: ['全部'],
+      select: [0,0]
+    }
+    this.setData({
+      multiArray: [provinceName, cityName],
+      multiIndex: [5, 17], // 默认广东省湛江
+      area,
+      address: [provinceName[5], cityName[17]]
+    })
+  },
   onLoad: function () {
-    if (globalData.area === null) this.getArea();
+    if (!wx.getStorageSync('position')) {
+      this.getArea();
+    } else {
+      this.position();
+    }
+    this.getCategory();
     this.getAds()
     wx.getLocation({
       type: 'wgs84',
@@ -107,58 +202,70 @@ Page({
         })
       }
     })
-    const dataList = [];
-    const area =  [{
-      name: '广州市',
-      subtime: {
-        arr: ['天河区', '海珠区', '荔弯区']
-      }
-    }]
-
-    const place = [{
-        name: '全部'
+    const otype = {
+      list: [{
+        ID: '',
+        Name: '全选'
       },
       {
-        name: '全超市部'
+        ID: 1,
+        Name: '线上'
       },
       {
-        name: '机场'
-      },
-    ]
-    // 全选为空， 1为线上，0为线下
-    const otype = [
-      {
-        id: '',
-        name: '全选'
-      },
-      {
-        id: 1,
-        name: '线上'
-      },
-      {
-        id: 0,
-        name: '线下'
-      },
-    ]
-    const data = {
-      cover: 'https://profile.csdnimg.cn/5/D/E/3_a772116804',
-      title: '湛江市赤坎区安铺人鸡饭店',
-      desc: '广东省湛江市赤坎区金城新区127号',
-      cost: '38',
-      location: '0.88'
-    }
-    for (let i = 1; i < 20; i += 1) {
-      dataList.push(data);
+        ID: 0,
+        Name: '线下'
+      },],
+      current: '',
     }
     this.setData({
-      list: dataList,
-      area: area,
-      place: place,
       otype: otype
     })
   },
-  bindtap(e) {
-    console.log(e.detail)
+  bindTabList: function (e) {
+    const id = e.currentTarget.dataset.id;
+    const list = this.data.downList;
+    list.current = id;
+    this.setData({
+      downList: list,
+      tabType: 0
+    });
+    this.getAds();
+  },
+  bindLayer: function(e) {
+    this.setData({
+      tabType: 0
+    });
+  },
+  bindTabArea: function(e) {
+    const index = e.currentTarget.dataset.index;
+    const type = e.currentTarget.dataset.type;
+    const list = this.data.area;
+    const obj = {
+      address: this.data.address
+    };
+    if (!type) {
+      if(index > 0) {
+        const position = wx.getStorageSync('position');
+        curCityID.area = position.area[curCityID.city][index - 1].ID;
+        list.county = !!position.county[curCityID.area] ? this.getName(position.county[curCityID.area], 'all') : ['全部']
+      } else {
+        list.county = ['全部']
+      }
+      obj.address[2] = list.area[index];
+    } else {
+      obj.address[3] = list.county[index];
+      obj.tabType = 0;
+    }
+    list.select = type ? [list.select[0], index] : [index, 0]
+    obj.downList = list;
+    this.setData(obj);
+    this.getAds();
+  },
+  bindSearch: function(e) {
+    this.setData({
+      key: e.detail.value
+    })
+    this.getAds();
   },
   tab: function(e) {
     const type = e.currentTarget.dataset.type;
@@ -168,7 +275,7 @@ Page({
     } else {
       obj.tabType = type;
       obj.isSub = type != 1 ;
-      obj.downList = type == 1 ? this.data.area : (type == 2 ? this.data.place : this.data.otype);
+      obj.downList = type == 1 ? this.data.area : (type == 3 ? this.data.otype : this.data.getCategory);
     }
     this.setData(obj);
   }

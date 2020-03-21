@@ -1,6 +1,7 @@
 //app.js
 const apiUrl = 'http://hzkzd.com:8050/Services/c_server.aspx';
 App({
+  host: 'http://hzkzd.com:8050',
   api: {
     reg: `${apiUrl}?t=reg`,
     login: `${apiUrl}?t=login`,
@@ -14,7 +15,10 @@ App({
     updaddr: `${apiUrl}?t=updaddr`, // 编辑收货地址
     deladdr: `${apiUrl}?t=deladdr`, // 删除收货地址
     cartlist: `${apiUrl}?t=cartlist`, // 购物车列表
-    deladdr: `${apiUrl}?t=delcart`, // 删除购物车: 
+    deladdr: `${apiUrl}?t=delcart`, // 删除购物车:
+    recharge:`${apiUrl}?t=recharge`, // 充值
+    paylist: `${apiUrl}?t=paylist`, // 账单列表
+    addcart: `${apiUrl}?t=addcart` // 添加购物车
   },
   onLaunch: function () {
     // 展示本地存储能力
@@ -49,55 +53,55 @@ App({
       }
     })
   },
-  getUser() {
-    var _this = this;
-    wx.login({
-      success: function (res) {
-        const code = res.code;
-        if (!!code) {
-          wx.getUserInfo({
-            success: function (data) {
-              wx.request({
-                url: _this.api.login,
-                data: {
-                  code: res.code,
-                  nickname: data.userInfo.nickName,
-                  img: data.userInfo.avatarUrl,
-                  fid: '',
-                  phone: ''
-                },
-                method: 'POST',
-                success: function (data) {
-                  if (data.data.code === 1) {
-                    wx.setStorageSync('userid', data.data.msg.id);
-                  }
-                },
-                fail: function (faildata) {
-                  wx.showModal({
-                    title: '登录失败',
-                    content: `请重试`,
-                    success: function (success) {
-                      _this.getUser();
-                    },
-                    fail: function (e) { }
-                  });
-                },
-              });
-            }
-          })
-        } else {
-          wx.showModal({
-            title: '登录失败',
-            content: `请退出小程序后重新登录`
-          });
-        }
-      },
-      fail: function (data) {
-        console.log(data)
-      },
-    });
-  },
-  ajax(params, tokenNotShow) {
+  // getUser() {
+  //   var _this = this;
+  //   wx.login({
+  //     success: function (res) {
+  //       const code = res.code;
+  //       if (!!code) {
+  //         wx.getUserInfo({
+  //           success: function (data) {
+  //             wx.request({
+  //               url: _this.api.login,
+  //               data: {
+  //                 code: res.code,
+  //                 nickname: data.userInfo.nickName,
+  //                 img: data.userInfo.avatarUrl,
+  //                 fid: '',
+  //                 phone: ''
+  //               },
+  //               method: 'POST',
+  //               success: function (data) {
+  //                 if (data.data.code === 1) {
+  //                   wx.setStorageSync('userid', data.data.msg.id);
+  //                 }
+  //               },
+  //               fail: function (faildata) {
+  //                 wx.showModal({
+  //                   title: '登录失败',
+  //                   content: `请重试`,
+  //                   success: function (success) {
+  //                     _this.getUser();
+  //                   },
+  //                   fail: function (e) { }
+  //                 });
+  //               },
+  //             });
+  //           }
+  //         })
+  //       } else {
+  //         wx.showModal({
+  //           title: '登录失败',
+  //           content: `请退出小程序后重新登录`
+  //         });
+  //       }
+  //     },
+  //     fail: function (data) {
+  //       console.log(data)
+  //     },
+  //   });
+  // },
+  ajax(params, tokenNotShow, type) {
     var _this = this;
     params.data = params.data || {};
     if (!tokenNotShow) {
@@ -110,7 +114,7 @@ App({
             title: '未登录',
             content: data.data.msg,
             success: function(){
-              _this.getUser();
+             // _this.getUser();
             },
             fail: function() {
               wx.clearStorageSync();

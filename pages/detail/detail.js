@@ -24,29 +24,26 @@ Page({
     this.setData({
       page: page
     })
-    wx.request({
+    app.ajax({
       url: api.adsinfo,
       data: {
         pid: page
       },
       method: 'POST',
-      success: function (res) { 
-        if (res.data.code === 1) {
-          that.setData({
-            detail: res.data.msg
-          })
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: "none"
-          })
-        }
-      },
-      fail: function () { },
-
+    }).then(res => {
+      if (res.data.code === 1) {
+        that.setData({
+          detail: res.data.msg
+        })
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: "none"
+        })
+      }
+    }).catch(res => {
+      console.log(res)
     })
-    
-    
   },
   seletePop: function() {
     this.setData({
