@@ -43,15 +43,15 @@ Page({
     });
   },
   catchShopCart: function (e) {
-    const id = e.currentTarget.dataset.id;
-    console.log(id)
+    const item = e.currentTarget.dataset.item;
+    console.log(item)
     app.ajax({
       url: api.addcart,
       data: {
-        proid: id,//商品ID
-        spid: "",//规格ID（可为空，如果该商品有规格，则该值必填）
+        proid: item.ID,//商品ID
+        spid: item.ShopID,//规格ID（可为空，如果该商品有规格，则该值必填）
         count: 1,//商品数量
-        isbuy: "",//是否勾选购买
+        isbuy: 1,//是否勾选购买
       },
       method: 'POST'
     }).then(res => {
