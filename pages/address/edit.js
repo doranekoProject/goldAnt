@@ -8,7 +8,7 @@ Page({
     addressInfo: {
       aid: '',
       family: '',
-      isdefault: '',
+      isdefault: '0',
       name: '',//收货人姓名
       address: '',//详细地址
       phone: ''//收货电话
@@ -47,7 +47,13 @@ Page({
         wx.showToast({
           title: '成功',
           icon: 'success',
-          duration: 2000
+          duration: 2000,
+          success: function() {
+            wx.navigateBack({
+              delta: 1
+            });
+
+          }
         });
       }
     });

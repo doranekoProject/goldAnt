@@ -7,7 +7,7 @@
 <view wx:if="{{cartList.length < 1}}" class="no-login">
   <view class="cart-icon"></view>
   <view class="text">亲，您的购物车空空哦</view>
-  <view class="login-button">继续购物</view>
+  <navigator url="/pages/shop/index"  class="login-button" open-type="redirect">继续购物</navigator>
 </view>
 <view wx:if="{{cartList.length > 0}}" class="cart-warp">
   <scroll-view bindscrolltoupper="upper" bindscrolltolower="lower" scroll-y="true" class="scroll-view" bindscrolltoupper="upper" bindscrolltolower="lower" style="height:{{listHeight}}px">
@@ -37,3 +37,4 @@
     <view class="count">去结算</view>
   </view>
 </view>
+<footer-menu number="2"></footer-menu>

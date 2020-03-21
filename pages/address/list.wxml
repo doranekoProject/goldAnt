@@ -21,7 +21,7 @@
       <view class="right flex-item">
         <!-- <navigator class="button" url="/pages/address/edit">编辑</navigator> --> 
         <text class="button" data-item="{{item}}" bindtap="edit">编辑</text>
-        <text bindtap="remove" data-aid="{{item.ID}}"class="button">删除</text>
+        <text bindtap="remove" data-aid="{{item.ID}}" class="button">删除</text>
       </view>
     </view>
   </view>
