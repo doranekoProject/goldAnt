@@ -19,15 +19,18 @@ Page({
    
   },
   onLoad: function (e) {
-    const page = e.type || 1;
+    const page = e.type || 'adsinfo';
+    const id = e.id;
     const that =  this;
     this.setData({
-      page: page
+      page,
+      id
     })
+    console.log(e ,api[page])
     app.ajax({
-      url: api.adsinfo,
+      url: api[page],
       data: {
-        pid: page
+        pid: id
       },
       method: 'POST',
     }).then(res => {
