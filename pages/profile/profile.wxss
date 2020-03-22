@@ -14,6 +14,9 @@
   vertical-align: top;
   margin: 30rpx 30rpx 0;
 }
+.profile-info_left image {
+  width: 100%;
+}
 .profile-info_right {
   display: inline-block;
   margin-top: 30rpx;

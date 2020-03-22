@@ -6,6 +6,7 @@ App({
     reg: `${apiUrl}?t=reg`,
     login: `${apiUrl}?t=login`,
     userinfo: `${apiUrl}?t=userinfo`,
+    collects: `${apiUrl}?t=collects`, // 收藏列表
     category: `${apiUrl}?t=category`, // 获取所有商品或广告分类类型
     ads: `${apiUrl}?t=ads`, // 获取广告列表
     adsinfo: `${apiUrl}?t=adsinfo`, // 获取广告详情
@@ -22,7 +23,8 @@ App({
     addcart: `${apiUrl}?t=addcart`, // 添加购物车
     addcollect: `${apiUrl}?t=addcollect`, // 添加购物车
     orderlist: `${apiUrl}?t=orderlist`, // 订单列表
-    updord: `${apiUrl}?t=updord` // 更新状态
+    updord: `${apiUrl}?t=updord`, // 更新状态
+    proads: `${apiUrl}?t=proads` // 商品首页中的广告图 
   },
   onLaunch: function () {
     // 展示本地存储能力

@@ -9,9 +9,7 @@ Page({
     key: '',
     page: 1,
     height: wx.getSystemInfoSync().windowHeight,
-    banner: [
-      'https://image.seedit.com/sys/2020/02/08/b54dd7cee43fa8c5b353c9184e3f7658693628.jpg', 'https://image.seedit.com/sys/2020/02/08/67536dd2dabc741d7f88d3784e3d1a80801717.jpg', 'https://image.seedit.com/sys/2020/02/08/b4b68bdce8e154004526ed709c8bef02496360.jpg'
-    ],
+    banner: [],
     indicatorDots: true,
     vertical: false,
     autoplay: false,
@@ -19,6 +17,23 @@ Page({
     duration: 500
   },
   onReady: function (e) {
+  },
+  getBanner: function (e) {
+    app.ajax({
+      url: api.proads,
+      method: 'POST',
+    }).then(res => {
+      if (res.data.code === 1) {
+        for (let i = 0; i < res.data.msg.length; i += 1) {
+          res.data.msg.list[i].Img = `${app.host}${res.data.msg.list[i].Img}`;
+        }
+        this.setData({
+          banner: res.data.msg.list
+        }); 
+      }
+    }).catch(res => {
+      console.log(res)
+    });
   },
   getCategory: function () {
     app.ajax({
@@ -91,5 +106,6 @@ Page({
     const dataList = [];
     this.getList()
     this.getCategory();
+    this.getBanner();
   }
 })

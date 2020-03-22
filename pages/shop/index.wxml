@@ -1,21 +1,20 @@
 <!--shop.wxml-->
 <view>
 <scroll-view class="shop-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
-    <swiper class="shop-banner" indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{banner}}" wx:key="*this">
+    <swiper wx:if="{{banner.length > 0}}" class="shop-banner" indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{banner}}" wx:key="item">
         <swiper-item>
-          <view class="swiper-item"><image mode="widthFix" src="{{item}}"></image></view>
+          <navigator url="../wrap/wrap?url={{item.LinkTo}}" class="swiper-item"><image mode="widthFix" src="{{item.Img}}"></image></navigator>
         </swiper-item>
       </block>
     </swiper>
     <view class="shop-sort">
-  
       <view class="shop-sort_item" wx:for="{{getCategory}}" wx:key="item" bindtap="bindToPage" data-type="allBusiness" data-id="{{item.ID}}">
         <image src="{{item.Img}}" mode="widthFix"></image>
         <view>{{item.Name}}</view>
       </view>
     </view>
-    <view class="shop-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item" data-id="{{item.ID}}" data-shopID="{{item.ShopID}}" bindtap="bindToPage" bindscrolltolower='lower'>
+    <view class="shop-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item" data-id="{{item.ID}}" data-shopID="{{item.ShopID}}" bindtap="bindToPage">
       <image class="shop-list_item--img" src="{{item.Img}}"></image>
       <view class="shop-list_info">
         <view class="shop-list_title">{{item.Name}}</view>

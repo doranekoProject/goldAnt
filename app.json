@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/profile/profile",
+    "pages/wrap/wrap",
     "pages/merchantCenter/center",
     "pages/homepage/homepage",
-    "pages/profile/profile",
     "pages/shopCart/shop-cart",
     "pages/logistics/logistics-info",
     "pages/showroom/index",
