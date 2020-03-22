@@ -55,7 +55,7 @@
 .profile-header_bar--tag {
   padding: 10rpx 15rpx;
   height: 20rpx;
-  width: 120rpx;
+  width: 140rpx;
   border-radius: 50rpx;
   font-size: 22rpx;
   line-height: 20rpx;

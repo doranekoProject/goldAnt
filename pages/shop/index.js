@@ -71,36 +71,6 @@ Page({
       console.log(res)
     });
   },
-  catchShopCart: function (e) {
-    const id = e.currentTarget.dataset.id;
-    console.log(id)
-    app.ajax({
-      url: api.addcart,
-      data: {
-        proid: id,//商品ID
-        spid: "",//规格ID（可为空，如果该商品有规格，则该值必填）
-        count: 1,//商品数量
-        isbuy: 1,//是否勾选购买
-      },
-      method: 'POST'
-    }).then(res => {
-      if (res.data.code != 1) {
-       wx.showModal({
-         title: '提示',
-         content: res.data.msg,
-       });
-      } else {
-        wx.showToast({
-          title: '添加成功',
-        })
-      }
-    }).catch(res => {
-      wx.showModal({
-        title: '提示',
-        content: res,
-      });
-    });
-  },
   bindToPage: function (e) {
     const id = e.currentTarget.dataset.id;
     const type = e.currentTarget.dataset.type;

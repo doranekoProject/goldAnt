@@ -19,7 +19,8 @@ App({
     deladdr: `${apiUrl}?t=delcart`, // 删除购物车:
     recharge:`${apiUrl}?t=recharge`, // 充值
     paylist: `${apiUrl}?t=paylist`, // 账单列表
-    addcart: `${apiUrl}?t=addcart` // 添加购物车
+    addcart: `${apiUrl}?t=addcart`, // 添加购物车
+    addcollect: `${apiUrl}?t=addcollect` // 添加购物车
   },
   onLaunch: function () {
     // 展示本地存储能力

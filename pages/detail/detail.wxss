@@ -170,6 +170,7 @@
 .detail-desc_title {
   text-align: center;
   border-bottom: 1px solid #DBDBDB;
+  margin-bottom: 20rpx;
 }
 .detail-desc_title text {
   display: inline-block;

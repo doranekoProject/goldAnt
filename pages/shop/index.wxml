@@ -23,7 +23,7 @@
         <view>￥<text class="shop-list_cost">{{item.Price}}</text></view>
         <view class="shop-list_bot">
           <text wx:if="{{!!item.location}}">距离{{item.location}}km</text>
-          <view class="shop-list_bot--cart" catchtap="catchShopCart" data-id="{{item.ID}}"></view>
+          <!-- <view class="shop-list_bot--cart" catchtap="catchShopCart" data-id="{{item.ID}}"></view> -->
         </view>
       </view>
     </view>

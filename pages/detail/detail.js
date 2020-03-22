@@ -1,7 +1,6 @@
 //detail.js
 const app = getApp()
 const api = app.api;
-
 Page({
   data: {
     banner: [
@@ -20,13 +19,12 @@ Page({
   },
   onLoad: function (e) {
     const page = e.type || 'adsinfo';
-    const id = e.id;
+    const id = 'd9a9fcd7-5f04-4e8c-b482-e70e1f265b0d' //e.id;
     const that =  this;
     this.setData({
       page,
       id
     })
-    console.log(e ,api[page])
     app.ajax({
       url: api[page],
       data: {
@@ -35,8 +33,36 @@ Page({
       method: 'POST',
     }).then(res => {
       if (res.data.code === 1) {
+        res.data.msg.ImgList = res.data.msg.ImgList.split(';')
+        console.log(res.data.msg.ImgList)
+        for (let i = 0; i < res.data.msg.ImgList.length; i += 1) {
+          res.data.msg.ImgList[i] = `${app.host}${res.data.msg.ImgList[i]}`;
+        }
         that.setData({
           detail: res.data.msg
+        })
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: "none"
+        })
+      }
+    }).catch(res => {
+      console.log(res)
+    })
+  },
+  bindAddcollect: function (e) {
+    app.ajax({
+      url: api.addcollect,
+      data: {
+        proid: this.data.id
+      },
+      method: 'POST',
+    }).then(res => {
+      if (res.data.code === 1) {
+        wx.showToast({
+          title: '收藏成功',
+          icon: "none"
         })
       } else {
         wx.showToast({

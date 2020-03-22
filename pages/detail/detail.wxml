@@ -1,12 +1,13 @@
 <!--homepage.wxml-->
 <view>
-  <swiper class="detail-banner" indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{banner}}" wx:key="*this">
+  <swiper wx:if="{{detail.ImgList.length > 1}}" class="detail-banner" indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{detail.ImgList}}" wx:key="*this">
       <swiper-item>
         <view class="swiper-item"><image mode="widthFix" src="{{item}}"></image></view>
       </swiper-item>
     </block>
   </swiper>
+  <view wx:if="{{detail.ImgList.length <= 1}}"  class="detail-banner"><image mode="widthFix" src="{{detail.ImgList}}"></image></view>
   <view class="detail-info">
     <view class="detail-info_title">{{detail.Name}}</view>
     <view wx:if="{{!page}}" class="detail-info_desc">{{detail.Title}}</view>
@@ -18,7 +19,7 @@
    </view>
   <view class="detail-type">
     <view class="detail-type_title">选择</view>
-    <view class="detail-type_text">{{!page ? '尺寸' : '选择尺寸、颜色规格'}}尺寸</view>
+    <view class="detail-type_text" bindtap="seletePop">{{!page ? '尺寸' : '选择尺寸、颜色规格'}}尺寸</view>
     <view wx:if="{{!page}}" class="detail-mian">
       <view class="detail-mian_desc"><view>行业</view> 娱乐休闲</view>
       <view class="detail-mian_desc"><view>屏幕</view> 1980 x 1024</view>   
@@ -26,10 +27,11 @@
   </view>
   <view class="detail-desc">
     <view class="detail-desc_title"><text>详情介绍</text></view>
+    <rich-text nodes="{{detail.Descrition}}" bindtap="tap"></rich-text>
   </view>
   <view class="detail-bot">
     <button open-type="contact" class="home-bar_contact">客服</button>
-    <view class="detail-favorite">收藏</view>
+    <view class="detail-favorite" bindtap="bindAddcollect">收藏</view>
     <view class="detail-bot_right">
       <view class="detail-bot_btn btn-orange" bindtap="seletePop">加入购物车</view>
       <view class="detail-bot_btn btn-blue">立即购买</view>
