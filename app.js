@@ -9,6 +9,7 @@ App({
     category: `${apiUrl}?t=category`, // 获取所有商品或广告分类类型
     ads: `${apiUrl}?t=ads`, // 获取广告列表
     adsinfo: `${apiUrl}?t=adsinfo`, // 获取广告详情
+    proinfo: `${apiUrl}?t=proinfo`, // 获取商品详情
     pros: `${apiUrl}?t=pros`,
     getarea: `${apiUrl}?t=getarea`,
     addr: `${apiUrl}?t=addr`, //，  获取收货地址

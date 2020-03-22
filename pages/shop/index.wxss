@@ -1,15 +1,19 @@
 /**shop.wxss**/
 .shop-sort {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: center; */
   padding: 28rpx 0;
+  white-space: nowrap;
+  overflow: scroll;
 }
 .shop-sort_item {
-  flex: 1;
+  /* flex: 1; */
   color: #A5A5A5;
   font-size: 28rpx;
+  display: inline-block;
+  margin: 0 10rpx;
 }
 .shop-sort_item image {
   width: 125rpx;

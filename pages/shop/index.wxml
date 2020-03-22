@@ -9,21 +9,10 @@
       </block>
     </swiper>
     <view class="shop-sort">
-      <view class="shop-sort_item">
-        <image></image>
-        <view>美妆护肤</view>
-      </view>
-      <view class="shop-sort_item">
-        <image></image>
-        <view>美妆护肤</view>
-      </view>
-      <view class="shop-sort_item">
-        <image></image>
-        <view>美妆护肤</view>
-      </view>
-      <view class="shop-sort_item">
-        <image></image>
-        <view>美妆护肤</view>
+  
+      <view class="shop-sort_item" wx:for="{{getCategory}}" wx:key="item" bindtap="bindToPage" data-type="allBusiness" data-id="{{item.ID}}">
+        <image src="{{item.Img}}" mode="widthFix"></image>
+        <view>{{item.Name}}</view>
       </view>
     </view>
     <view class="shop-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item" data-id="{{item.ID}}" data-shopID="{{item.ShopID}}" bindtap="bindToPage" bindscrolltolower='lower'>

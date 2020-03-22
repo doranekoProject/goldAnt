@@ -5,6 +5,7 @@ const api = app.api;
 Page({
   data: {
     list: [],
+    getCategory: [],
     key: '',
     page: 1,
     height: wx.getSystemInfoSync().windowHeight,
@@ -19,6 +20,29 @@ Page({
   },
   onReady: function (e) {
   },
+  getCategory: function () {
+    app.ajax({
+      url: api.category,
+      data: {
+        type: 0
+      },
+      method: 'POST',
+    }).then(res => {
+      console.log(res)
+      if (res.data.code === 1) {
+        this.setData({
+          getCategory: res.data.msg.list
+        })
+      } else {
+        wx.showModal({
+          title: '获取类型列表失败',
+          content: res.data.msg
+        });
+      }
+    }).catch(res => {
+      console.log(res)
+    });
+  },
   getList: function () {
     app.ajax({
       url: api.pros,
@@ -31,7 +55,12 @@ Page({
       if (res.data.code === 1) {
         const data = res.data.msg;
         const obj = {};
-        if (data.list.length >= 10) obj.page = this.data.page + 1;
+        console.log(data.list.length)
+        if (data.list.length >= 10) {
+          obj.page = this.data.page + 1;
+        } else {
+          obj.lastPage = true;
+        }
         for(let i = 0; i < data.list.length; i += 1) {
           data.list[i].Img = `${app.host}${data.list[i].Img}`;
         }
@@ -74,12 +103,23 @@ Page({
   },
   bindToPage: function (e) {
     const id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: `../detail/detail?type=shop&id=${id}`,
-    })
+    const type = e.currentTarget.dataset.type;
+    if (type === 'allBusiness') {
+      wx.navigateTo({
+        url: `../allBusiness/index?id=${id}`,
+      })
+    } else {
+      wx.navigateTo({
+        url: `../detail/detail?type=proinfo&id=${id}`,
+      })
+    }
+  },
+  lower: function(e) {
+    if(!this.data.lastPage) this.getList();
   },
   onLoad: function () {
     const dataList = [];
     this.getList()
+    this.getCategory();
   }
 })
