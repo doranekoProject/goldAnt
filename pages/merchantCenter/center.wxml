@@ -25,10 +25,10 @@
           <navigator url="/pages/adOrder/list?type=2" class="profile-module_row--desc icon-product">商品订单</navigator>
         </view>
         <view class="profile-module_row--item">
-          <navigator url="/pages/billList/list?type=2" class="profile-module_row--desc icon-address">我要提现</navigator>
+          <navigator url="/pages/billList/list?type=other" class="profile-module_row--desc icon-address">我要提现</navigator>
         </view>
         <view class="profile-module_row--item">
-          <navigator url="/pages/billList/list?type=3" class="profile-module_row--desc icon-address">账单明细</navigator>
+          <navigator url="/pages/billList/list?type=account" class="profile-module_row--desc icon-address">账单明细</navigator>
         </view>
       </view>
     </view>
