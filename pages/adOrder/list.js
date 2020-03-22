@@ -5,41 +5,53 @@ Page({
   data: {
     isShow: true,
     currentTab: 0,
-    menuData: ['全部', '待付款', '待发货', '待收货', '已完成'],
-    tabItem: [{
+    menuData: [{
+      title: '全部',
+      value: '',
       isShow: true
     }, {
-      isShow: false
-    }, {
-      isShow: false
-    }, {
-    isShow: false
-    }, {
-      isShow: false
-    }]
+        title: '待付款',
+        value: '0',
+        isShow: false
+      }, {
+        title: '待发货',
+        value: '1',
+        isShow: false
+      }, {
+        title: '待收货',
+        value: '2',
+        isShow: false
+      }, {
+        title: '已完成',
+        value: '4',
+        isShow: false
+      }]
   },
-  onLoad: function () {
+  onLoad: function (e) {
+    const title = e.type == 1 ? '广告订单': '商品订单';
+    wx.setNavigationBarTitle({
+      title
+    });
   },
   // 处理事件
   onTab(event) {
-    console.log('ddd')
     var cur = event.currentTarget.dataset.current;
     if (this.data.currentTab == cur) {
       return false;
     } else {
-      this.data.tabItem[cur].isShow = true;
+      this.data.menuData[cur].isShow = true;
       this.setData({
         currentTab: cur,
-        tabItem: this.data.tabItem
+        menuData: this.data.menuData
       })
     }
   },
   switchTab(event) {
     var cur = event.detail.current;
-    this.data.tabItem[cur].isShow = true;
+    this.data.menuData[cur].isShow = true;
     this.setData({
       currentTab: cur,
-      tabItem: this.data.tabItem
+      menuData: this.data.menuData
     });
   }
 })

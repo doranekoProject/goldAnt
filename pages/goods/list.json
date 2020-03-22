@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "info-list": "../components/infoList/info-list"
-  },
-  "navigationBarTitleText": "商品订单"
-}
