@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/merchantCenter/center",
     "pages/homepage/homepage",
     "pages/profile/profile",
     "pages/shopCart/shop-cart",
@@ -8,15 +9,12 @@
     "pages/detail/detail",
     "pages/shop/index",
     "pages/allBusiness/index",
-    "pages/merchantCenter/center",
     "pages/merchantsSettled/merchants-settled",
     "pages/membership/open-membership",
     "pages/aboutUs/aboutUs",
     "pages/address/list",
     "pages/address/edit",
     "pages/myFavorite/list",
-    "pages/goods/list",
-    "pages/goods/details",
     "pages/adOrder/list",
     "pages/adOrder/details",
     "pages/infoList/list",

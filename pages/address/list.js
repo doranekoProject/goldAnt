@@ -5,7 +5,14 @@ Page({
   data: {
     addressList: []
   },
+  onShow: function() {
+    
+    this.getData();
+  },
   onLoad: function () {
+    // this.getData();
+  },
+  getData() {
     app.ajax({
       url: app.api.addr,
       method: 'POST'

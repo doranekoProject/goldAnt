@@ -1,12 +1,12 @@
 <!-- 组件模板 -->
 <view class="ads-list">
-  <view class="state">待付款</view>
+  <view class="state">{{type[dataItem.Status]}}</view>
   <view class="ads-wrap">
-    <image class="tab-img" src="https://img-blog.csdnimg.cn/20190927151132530.png"></image>
+    <image class="tab-img" src="{{dataItem.ImgList}}"></image>
     <view class="tab-left-info">
-      <text class="title">北欧现代简约餐厅吊灯创意三头 餐厅灯具</text>
+      <text class="title">{{dataItem.proName}}</text>
       <view class="price-wrap">
-        共计10件商品  合计：<text class="price">￥6.50</text>
+        共计{{dataItem.Count}}件商品  合计：<text class="price">￥{{dataItem.Price}}</text>
       </view>
     </view>
   </view>
@@ -17,24 +17,24 @@
 <view class="price-details">
   <view class="price-list clearfix">
     <text class="text-left">商品总价</text>
-    <text class="text-right">￥100</text>
+    <text class="text-right">￥{{dataItem.Price}}</text>
   </view>
   <view class="price-list clearfix">
     <text class="text-left">运费</text>
-    <text class="text-right">￥100</text>
+    <text class="text-right">￥{{dataItem.Fee}}</text>
   </view>
   <view class="price-list clearfix">
     <text class="text-left">实际付款</text>
-    <text class="text-right">￥100</text>
+    <text class="text-right">￥{{dataItem.total}}</text>
   </view>
 </view>
 <view class="price-details">
   <view class="price-list clearfix">
     <text class="text-left">订单编号</text>
-    <text class="text-right">￥100</text>
+    <text class="text-right">￥{{dataItem.Number}}</text>
   </view>
   <view class="price-list clearfix">
-    <text class="text-left">20202020202010</text>
-    <text class="text-right">2020-2-10  12:09:08</text>
+    <text class="text-left">支付时间</text>
+    <text class="text-right">{{dataItem.CreateTime}}</text>
   </view>
 </view>

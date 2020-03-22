@@ -1,6 +1,6 @@
 <!-- 组件模板 -->
 <view class="tab-content" class="{{showClass}}">
-  <scroll-view scroll-y="true" class="scroll-view"  style="height:{{listHeight}}px">
+  <scroll-view bindscrolltolower='lower' scroll-y="true" class="scroll-view"  style="height:{{listHeight}}px">
     <navigator wx:if="{{type === 'list'}}" class="tab-list" wx:key="index" wx:for="{{infoList}}" url="/pages/infoList/details">
       <image class="tab-img" src="{{item.imgUrl}}"></image>
       <view class="tab-left-info">
@@ -12,22 +12,22 @@
     </navigator>
     <view wx:if="{{type === 'ads' && infoList.length > 0}}" class="ads-list" wx:key="index" wx:for="{{infoList}}">
       <navigator  url="/pages/adOrder/details">
-        <view class="state">待付款</view>
+        <view class="state">{{type[item.Status]}}</view>
         <view class="ads-wrap">
-          <image class="tab-img" src="{{item.imgUrl}}"></image>
+          <image class="tab-img" src="{{item.ImgList}}"></image>
           <view class="tab-left-info">
-            <text class="title">北欧现代简约餐厅吊灯创意三头 餐厅灯具</text>
+            <text class="title">{{item.proName}}</text>
             <view class="price-wrap">
-              共计10件商品  合计：<text class="price">￥6.50</text>
+              共计{{item.Count}}件商品  合计：<text class="price">￥{{item.Price}}</text>
             </view>
           </view>
         </view>
       </navigator>
       <view class="button-warp">
-        <button bindtap="onTap" class="button">待付款</button>
+        <button bindtap="onTap" data-item="{{item}}" class="button">{{actions[item.Status]}}</button>
       </view>
     </view>
-    <view wx:if="{{type === 'ads' && infoList.length <1}}" class="no-data"> 亲，你还没有相关订单哟！ </view>
+    <view wx:if="{{infoList.length <1}}" class="no-data"> 亲，你还没有相关订单哟！ </view>
   </scroll-view>
   
 </view>
