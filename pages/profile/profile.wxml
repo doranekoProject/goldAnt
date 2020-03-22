@@ -27,13 +27,13 @@
   </view>
   <view class="profile-module">
     <view class="profile-module_row">
-      <navigator url="/pages/profile/bill"class="profile-module_row--title">账单</navigator>
+      <navigator url="/pages/bill/bill"class="profile-module_row--title">账单</navigator>
       <view class="profile-module_row--main">
         <view class="profile-module_row--item">
           <view class="profile-module_row--cost">￥{{userInfo.balance}}</view>余额
         </view>
         <view class="profile-module_row--item">
-          <view class="profile-module_row--cost">￥0</view>金币
+          <view class="profile-module_row--cost">￥{{userInfo.MScore}}</view>金币
         </view>
         <view class="profile-module_row--item">
           <view class="profile-module_row--cost">￥{{userInfo.score}}</view>佣金
