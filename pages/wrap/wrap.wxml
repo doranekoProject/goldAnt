@@ -1,0 +1,2 @@
+<!--pages/wrap/wrap.wxml-->
+<web-view src="{{pageUrl}}"></web-view>

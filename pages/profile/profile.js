@@ -7,7 +7,14 @@ Page({
     motto: 'Hello World',
     isLogin: false,
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    userInfo: {
+      balance: 0,
+      score: 0,
+      utype: 0,
+      nickname: '',
+      img: ''
+    }
   },
   //事件处理函数
   bindViewTap: function() {
@@ -17,17 +24,55 @@ Page({
   },
   onLoad: function () {
     if (!!wx.getStorageSync('userid')) {
+      this.userInfo();
       this.setData({
         isLogin: true
       });
     }
+  },
+  userInfo: function (e) {
+    // wx.request({
+    //   url: api.userinfo,
+    //   data: {
+    //     id: wx.getStorageSync('userid')
+    //   },
+    //   method: 'POST',
+    //   success: function (data) {
+    //     if (data.data.code === 1) {
+         
+    //     }
+    //   },
+    //   fail: function (faildata) {
+    //   },
+    // });
+    app.ajax({
+      url: api.userinfo,
+      data: {
+        id: wx.getStorageSync('userid').split('.')[0]
+      },
+      method: 'POST'
+    }).then((res) => {
+      if (res.data.code === 1) {
+        const data = res.data;
+        data.msg.endtime = data.msg.endtime.split('T')[0];
+        this.setData({
+          userInfo: data.msg
+        });
+      } else {
+        wx.showModal({
+          title: '获取用户信息失败',
+          content: res.data.msg
+        });
+      }
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   getUserInfo: function(e) {
     const that = this;
     wx.login({
       success: function (res) {
         const code = res.code;
-        console.log('code' ,code)
         if (!!code) {
           wx.getUserInfo({
             success: function (data) {

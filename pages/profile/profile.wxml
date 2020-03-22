@@ -3,10 +3,10 @@
   <view class="profile-header">
     <block wx:if="{{isLogin}}">
       <view class="profile-info">
-        <view class="profile-info_left"><open-data type="userAvatarUrl"></open-data></view>
+        <view class="profile-info_left"><image src="{{userInfo.img}}" mode="widthFix"></image></view>
         <view class="profile-info_right">
-          <open-data type="userNickName"></open-data>
-          <view class="profile-info_phone"></view>
+          <view>{{userInfo.nickname}}</view>
+          <view class="profile-info_phone">{{userInfo.phone}}</view>
         </view>
       </view>
     </block>
@@ -16,11 +16,11 @@
     <view class="profile-header_bar">
       <view class="profile-header_bar--main">
         <view class="profile-header_bar--tag"><view class="profile-header_bar--icon"></view>VIP店长</view>
-          <block wx:if="{{isLogin}}">
-            <view class="profile-header_bar--right profile-header_bar--yellow">到期时间： 2020-10-10</view>
+          <block wx:if="{{userInfo.utype}}">
+            <view class="profile-header_bar--right profile-header_bar--yellow">到期时间： {{userInfo.endtime}}</view>
           </block>
           <block wx:else>
-            <view class="profile-header_bar--right">立即开通</view>
+            <navigator url="../membership/open-membership" class="profile-header_bar--right">立即开通</navigator>
           </block>
       </view>
     </view>
@@ -30,13 +30,13 @@
       <navigator url="/pages/profile/bill"class="profile-module_row--title">账单</navigator>
       <view class="profile-module_row--main">
         <view class="profile-module_row--item">
-          <view class="profile-module_row--cost">￥0</view>余额
+          <view class="profile-module_row--cost">￥{{userInfo.balance}}</view>余额
         </view>
         <view class="profile-module_row--item">
           <view class="profile-module_row--cost">￥0</view>金币
         </view>
         <view class="profile-module_row--item">
-          <view class="profile-module_row--cost">￥0</view>佣金
+          <view class="profile-module_row--cost">￥{{userInfo.score}}</view>佣金
         </view>
       </view>
     </view>
