@@ -84,3 +84,9 @@ page {
   text-align: center;
   margin: 48rpx auto 0;
 }
+.no-data {
+  padding-top: calc(100% - 50%);
+  text-align: center;
+  color: #A5A5A5;
+  font-size: 32rpx;
+}

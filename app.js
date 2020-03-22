@@ -22,6 +22,8 @@ App({
     addcart: `${apiUrl}?t=addcart`, // 添加购物车
     addcollect: `${apiUrl}?t=addcollect`, // 添加购物车
     orderlist: `${apiUrl}?t=orderlist`, // 订单列表
+    collects: `${apiUrl}?t=collects`, // 我的收藏
+    applyshop: `${apiUrl}?t=applyshop`, // 商家入驻
     updord: `${apiUrl}?t=updord` // 更新状态
   },
   onLaunch: function () {

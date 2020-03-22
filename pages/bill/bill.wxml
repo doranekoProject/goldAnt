@@ -19,11 +19,11 @@
     </view>
   </view>
    <view class="bill-box">
-    <navigator url="/pages/billList/list?type=2" class="bill-box_head">佣金 <view class="bill-box_head--right">提现记录</view></navigator>
+    <navigator url="/pages/billList/list?type=4" class="bill-box_head">佣金 <view class="bill-box_head--right">提现记录</view></navigator>
     <view class="bill-box_main">
       <view>
         ￥<text class="bill-box_number">0</text>
-        <view class="bill-btn_yellow" bindtap='bindBtn' data-type="2">提现</view>
+        <navigator url="/pages/billList/list?type=other" class="bill-btn_yellow">提现</navigator>
       </view>
     </view>
   </view>

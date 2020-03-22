@@ -6,7 +6,7 @@ Page({
     isRecharge: false,
   },
   bindBtn: function(e) {
-    const popType = ["充值", "兑换", "提现"];
+    const popType = ["充值", "兑换"];
     const text = e.currentTarget.dataset.type ?  popType[e.currentTarget.dataset.type] : '';
     this.setData({
       isRecharge: !this.data.isRecharge,

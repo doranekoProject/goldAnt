@@ -5,20 +5,20 @@
     <view class="title">商家信息</view>
     <view class="section">
       <view class="section-title">商铺名称</view>
-      <input class="input" bindinput="bindKeyInput" data-modal='userName' name="userName" value="{{addressInfo.userName}}" />
+      <input class="input" bindinput="bindKeyInput" data-modal='shopname' name="shopname" value="{{addressInfo.shopname}}" />
     </view>
     <view class="section">
       <view class="section-title">联系人</view>
-      <input class="input" bindinput="bindKeyInput" data-modal='userName' name="userName" value="{{addressInfo.userName}}" />
+      <input class="input" bindinput="bindKeyInput" data-modal='name' name="name" value="{{addressInfo.name}}" />
     </view>
     <view class="section">
       <view class="section-title">联系电话</view>
-      <input class="input" bindinput="bindKeyInput" data-modal='userName' name="userName" value="{{addressInfo.userName}}" />
+      <input class="input" bindinput="bindKeyInput" data-modal='phone' name="phone" value="{{addressInfo.phone}}" />
     </view>
     <view class="section">
       <view class="section-title">地址</view>
-      <input class="input" bindinput="bindKeyInput" data-modal='userName' name="userName" value="{{addressInfo.userName}}" />
+      <input class="input" bindinput="bindKeyInput" data-modal='address' name="address" value="{{addressInfo.address}}" />
     </view>
-    <view class="button">申请提交</view>
+    <view class="button" bindtap="submit">申请提交</view>
   </view>
 </view>

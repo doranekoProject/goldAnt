@@ -28,7 +28,7 @@ Page({
       }]
   },
   onLoad: function (e) {
-    const title = e.type == 1 ? '广告订单': '商品订单';
+    const title = e.type == 'ads' ? '广告订单': '商品订单';
     wx.setNavigationBarTitle({
       title
     });

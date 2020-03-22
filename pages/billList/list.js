@@ -10,12 +10,16 @@ Page({
     height: wx.getSystemInfoSync().windowHeight
   },
   onLoad: function (e) {
-    const typeText = ["充值", "兑换", "提现", '账单'];
+    const typeText = {
+      '0': '充值记录',
+      '4': '提现记录',
+      'account': '账单明细',
+      'other': '提现'
+    };
     const type = !e.type ? 0 : e.type;
-    let title = `${typeText[type]}记录`;
+    let title = typeText[type];
     let inout = type; 
-    if (type == 3) {
-      title = '账单明细';
+    if (type == 'account') {
       inout = '';
     }
     wx.setNavigationBarTitle({
@@ -25,10 +29,16 @@ Page({
       type,
       inout
     });
-    this.getList();
+    if (type != 'other') {
+      this.getAccountList();
+    }
   },
-  getList: function (e) {
+  // 获取账单明细
+  getAccountList: function (e) {
     const that = this;
+    if (this.isEnd) {
+      return false;
+    }
     app.ajax({
       url: api.paylist,
       data: {
@@ -39,8 +49,16 @@ Page({
       method: 'POST',
     }).then(res => {
       if (res.data.code === 1) {
+        let d = res.data.msg.list;
+        let page = that.data.page;
+        if (d.length >= 10) {
+          page = page +1;
+        } else {
+          this.isEnd = true;
+        }
         that.setData({
-          list: that.data.list.concat(res.data.list)
+          page,
+          list: that.data.list.concat(d)
         })
       } else {
         wx.showToast({
@@ -49,13 +67,10 @@ Page({
         })
       }
     }).catch(res => {
-      console.elog(res);
+      console.log(res);
     });
   },
   lower: function() {
-    this.setData({
-      page: this.data.page + 1
-    })
-    this.getList();
+    this.getAccountList();
   }
 })

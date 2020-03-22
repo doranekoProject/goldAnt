@@ -44,10 +44,10 @@
       <view class="profile-module_row--title">订单</view>
       <view class="profile-module_row--main">
         <view class="profile-module_row--item">
-          <navigator url="/pages/adOrder/list" class="profile-module_row--desc icon-ad">广告订单</navigator>
+          <navigator url="/pages/adOrder/list?type=ads" class="profile-module_row--desc icon-ad">广告订单</navigator>
         </view>
         <view class="profile-module_row--item">
-          <navigator url="/pages/goods/list" class="profile-module_row--desc icon-product">商品订单</navigator>
+          <navigator url="/pages/adOrder/list?type=goods" class="profile-module_row--desc icon-product">商品订单</navigator>
         </view>
         <view class="profile-module_row--item">
           <navigator url="/pages/myFavorite/list" class="profile-module_row--desc icon-like">我的收藏</navigator>
@@ -64,13 +64,13 @@
           <button open-type="contact" class="profile-module_row--desc icon-service">在线客服</button>
         </view>
         <view class="profile-module_row--item">
-          <view class="profile-module_row--desc icon-us">关于我们</view>
+          <navigator url="/pages/aboutUs/aboutUs" class="profile-module_row--desc icon-us">关于我们</navigator>
         </view>
         <view class="profile-module_row--item">
-          <view class="profile-module_row--desc icon-business">商家中心</view>
+          <navigator url="/pages/merchantCenter/center" class="profile-module_row--desc icon-business">商家中心</navigator>
         </view>
         <view class="profile-module_row--item">
-          <view class="profile-module_row--desc icon-entry">商家入驻</view>
+          <navigator url="/pages/merchantsSettled/merchants-settled" class="profile-module_row--desc icon-entry">商家入驻</navigator>
         </view>
       </view>
     </view>

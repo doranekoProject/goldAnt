@@ -20,9 +20,9 @@ Component({
       type: String,
       value: ''
     },
-    type: {
+    method: {
       type: String,
-      value: 'list'
+      value: 'getCollects' // getCollects：我的收藏， getList：资讯列表， getOrder：订单列表
     },
     paddingTop: {
       type: Number,
@@ -31,8 +31,9 @@ Component({
   },
   observers: {
     'isShow': function (val) {
+      let type = this.data.method;
       if (val && !this._hasLoadData) {
-        this.getData();
+        this[type]();
       }
       let show = !val ? 'tab-hide' : ''
       this.setData({
@@ -46,6 +47,7 @@ Component({
   data: {
     showClass: '',
     infoList: [],
+
     adsPage: 1,
     type: {
       '0': '待付款',
@@ -59,17 +61,32 @@ Component({
       '2': '确认收货',
       '4': '查看物流'
     },
+    message: {
+      getCollects: '亲，你的收藏为空哦！',
+      getList: '暂无数据',
+      getOrder: '亲，你还没有相关订单哟！'
+    },
     _hasLoadData: false
   },
-
+  ready: function() {
+    const systemInfo = wx.getSystemInfoSync();
+    this.setData({
+      listHeight: systemInfo.windowHeight - this.data.paddingTop
+    });
+  },
   /**
    * 组件的方法列表
    */
   methods: {
     // 滚动到底部获取数据
     lower() {
-      this.getData();
+      let method = this.data.method;
+      if (method == 'getCollects') {
+        return false;
+      }
+      this[method]();
     },
+    // 去支付
     pay(data) {
       wx.requestPayment({
         timeStamp: '',
@@ -93,9 +110,10 @@ Component({
         method: 'POST',
       }).then((data) => {
         if (res.data.code == 1) {
-          wx.showModal({
+          wx.showToast({
             title: '确认收货',
-            content: '确认收货成功'
+            icon: 'success',
+            duration: 2000
           });
         }
       });
@@ -118,10 +136,34 @@ Component({
           break;
       }
     },
-    getData() {
-      var that = this;
-      const systemInfo = wx.getSystemInfoSync();
+    // 获取我的收藏
+    getCollects() {
       this._hasLoadData = true;
+      app.ajax({
+        data: {
+        },
+        url: app.api.collects,
+        method: 'POST',
+      }).then((data) => {
+        if (res.data.code == 1) {
+          this.setData({
+            infoList: res.data.msg
+          });
+        } else {
+          wx.showModal({
+            title: '获取数据失败',
+            content: res.data.msg
+          });
+        }
+      });
+    },
+    // 获取我的账单
+    getOrder() {
+      var that = this;
+      this._hasLoadData = true;
+      if (this.isEnd) {
+        return false;
+      }
       app.ajax({
         data: {
           begin: '',
@@ -135,10 +177,13 @@ Component({
         if (res.data.code == 1) {
           let data = res.data.msg;
           const obj = {};
-          obj.list = that.data.infoList.length > 0 ? that.data.infoList.concat(data.list) : data.list;
-          if (obj.list.length > 10) obj.adsPage = obj.adsPage + 1;
+          obj.list = that.data.infoList.concat(data.list);
+          if (obj.list.length > 10) {
+            obj.adsPage = obj.adsPage + 1;
+          } else {
+            this.isEnd = true;
+          }
           this.setData({
-            listHeight: systemInfo.windowHeight - this.data.paddingTop,
             infoList: obj.list,
             adsPage: obj.adsPage
           });
