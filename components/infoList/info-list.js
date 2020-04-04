@@ -40,7 +40,7 @@ Component({
       if (val && !this._hasLoadData) {
         setTimeout(() => {
           this[type](this.data.methodType);
-        }, 20);
+        }, 0);
         
       }
       let show = !val ? 'tab-hide' : ''
@@ -55,7 +55,9 @@ Component({
   data: {
     showClass: '',
     infoList: [],
-
+    userinfo: {},
+    walletType: '',
+    show: false,
     adsPage: 1,
     type: {
       '0': '待付款',
@@ -65,9 +67,8 @@ Component({
     },
     actions: {
       '0': '去付款',
-      '1': '确认收货',
       '2': '确认收货',
-      '4': '查看物流'
+      '4': '退货'
     },
     message: {
       getCollects: '亲，你的收藏为空哦！',
@@ -81,24 +82,90 @@ Component({
     this.setData({
       listHeight: systemInfo.windowHeight - this.data.paddingTop
     });
+    if (this.data.methodType == 'ads' || this.data.methodType == 'goods') {
+      this.getInfo();
+    }
   },
   /**
    * 组件的方法列表
    */
   methods: {
-    bindSumbit: function (data) {
-      app.orderDetails = data;
+    bindWallet: function (e) {
+      const type = e.currentTarget.dataset.type;
+      let price = this.currentData.Price;
+
+      if (type != 'weixin' && this.data.userInfo[type] < price) {
+        return wx.showToast({
+          title: `您的${type === 'balance' ? '余额' : '积分'}不足`,
+          icon: 'none'
+        });
+      }
+      this.setData({
+        walletType: this.data.walletType === type ? '' : type
+      })
+    },
+    getInfo: function () {
+      app.ajax({
+        url: app.api.userinfo,
+        data: {
+          id: wx.getStorageSync('userid').split('.')[0]
+        },
+        method: 'POST'
+      }).then((res) => {
+        if (res.data.code === 1) {
+          const data = res.data;
+          this.setData({
+            userInfo: data.msg
+          });
+        } else {
+          wx.showModal({
+            title: '获取用户信息失败',
+            content: res.data.msg
+          });
+        }
+      }).catch((res) => {
+        console.log(res)
+      });
+    },
+    hideMask() {
+      this.setData({
+        show: false
+      })
+    },
+    bindSumbit: function () {
+      let _this = this;
+      let data = this.currentData;
+      let paytype = this.data.walletType === 'balance' ? 1 : (this.data.walletType === 'score' ? 2 : 0)
       app.ajax({
         data: {
           id: data.ID,
-          paytyte: 0
+          paytype
         },
         url: app.api.pay,
         method: 'POST',
-      }).then((data) => {
-        if (data.data.code == 1) {
-          wx.navigateTo({
-            url: '/pages/adOrder/details?id=${data.ID}'
+      }).then((res) => {
+        if (res.data.code == 1) {
+          const obj = res.data.msg;
+          obj.success = function (e) {
+            _this.setData({
+              adsPage: 1,
+              infoList: [],
+              show: false
+            });
+            _this.currentData = null;
+            _this.getOrder();
+          }
+          obj.fail = function (e) {
+            wx.showToast({
+              icon: "none",
+              title: '支付失败，请重试'
+            });
+          }
+          wx.requestPayment(obj);
+        } else {
+          wx.showToast({
+            icon: "none",
+            title: '支付失败，请重试'
           });
         }
       });
@@ -112,36 +179,49 @@ Component({
       this[method]();
     },
     // 确认收货
-    submitPay(data) {
+    submitPay(data, status) {
+      var _this = this;
       app.ajax({
         data: {
           id: data.ID,//订单ID
-          status: 3 //订单状态（3已收货、4确认完成）
+          status
 
         },
         url: app.api.updord,
         method: 'POST',
-      }).then((data) => {
+      }).then((res) => {
         if (res.data.code == 1) {
           wx.showToast({
             title: '确认收货',
             icon: 'success',
             duration: 2000
           });
+          _this.setData({
+            adsPage: 1,
+            infoList: []
+          });
+          _this.getOrder();
         }
       });
     },
     onTap(e) {
       let data = e.currentTarget.dataset.item;
-      switch (data.Status) {
+      let type = e.currentTarget.dataset.type;
+      let action = data ? data.Status : type;
+      switch (action) {
         case 0: // 待付款
-          this.bindSumbit(data);
+          this.setData({
+            show: true
+          });
+          this.currentData = data;
           break;
-        case 1: // 待发货
         case 2: // 待收货
-          this.submitPay(data);
+          this.submitPay(data, 4);
           break;
         case 4: // 已完成
+          this.submitPay(data, t);
+          break;
+        case 'wu':
           app.orderListItem = data;
           wx.navigateTo({
             url: '/pages/logistics/logistics-info'
@@ -171,15 +251,13 @@ Component({
       });
     },
     // 获取我的账单
-    getOrder(methodType) {
+    getOrder() {
       var that = this;
       this._hasLoadData = true;
       if (this.isEnd) {
         return false;
       }
-      console.log(this.methodType);
-      let OrderType = methodType === 'ads' ? 1 : 2;
-      console.log(OrderType)
+      let OrderType = this.data.methodType === 'ads' ? 1 : 2;
       app.ajax({
         data: {
           begin: '',

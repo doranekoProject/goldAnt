@@ -35,10 +35,32 @@
         </view>
       </navigator>
       <view class="button-warp">
-        <button bindtap="onTap" data-item="{{item}}" class="button">{{actions[item.Status]}}</button>
+        <button bindtap="onTap" wx:if="{{item.Status == 2}}" data-type="wu" data-item="{{item}}" class="button">查看物流</button>
+        <button wx:if="{{item.Status == 0 || item.Status ==2 || item.Status ==4}}" bindtap="onTap" data-item="{{item}}" class="button">{{actions[item.Status]}}</button>
       </view>
     </view>
     <view wx:if="{{infoList.length <1}}" class="no-data">{{message[method]}}</view>
   </scroll-view>
-  
+  <view class="mask-wrap"  wx:if="{{show}}">
+    <view class="mask" bindtap="hideMask"></view>
+    <view class="order-other">
+      <view class="order-other_item {{walletType === 'balance' ? 'order-other_item--active' : ''}}" bindtap="bindWallet" data-type="balance">
+        <view class="order-other_item--name">使用余额</view>
+        <view class="order-other_item--desc">￥ {{userInfo.balance}}</view>
+      </view>
+      <view class="order-other_item {{walletType === 'score' ? 'order-other_item--active' : ''}}" bindtap="bindWallet" data-type="score">
+        <view class="order-other_item--name">使用积分</view>
+        <view class="order-other_item--desc">{{userInfo.score}}</view>
+      </view>
+      <view class="order-other_item {{walletType === 'weixin' ? 'order-other_item--active' : ''}}" bindtap="bindWallet" data-type="weixin">
+        <view class="order-other_item--name">微信支付</view>
+      </view>
+        
+        
+      <view class="order-other_item order-other_item--button" bindtap="bindSumbit">
+        <text class="order-other_item--name">确定支付</text>
+      </view>
+    </view>
+  </view>
 </view>
+
