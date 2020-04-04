@@ -10,6 +10,7 @@ Page({
     duration: 500,
     isSeletePop: false,
     quantity: 1,
+    stock: 0,
     SPID:0,
     isBuy: 0,
     itemOption: {
@@ -242,10 +243,14 @@ Page({
         SPID: spid,
         stock: stock
       });
+    } else {
+      this.setData({
+        stock: this.data.detail.Stock
+      });
     }
     if (this.data.stock < this.data.quantity) {
       return wx.showToast({
-        title: `库存只剩${this.data.stock}`,
+        title: `库存只剩下${this.data.stock}件`,
         icon: 'none'
       });
     }
@@ -303,16 +308,9 @@ Page({
   },
   seletePop: function(e) {
     const type = e.currentTarget.dataset.type;
-    if (this.data.itemOption.allData.length > 0) {
-      this.setData({
-        isSeletePop: !this.data.isSeletePop,
-        isBuy: type
-      })
-    } else {
-      this.setData({
-        isBuy: type
-      });
-      this.bindConfirm();
-    }
+    this.setData({
+      isSeletePop: !this.data.isSeletePop,
+      isBuy: type
+    })
   }
 })

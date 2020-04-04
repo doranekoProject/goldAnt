@@ -54,6 +54,17 @@
         <view class="selete-pop_main--btn" bindtap="bindConfirm" data-type="1">确定</view>
       </view>
       </block>
+      <block wx:if="{{detail.list.length <= 0}}">
+       <view class="selete-pop_main--row">
+        <view class="selete-pop_main--name">数量</view>
+        <view class="selete-pop_main--reduce" bindtap="bindQuantity" data-type="reduce"></view>
+        <input class="selete-pop_main--input" value="{{quantity}}" type="number" bindinput="bindQuantity" data-type="input"></input>
+        <view class="selete-pop_main--add" bindtap="bindQuantity" data-type="add"></view>
+      </view>
+      <view>
+        <view class="selete-pop_main--btn" bindtap="bindConfirm" data-type="1">确定</view>
+      </view>
+      </block>
     </view>
   </view>
 </view>
