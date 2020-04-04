@@ -15,7 +15,7 @@
   <block wx:if="{{type == 'other'}}">
       <view class="cash-out_box">
         <view>
-          ￥<view class="cash-out_number">{{cashValue}}</view>
+          ￥<view class="cash-out_number">{{userInfo.score}}</view>
           <view class="cash-out_text">可提现金额</view>
         </view>
       </view>

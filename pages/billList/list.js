@@ -27,17 +27,38 @@ Page({
     });
     this.setData ({
       type,
-      inout,
-      cashValue: e.type === 'other' ? e.value : 0
+      inout
     });
     if (type != 'other') {
       this.getAccountList();
+    } else {
+      app.ajax({
+        url: api.userinfo,
+        data: {
+          id: wx.getStorageSync('userid').split('.')[0]
+        },
+        method: 'POST'
+      }).then((res) => {
+        if (res.data.code === 1) {
+          const data = res.data;
+          this.setData({
+            userInfo: data.msg
+          });
+        } else {
+          wx.showModal({
+            title: '获取用户信息失败',
+            content: res.data.msg
+          });
+        }
+      }).catch((res) => {
+        console.log(res)
+      });
     }
   },
   inputValue: function (e) {
     const v = e.detail.value;
     this.setData({
-      value: v > this.data.cashValue ? this.data.cashValue : v
+      value: v > this.data.userInfo.score ? this.data.userInfo.score : v
     })
   },
   // 获取账单明细
@@ -78,7 +99,7 @@ Page({
     });
   },
   submit: function () {
-    if (this.data.value === 0 || this.data.value > this.data.cashValue) {
+    if (!this.data.value || this.data.value == 0 || this.data.value > this.data.userInfo.score ) {
       return wx.showToast({
         title: '请检查提现金额',
         icon: "none"
