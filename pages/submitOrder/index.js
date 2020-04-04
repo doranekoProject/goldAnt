@@ -12,6 +12,7 @@ Page({
     remark: '',
     address: {},
     aid: 0,
+    totle: 0,
   },
   getItem: function () {
     app.ajax({
@@ -22,17 +23,26 @@ Page({
       },
     }).then(res => {
       if (res.data.code === 1) {
-        res.data.msg.Img = `${app.host}${res.data.msg.Img}`;
-        const cost = res.data.msg.Price * this.data.quantity;
-        this.setData({
-          detail: res.data.msg,
-          cost: cost,
-          originalCost: cost
-        });
-        console.log(this.data)
+        const data = res.data.msg;
+        data.Img = `${app.host}${data.Img}`;
+        const cost = data.Price * this.data.quantity;
+        const obj = {};
+        if (!!this.data.spid) {
+          for (let i = 0; i < data.list.length; i += 1) {
+            if (data.list[i].SPID === this.data.spid) {
+              obj.totle = data.list[i].Stock;
+            }
+          }
+        } else {
+          obj.totle = data.Stock;
+        }
+        obj.detail = data;
+        obj.cost = cost;
+        obj.originalCost = cost;
+        this.setData(obj);
       } else {
         wx.showToast({
-          title: res.data.msg,
+          title: data,
           icon: "none"
         })
       }
@@ -90,16 +100,17 @@ Page({
   bindQuantity: function (e) {
     const type = e.currentTarget.dataset.type;
     const quantity = Number(this.data.quantity)
-    console.log(type)
     const obj = {};
+    const max = this.data.totle;
     if (type === 'add') {
-      obj.quantity = quantity + 1;
+      obj.quantity = quantity + 1 > max ? max : quantity + 1;
     }
     if (type === 'reduce') {
       obj.quantity = quantity === 1 ? 1 : quantity - 1;
     }
     if (type === 'input') {
-      obj.quantity = e.detail.value;
+      const num = Number(e.detail.value);
+      obj.quantity = num <= 1 ? 1 : (num > max ? max : num);
     }
     obj.cost  =  obj.quantity * this.data.detail.Price;
     this.setData(obj);
@@ -108,7 +119,7 @@ Page({
     const type = e.currentTarget.dataset.type;
     const price = this.data.cost;
     console.log(this.data.userInfo[type], price)
-    if (this.data.userInfo[type] < price ) {
+    if (this.data.userInfo[type] < price || (this.data.userInfo[type] === 0 && this.data.walletType!= type )) {
       return  wx.showToast({
         title: `您的${type === 'balance' ? '余额' : '积分'}不足`,
         icon: 'none'
@@ -140,20 +151,25 @@ Page({
         if (res.data.code === 1) {
           console.log('下单成功', res.data)
           const obj = res.data.msg;
-          console.log(obj)
-          obj.success = function (e) {
-            wx.navigateTo({
-              url: `../adOrder/details?id=${obj.orderid}`,
+          if (!!this.data.walletType) {
+            wx.redirectTo({
+              url: `../adOrder/details?id=${obj}`,
             })
+          } else {
+            obj.success = function (e) {
+              wx.navigateTo({
+                url: `../adOrder/details?id=${obj.orderid}`,
+              })
+            }
+            obj.fail = function (e) {
+              wx.showToast({
+                icon: "none",
+                title: '支付失败，请重试'
+              });
+              console.log('fail', e)
+            }
+            wx.requestPayment(obj);
           }
-          obj.fail = function (e) {
-            wx.showToast({
-              icon: "none",
-              title: '支付失败，请重试'
-            });
-            console.log('fail', e)
-          }
-          wx.requestPayment(obj);
         } else {
           wx.showToast({
             title: res.data.msg,
@@ -181,20 +197,24 @@ Page({
         if (res.data.code === 1) {
           console.log('下单成功',res.data)
           const obj = res.data.msg;
-          console.log(obj)
-          obj.success = function(e) {
-            wx.navigateTo({
-              url: `../adOrder/details?id=${obj.orderid}`,
+          if (!!this.data.walletType) {
+            wx.redirectTo({
+              url: `../adOrder/details?id=${obj}`,
             })
+          } else {
+            obj.success = function (e) {
+              wx.navigateTo({
+                url: `../adOrder/details?id=${obj.orderid}`,
+              })
+            }
+            obj.fail = function (e) {
+              wx.showToast({
+                icon: "none",
+                title: '支付失败，请重试'
+              });
+            }
+            wx.requestPayment(obj);
           }
-          obj.fail = function(e) {
-            wx.showToast({
-              icon: "none",
-              title: '支付失败，请重试'
-            });
-            console.log('fail', e)
-          }
-          wx.requestPayment(obj);
         } else {
           wx.showToast({
             title: res.data.msg,
@@ -213,7 +233,6 @@ Page({
     }).then((res) => {
       if (res.data.code == 1) {
         let data = res.data.msg;
-        console.log(data)
         const indexArr = this.data.cartIndex;
         let list = [];
         let cost = 0;
@@ -238,7 +257,7 @@ Page({
     });
   },
   onLoad: function (e) {
-    if (!e.id && !e.cartIndex) return wx.showToast({
+    if (!e.id && (!e.cartIndex && e.cartIndex != 0 )) return wx.showToast({
       title: "找不到商品ID",
       icon: "none"
     });
@@ -257,9 +276,9 @@ Page({
       });
       this.getItem();
     }
-    this.getInfo();
   },
   onShow: function () {
     this.getAddr();
+    this.getInfo();
   }
 })

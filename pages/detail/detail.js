@@ -182,6 +182,12 @@ Page({
     const itemOption = this.data.itemOption;
     let spid = 0;
     let isNext = 1;
+    if (this.data.quantity <= 0) {
+      return wx.showToast({
+        title: '请添加数量',
+        icon: "none"
+      })
+    }
     for (let i = 0; i < itemOption.showData.length; i += 1) {
       if(itemOption.curData[i].includes(1) && isNext) {
         spid = true;
