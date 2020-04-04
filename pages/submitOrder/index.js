@@ -118,7 +118,6 @@ Page({
   bindWallet: function (e) {
     const type = e.currentTarget.dataset.type;
     const price = this.data.cost;
-    console.log(this.data.userInfo[type], price)
     if (this.data.userInfo[type] < price || (this.data.userInfo[type] === 0 && this.data.walletType!= type )) {
       return  wx.showToast({
         title: `您的${type === 'balance' ? '余额' : '积分'}不足`,
@@ -137,7 +136,6 @@ Page({
     })
   },
   bindSumbit: function () {
-    console.log(this.data.detail)
     if (this.data.type === 'list') {
       app.ajax({
         url: api.ordercart,
@@ -149,7 +147,6 @@ Page({
         },
       }).then(res => {
         if (res.data.code === 1) {
-          console.log('下单成功', res.data)
           const obj = res.data.msg;
           if (!!this.data.walletType) {
             wx.redirectTo({
@@ -195,7 +192,6 @@ Page({
         },
       }).then(res => {
         if (res.data.code === 1) {
-          console.log('下单成功',res.data)
           const obj = res.data.msg;
           if (!!this.data.walletType) {
             wx.navigateTo({
@@ -249,7 +245,6 @@ Page({
             cost: cost,
             originalCost: cost
           });
-          console.log(this.data)
         }
       }
       if (res.code)

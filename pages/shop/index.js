@@ -47,7 +47,6 @@ Page({
       },
       method: 'POST',
     }).then(res => {
-      console.log(res)
       if (res.data.code === 1) {
         this.setData({
           getCategory: res.data.msg.list
@@ -74,7 +73,6 @@ Page({
       if (res.data.code === 1) {
         const data = res.data.msg;
         const obj = {};
-        console.log(data.list.length)
         if (data.list.length >= 10) {
           obj.page = this.data.page + 1;
         } else {

@@ -24,7 +24,6 @@ Page({
     isNext: true
   },
   onReady: function () {
-    console.log(utils)
     const that = this;
     let query = wx.createSelectorQuery().in(this)
     query.select('.home-bar').boundingClientRect()
@@ -120,7 +119,6 @@ Page({
       },
       method: 'POST',
     }).then(res => {
-      console.log(res)
       if (res.data.code === 1) {
         res.data.msg.current = 0;
         this.setData({
@@ -204,7 +202,6 @@ Page({
     
     wx.getSetting({
       success(res) {
-        console.log(res)
         if (res.authSetting['scope.userLocation'] && wx.getStorageSync('location')) {
           that.getAds();
         } else {

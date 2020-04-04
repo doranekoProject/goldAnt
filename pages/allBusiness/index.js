@@ -65,7 +65,6 @@ Page({
     this.getList();
   },
   lower: function () {
-    console.log(this.data.lastPage)
     if(!this.data.lastPage) this.getList();
   }
 })

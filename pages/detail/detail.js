@@ -86,7 +86,6 @@ Page({
     })
   },
   optionFilter: function (key, index) {
-    console.log(key, index);
     const result = [];
     const indexArr = [];
     let curIndex = 0;
@@ -284,7 +283,6 @@ Page({
     this.setData({
       isSeletePop: !this.data.isSeletePop
     })
-    console.log(item)
     app.ajax({
       url: api.addcart,
       data: {
