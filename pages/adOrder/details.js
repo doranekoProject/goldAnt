@@ -59,13 +59,28 @@ Page({
     },
     dataItem: {}
   },
-  onLoad: function () {
-    let d = Object.assign({}, app.addressItem);
-    delete app.orderListItem;
-    let total = addNumber(d.Price, d.Fee);
-    d.total = total;
-    this.setData({
-      dataItem: d
+  getAddress() {
+    app.detailsAddress = this.data.dataItem;
+    wx.navigateTo({
+      url: '/pages/logistics/logistics-info'
+    });
+  },
+  onLoad: function (e) {
+    let id = e.id;
+    app.ajax({
+      data: {
+        id
+      },
+      url: app.api.orderinfo,
+      method: 'POST',
+    }).then((data) => {
+      if (data.data.code == 1) {
+        data = data.data.msg;
+        data.totalPrice = addNumber(data.Price, data.Fee);
+        this.setData({
+          dataItem: data
+        });
+      }
     });
   },
 })

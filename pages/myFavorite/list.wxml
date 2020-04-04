@@ -1,4 +1,4 @@
 <!-- 组件模板 -->
 <view class="my-favorite">
-  <info-list paddingTop="{{0}}" isShow="{{true}}"></info-list>
+  <info-list paddingTop="{{0}}" methodType="list" isShow="{{true}}"></info-list>
 </view>

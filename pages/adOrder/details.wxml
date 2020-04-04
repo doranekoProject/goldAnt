@@ -11,7 +11,7 @@
     </view>
   </view>
   <view class="button-warp">
-    <button bindtap="onTap" class="button">查看物流</button>
+    <button bindtap="getAddress" class="button">查看物流</button>
   </view>
 </view>
 <view class="price-details">
@@ -25,13 +25,13 @@
   </view>
   <view class="price-list clearfix">
     <text class="text-left">实际付款</text>
-    <text class="text-right">￥{{dataItem.total}}</text>
+    <text class="text-right">￥{{dataItem.totalPrice}}</text>
   </view>
 </view>
 <view class="price-details">
   <view class="price-list clearfix">
     <text class="text-left">订单编号</text>
-    <text class="text-right">￥{{dataItem.Number}}</text>
+    <text class="text-right">{{dataItem.Number}}</text>
   </view>
   <view class="price-list clearfix">
     <text class="text-left">支付时间</text>
