@@ -5,6 +5,7 @@ const api = app.api;
 
 Page({
   data: {
+    list: [],
     detail: {},
     userInfo: {},
     quantity: 1,
@@ -22,9 +23,11 @@ Page({
     }).then(res => {
       if (res.data.code === 1) {
         res.data.msg.Img = `${app.host}${res.data.msg.Img}`;
+        const cost = res.data.msg.Price * this.data.quantity;
         this.setData({
           detail: res.data.msg,
-          cost: res.data.msg.Price * this.data.quantity
+          cost: cost,
+          originalCost: cost
         });
         console.log(this.data)
       } else {
@@ -103,16 +106,17 @@ Page({
   },
   bindWallet: function (e) {
     const type = e.currentTarget.dataset.type;
-    const price = this.data.quantity * this.data.detail.Price;
+    const price = this.data.cost;
+    console.log(this.data.userInfo[type], price)
     if (this.data.userInfo[type] < price ) {
       return  wx.showToast({
         title: `您的${type === 'balance' ? '余额' : '积分'}不足`,
         icon: 'none'
-      })
+      });
     }
     this.setData({
-      walletType: type,
-      cost: 0
+      walletType: this.data.walletType === type ? '' : type,
+      cost: this.data.walletType === type ? this.data.originalCost : 0
     })
   },
   bindDesc: function (e) {
@@ -123,59 +127,136 @@ Page({
   },
   bindSumbit: function () {
     console.log(this.data.detail)
-    app.ajax({
-      url: api.order,
-      method: 'POST',
-      data: {
-        shopid: this.data.detail.ShopID,
-        addid: this.data.aid,
-        remark: this.data.remark,
-        proid: this.data.itemId,
-        spid:  this.data.spid,
-        count: this.data.quantity,
-        paytype: this.data.walletType === 'balance' ? 1 : (this.data.walletType === 'score' ? 2 : 0),
-        fee: this.data.cost
-      },
-    }).then(res => {
-      if (res.data.code === 1) {
-        console.log('下单成功',res.data)
-        const obj = res.data.msg;
-        console.log(obj)
-        obj.success = function(e) {
-          wx.navigateTo({
-            url: `../adOrder/details?id=${obj.orderid}`,
+    if (this.data.type === 'list') {
+      app.ajax({
+        url: api.ordercart,
+        method: 'POST',
+        data: {
+          addid: this.data.aid,
+          remark: this.data.remark,
+          paytype: this.data.walletType === 'balance' ? 1 : (this.data.walletType === 'score' ? 2 : 0),
+        },
+      }).then(res => {
+        if (res.data.code === 1) {
+          console.log('下单成功', res.data)
+          const obj = res.data.msg;
+          console.log(obj)
+          obj.success = function (e) {
+            wx.navigateTo({
+              url: `../adOrder/details?id=${obj.orderid}`,
+            })
+          }
+          obj.fail = function (e) {
+            wx.showToast({
+              icon: "none",
+              title: '支付失败，请重试'
+            });
+            console.log('fail', e)
+          }
+          wx.requestPayment(obj);
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: "none"
           })
         }
-        obj.fail = function(e) {
+      }).catch(res => {
+        console.log(res)
+      });
+    } else {
+      app.ajax({
+        url: api.order,
+        method: 'POST',
+        data: {
+          shopid: this.data.detail.ShopID,
+          addid: this.data.aid,
+          remark: this.data.remark,
+          proid: this.data.itemId,
+          spid:  this.data.spid,
+          count: this.data.quantity,
+          paytype: this.data.walletType === 'balance' ? 1 : (this.data.walletType === 'score' ? 2 : 0),
+          fee: this.data.cost
+        },
+      }).then(res => {
+        if (res.data.code === 1) {
+          console.log('下单成功',res.data)
+          const obj = res.data.msg;
+          console.log(obj)
+          obj.success = function(e) {
+            wx.navigateTo({
+              url: `../adOrder/details?id=${obj.orderid}`,
+            })
+          }
+          obj.fail = function(e) {
+            wx.showToast({
+              icon: "none",
+              title: '支付失败，请重试'
+            });
+            console.log('fail', e)
+          }
+          wx.requestPayment(obj);
+        } else {
           wx.showToast({
-            icon: "none",
-            title: '支付失败，请重试'
-          });
-          console.log('fail', e)
+            title: res.data.msg,
+            icon: "none"
+          })
         }
-        wx.requestPayment(obj);
-      } else {
-        wx.showToast({
-          title: res.data.msg,
-          icon: "none"
-        })
+      }).catch(res => {
+        console.log(res)
+      });
+    }
+  },
+  getList: function () {
+    app.ajax({
+      method: 'POST',
+      url: app.api.cartlist
+    }).then((res) => {
+      if (res.data.code == 1) {
+        let data = res.data.msg;
+        console.log(data)
+        const indexArr = this.data.cartIndex;
+        let list = [];
+        let cost = 0;
+        if (indexArr.length > 0) {
+          for (let i = 0; i < indexArr.length; i += 1) {
+            if (!!data[indexArr[i]]) {
+              data[indexArr[i]].Img = `${app.host}${data[indexArr[i]].Img}`;
+              list.push(data[indexArr[i]]);
+              cost += (data[indexArr[i]].Count * data[indexArr[i]].Price);
+            }
+          }
+          this.setData({
+            list: list,
+            cost: cost,
+            originalCost: cost
+          });
+          console.log(this.data)
+        }
       }
-    }).catch(res => {
-      console.log(res)
-    })
+      if (res.code)
+        console.log(res);
+    });
   },
   onLoad: function (e) {
-    if(!e.id) return wx.showToast({
+    if (!e.id && !e.cartIndex) return wx.showToast({
       title: "找不到商品ID",
       icon: "none"
     });
-    this.setData({
-      type: e.type,
-      spid: e.spid == 0 ? '':  e.spid,
-      itemId: e.id,
-      quantity: e.quantity
-    })
-    this.getItem();
+    if (!!e.cartIndex) {
+      this.setData({
+        cartIndex: e.cartIndex.split(','),
+        type: 'list'
+      });
+      this.getList();
+    } else {
+      this.setData({
+        type: e.type,
+        spid: e.spid == 0 ? '':  e.spid,
+        itemId: e.id,
+        quantity: e.quantity
+      });
+      this.getItem();
+    }
     this.getInfo();
   },
   onShow: function () {
