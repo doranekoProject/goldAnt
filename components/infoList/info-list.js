@@ -20,6 +20,10 @@ Component({
       type: String,
       value: ''
     },
+    methodType: {
+      type: String,
+      value: 'ads'
+    },
     method: {
       type: String,
       value: 'getCollects' // getCollects：我的收藏， getList：资讯列表， getOrder：订单列表
@@ -86,24 +90,12 @@ Component({
       }
       this[method]();
     },
-    // 去支付
-    pay(data) {
-      wx.requestPayment({
-        timeStamp: '',
-        nonceStr: '',
-        package: '',
-        signType: 'MD5',
-        paySign: '',
-        success(res) { },
-        fail(res) { }
-      })
-    },
     // 确认收货
     submitPay(data) {
       app.ajax({
         data: {
           id: data.ID,//订单ID
-          status: 3//订单状态（3已收货、4确认完成）
+          status: 3 //订单状态（3已收货、4确认完成）
 
         },
         url: app.api.updord,
@@ -173,10 +165,12 @@ Component({
         },
         url: this.data.url,
         method: 'POST',
-      }).then((data) => {
+      }).then((res) => {
         if (res.data.code == 1) {
           let data = res.data.msg;
-          const obj = {};
+          const obj = {
+            adsPage: that.data.adsPage
+          };
           obj.list = that.data.infoList.concat(data.list);
           if (obj.list.length > 10) {
             obj.adsPage = obj.adsPage + 1;

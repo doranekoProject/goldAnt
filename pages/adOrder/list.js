@@ -4,6 +4,7 @@ const app = getApp()
 Page({
   data: {
     isShow: true,
+    type: 'ads',
     currentTab: 0,
     menuData: [{
       title: '全部',
@@ -30,7 +31,8 @@ Page({
   onLoad: function (e) {
     const title = e.type == 'ads' ? '广告订单': '商品订单';
     wx.setNavigationBarTitle({
-      title
+      title,
+      type: e.type
     });
   },
   // 处理事件

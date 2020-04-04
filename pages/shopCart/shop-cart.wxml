@@ -12,10 +12,12 @@
 <view wx:if="{{cartList.length > 0}}" class="cart-warp">
   <scroll-view bindscrolltoupper="upper" bindscrolltolower="lower" scroll-y="true" class="scroll-view" bindscrolltoupper="upper" bindscrolltolower="lower" style="height:{{listHeight}}px">
     <view class="cart-list"  wx:for-index="idx" wx:for="{{cartList}}">
-      <view bindtap="onTap"  data-index="{{idx}}" class="radio {{item.isChecked ? 'selected' : ''}}" ></view>
-      <navigator url="/pages/infoList/details"><image class="img" src="{{item.Img}}"></image></navigator>
+      <view bindtap="onTap"  data-index="{{idx}}" class="radio {{item.IsBuy == 1 ? 'selected' : ''}}" ></view>
+      <navigator v-if="item.type == 1" url="../detail/detail?type=adsinfo&id={{item.ProductID}}"><image class="img" src="{{item.Img}}"></image></navigator>
+      <navigator v-if="item.type == 0" url="../detail/detail?type=proinfo&id={{item.ProductID}}"><image class="img" src="{{item.Img}}"></image></navigator>
       <view class="left-con">
-        <navigator class="title" url="/pages/infoList/details">{{item.Name}}</navigator>
+        <navigator v-if="item.type == 1" class="title" url="../detail/detail?type=adsinfo&id={{item.ProductID}}">{{item.Name}}</navigator>
+        <navigator v-if="item.type == 0" class="title" url="../detail/detail?type=proinfo&id={{item.ProductID}}">{{item.Name}}</navigator>
         <view class="box">
           <view class="price">￥{{item.Price}}</view>
           <view class="num-wrap">
@@ -34,7 +36,7 @@
       全选
     </view>
     <view class="total">合计:<text class="price">￥{{totalCount}}</text></view>
-    <view class="count">去结算</view>
+    <view bindtap="goCount" class="count">去结算</view>
   </view>
 </view>
 <footer-menu number="2"></footer-menu>

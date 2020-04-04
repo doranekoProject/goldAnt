@@ -1,7 +1,7 @@
 <!-- 组件模板 -->
 <view class="tab-content" class="{{showClass}}">
   <scroll-view bindscrolltolower='lower' scroll-y="true" class="scroll-view"  style="height:{{listHeight}}px">
-    <navigator wx:if="{{type === 'list'}}" class="tab-list" wx:key="index" wx:for="{{infoList}}" url="/pages/infoList/details">
+    <navigator wx:if="{{methodType === 'list'}}" class="tab-list" wx:key="index" wx:for="{{infoList}}" url="/pages/infoList/details">
       <image class="tab-img" src="{{item.Img}}"></image>
       <view class="tab-left-info">
         <text class="title">{{item.Name}}</text>
@@ -10,7 +10,7 @@
         </text>
       </view>
     </navigator>
-    <view wx:if="{{type === 'ads' && infoList.length > 0}}" class="ads-list" wx:key="index" wx:for="{{infoList}}">
+    <view wx:if="{{methodType === 'ads' && infoList.length > 0}}" class="ads-list" wx:key="index" wx:for="{{infoList}}">
       <navigator  url="/pages/adOrder/details">
         <view class="state">{{type[item.Status]}}</view>
         <view class="ads-wrap">

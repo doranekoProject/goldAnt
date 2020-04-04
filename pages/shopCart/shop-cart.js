@@ -14,6 +14,12 @@ Page({
       url: app.api.cartlist
     }).then((res) => {
       let data = res.data;
+      if (data.code == -98) {
+        this.setData({
+          isLogin: false
+        });
+        return false;
+      }
       if (data.code == 1) {
         this.setData({
           cartList: data.msg
@@ -29,28 +35,13 @@ Page({
   },
   onTap(e) {
     let index = e.currentTarget.dataset.index;
-    this.data.cartList[index].isChecked = !this.data.cartList[index].isChecked;
+    var isBuy = this.data.cartList[index].IsBuy;
+    this.data.cartList[index].IsBuy = isBuy == 1 ? 0 : 1;
     this.setData({
       cartList: this.data.cartList
     });
     this.caculPrice();
-  },
-  addCard(e) {
-    let data = e.currentTarget.dataset.item;
-    console.log(data);
-    app.ajax({
-      url: app.api.addcart,
-      data: {
-        proid: data.ID,//商品ID
-        spid: data.ShopID,//规格ID（可为空，如果该商品有规格，则该值必填）
-        count: 1,//商品数量
-        isbuy: 1,//是否勾选购买
-
-      },
-      method: 'POST'
-    }).then(() => {
-
-    });
+    this.addCard(this.data.cartList[index]);
   },
   bindKeyInput(e) {
     var index = e.currentTarget.dataset.index;
@@ -60,7 +51,7 @@ Page({
     this.setData({
       cartList: this.data.cartList
     });
-    if (this.data.cartList[index].isChecked) {
+    if (this.data.cartList[index].IsBuy == 1) {
       this.caculPrice();
     }
   },
@@ -86,7 +77,8 @@ Page({
         cartList: this.data.cartList
       })
     }
-    if (this.data.cartList[index].isChecked) {
+    this.addCard(this.data.cartList[index]);
+    if (this.data.cartList[index].IsBuy == 1) {
       this.caculPrice();
     }
   },
@@ -95,7 +87,7 @@ Page({
     var tPrice = 0;
     var isAllCheck = true;
     data.forEach((item) => {
-      if (item.isChecked) {
+      if (item.IsBuy == 1) {
         let price = Number(item.Price);
         let count = Number(item.Count);
         let t = price * count;
@@ -113,12 +105,44 @@ Page({
     let checked = !this.data.allSelect;
     var data = this.data.cartList;
     data.forEach((item) => {
-      item.isChecked = checked
+      item.IsBuy = checked ? 1 : 0;
     });
     this.setData({
       cartList: data
     });
     this.caculPrice();
+  },
+  addCard(data) {
+    app.ajax({
+      url: app.api.addcart,
+      data: {
+        proid: data.ProductID,
+        spid: data.SPID,
+        count: data.Count,
+        isbuy: data.IsBuy
+      },
+      method: 'POST',
+    }).then(res => {
+    })
+  },
+  goCount() {
+    let index = [];
+    this.data.cartList.forEach((item, i) => {
+      if (item.IsBuy == 1) {
+        index.push(i);
+      }
+    });
+    if (i.length < 0) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择要购买的商品'
+      });
+      return false;
+    }
+    cartIndex = index.join('-')
+    wx.navigateTo({
+      url: `../submitOrder/index?cartIndex=${index}`
+    })
   },
   modified(e) {
     var index = e.currentTarget.dataset.index;
@@ -140,8 +164,10 @@ Page({
     this.setData({
       cartList: data
     });
-    if (this.data.cartList[index].isChecked) {
+    
+    if (data[index].IsBuy == 1) {
       this.caculPrice();
     }
+    this.addCard(data[index]);
   }
 })

@@ -19,10 +19,10 @@
       <view class="profile-module_row--title">订单</view>
       <view class="profile-module_row--main">
         <view class="profile-module_row--item">
-          <navigator url="/pages/adOrder/list?type=1" class="profile-module_row--desc icon-ad">广告订单</navigator>
+          <navigator url="/pages/adOrder/list?type=ads" class="profile-module_row--desc icon-ad">广告订单</navigator>
         </view>
         <view class="profile-module_row--item">
-          <navigator url="/pages/adOrder/list?type=2" class="profile-module_row--desc icon-product">商品订单</navigator>
+          <navigator url="/pages/adOrder/list?type=goods" class="profile-module_row--desc icon-product">商品订单</navigator>
         </view>
         <view class="profile-module_row--item">
           <navigator url="/pages/billList/list?type=other" class="profile-module_row--desc icon-address">我要提现</navigator>
