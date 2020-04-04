@@ -24,7 +24,7 @@ const distanceCheck = (lng_a, lat_a, lng_b, lat_b) => {
   var t2 = Math.cos(a1) * Math.sin(a2) * Math.cos(b1) * Math.sin(b2);
   var t3 = Math.sin(a1) * Math.sin(b1);
   var tt = Math.acos(t1 + t2 + t3);
-  return Math.floor(6366000 * tt);
+  return Math.floor(6366000 * tt/ 1000);
 }
 module.exports = {
   formatTime: formatTime,

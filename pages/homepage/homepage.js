@@ -1,6 +1,7 @@
 //homepage.js
 const app = getApp();
 const api = app.api;
+const utils = require('../../utils/util.js');
 const globalData = app.globalData;
 const curCityID = {
   province: 1963,
@@ -23,6 +24,7 @@ Page({
     isNext: true
   },
   onReady: function () {
+    console.log(utils)
     const that = this;
     let query = wx.createSelectorQuery().in(this)
     query.select('.home-bar').boundingClientRect()
@@ -90,8 +92,12 @@ Page({
       if (res.data.code === 1) {
         const data = res.data.msg;
         const obj = {};
+        const location = wx.getStorageSync('location');
         for(let i = 0; i < data.list.length; i += 1) {
           data.list[i].Img = `${app.host}${data.list[i].Img}`;
+          if (location != null && (data.list[i].X > 0 || data.list[i].Y > 0)) {
+            data.list[i].location = utils.distanceCheck(data.list[i].X, location.longitude, data.list[i].Y, location.latitude);
+          }
         }
         obj.list = that.data.list.length > 0 ? that.data.list.concat(data.list) : data.list;
         if(obj.list.length > 10 ) obj.adsPage = obj.adsPage  + 1;
@@ -202,13 +208,14 @@ Page({
         const longitude = res.longitude
         const speed = res.speed
         const accuracy = res.accuracy
-        globalData.location = res;
+        wx.setStorageSync('location', res);
       },
       fail: function(res) {
         wx.showToast({
           title: '授权失败,将无法显示距离',
           icon: "none"
-        })
+        });
+        wx.setStorageSync('location', null);
       }
     })
     const otype = {

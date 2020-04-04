@@ -1,6 +1,7 @@
 //shop.js
 const app = getApp()
 const api = app.api;
+const utils = require('../../utils/util.js');
 
 Page({
   data: {
@@ -26,6 +27,9 @@ Page({
       if (res.data.code === 1) {
         for (let i = 0; i < res.data.msg.length; i += 1) {
           res.data.msg.list[i].Img = `${app.host}${res.data.msg.list[i].Img}`;
+          if (location != null && (data.list[i].X > 0 || data.list[i].Y > 0)) {
+            data.list[i].location = utils.distanceCheck(data.list[i].X, location.longitude, data.list[i].Y, location.latitude);
+          }
         }
         this.setData({
           banner: res.data.msg.list

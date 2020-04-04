@@ -27,7 +27,7 @@
           <view class="home-list_title">{{item.Name}}</view>
           <view class="home-list_desc">{{item.desc}}</view>
           <view>￥<text class="home-list_cost">{{item.Price}}</text></view>
-          <view class="home-list_bot" wx:if="{{item.X != 0 && item.Y != 0}}">
+          <view class="home-list_bot" wx:if="{{!!item.location || item.location == 0}}">
             距离{{item.location}}km
             <!--<view class="home-list_bot--cart"></view>-->
           </view>
