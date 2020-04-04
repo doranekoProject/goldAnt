@@ -24,6 +24,7 @@ Page({
         this.setData({
           cartList: data.msg
         });
+        this.caculPrice();
       }
       if (res.code)
       console.log(res);
@@ -132,14 +133,14 @@ Page({
         index.push(i);
       }
     });
-    if (i.length < 0) {
+    if (index.length < 0) {
       wx.showModal({
         title: '提示',
         content: '请选择要购买的商品'
       });
       return false;
     }
-    cartIndex = index.join('-')
+    let cartIndex = index.join('-')
     wx.navigateTo({
       url: `../submitOrder/index?cartIndex=${index}`
     })
