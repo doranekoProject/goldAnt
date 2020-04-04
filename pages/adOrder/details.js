@@ -59,6 +59,12 @@ Page({
     },
     dataItem: {}
   },
+  getAddress() {
+    app.detailsAddress = this.data.dataItem;
+    wx.navigateTo({
+      url: '/pages/logistics/logistics-info'
+    });
+  },
   onLoad: function (e) {
     let id = e.id;
     app.ajax({

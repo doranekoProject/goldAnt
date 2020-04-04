@@ -11,7 +11,7 @@
     </view>
   </view>
   <view class="button-warp">
-    <button bindtap="onTap" class="button">查看物流</button>
+    <button bindtap="getAddress" class="button">查看物流</button>
   </view>
 </view>
 <view class="price-details">
