@@ -120,19 +120,22 @@ App({
     return new Promise((suc, err) => {
       params.success = function(data) {
         if (data.data.code == -98) {
-          wx.showModal({
-            title: '未登录',
-            content: data.data.msg,
-            success: function(){
-              wx.navigateTo({
-                url: `../profile/profile?action=back`,
-              })
-             // _this.getUser();
-            },
-            fail: function() {
-              wx.clearStorageSync();
-            }
-          });
+          if (!wx.getStorageSync('islong')) {
+            wx.showModal({
+              title: '未登录',
+              content: data.data.msg,
+              success: function(){
+                wx.navigateTo({
+                  url: `../profile/profile?action=back`,
+                })
+              },
+              fail: function() {
+                wx.clearStorageSync();
+              }
+            });
+          } else {
+            wx.getStorageSync('islong');
+          }
           return;
         }
         suc(data);

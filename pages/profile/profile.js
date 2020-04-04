@@ -87,9 +87,12 @@ Page({
                       }
                     });
                     if (that.data.action === 'back') {
-                      wx.navigateBack({
-                        delta: 1
-                      });
+                      wx.setStorageSync('islong', true);
+                      setTimeout(() => {
+                        wx.navigateBack({
+                          delta: 1
+                        });
+                      }, 1000)
                     }
                   }
                 },

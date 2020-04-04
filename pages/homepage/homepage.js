@@ -194,28 +194,40 @@ Page({
     })
   },
   onLoad: function () {
+    const that = this;
     if (!wx.getStorageSync('position')) {
       this.getArea();
     } else {
       this.position();
     }
     this.getCategory();
-    this.getAds()
-    wx.getLocation({
-      type: 'wgs84',
+    
+    wx.getSetting({
       success(res) {
-        const latitude = res.latitude
-        const longitude = res.longitude
-        const speed = res.speed
-        const accuracy = res.accuracy
-        wx.setStorageSync('location', res);
-      },
-      fail: function(res) {
-        wx.showToast({
-          title: '授权失败,将无法显示距离',
-          icon: "none"
-        });
-        wx.setStorageSync('location', null);
+        console.log(res)
+        if (res.authSetting['scope.userLocation'] && wx.getStorageSync('location')) {
+          that.getAds();
+        } else {
+          wx.getLocation({
+            type: 'wgs84',
+            success(res) {
+              const latitude = res.latitude
+              const longitude = res.longitude
+              const speed = res.speed
+              const accuracy = res.accuracy
+              wx.setStorageSync('location', res);
+              that.getAds();
+            },
+            fail: function(res) {
+              wx.showToast({
+                title: '授权失败,将无法显示距离',
+                icon: "none"
+              });
+              wx.setStorageSync('location', null);
+              that.getAds();
+            }
+          })
+        }
       }
     })
     const otype = {

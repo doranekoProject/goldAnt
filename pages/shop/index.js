@@ -108,9 +108,10 @@ Page({
     if(!this.data.lastPage) this.getList();
   },
   onLoad: function () {
-    const dataList = [];
-    this.getList()
     this.getCategory();
     this.getBanner();
+  },
+  onShow: function () {
+    this.getList()
   }
 })
