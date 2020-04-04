@@ -157,7 +157,7 @@ Page({
             })
           } else {
             obj.success = function (e) {
-              wx.navigateTo({
+              wx.redirectTo({
                 url: `../adOrder/details?id=${obj.orderid}`,
               })
             }
@@ -198,7 +198,7 @@ Page({
           console.log('下单成功',res.data)
           const obj = res.data.msg;
           if (!!this.data.walletType) {
-            wx.redirectTo({
+            wx.navigateTo({
               url: `../adOrder/details?id=${obj}`,
             })
           } else {
