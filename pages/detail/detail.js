@@ -190,7 +190,7 @@ Page({
       }
     }
     const postItem = () => {
-      if (spid <= 0) {
+      if (spid <= 0 && this.data.itemOption.allData.length > 0) {
         return wx.showToast({
           title: '请选择规格',
           icon: "none"
@@ -257,7 +257,7 @@ Page({
     if (this.data.isBuy == 0) {
       postItem();
     } else {
-      if (spid <= 0) {
+      if (spid <= 0 && this.data.itemOption.allData.length > 0) {
         return wx.showToast({
           title: '请选择规格',
           icon: "none"
@@ -303,9 +303,16 @@ Page({
   },
   seletePop: function(e) {
     const type = e.currentTarget.dataset.type;
-    this.setData({
-      isSeletePop: !this.data.isSeletePop,
-      isBuy: type
-    })
+    if (this.data.itemOption.allData.length > 0) {
+      this.setData({
+        isSeletePop: !this.data.isSeletePop,
+        isBuy: type
+      })
+    } else {
+      this.setData({
+        isBuy: type
+      });
+      this.bindConfirm();
+    }
   }
 })
