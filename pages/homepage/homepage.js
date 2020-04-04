@@ -120,7 +120,7 @@ Page({
       method: 'POST',
     }).then(res => {
       if (res.data.code === 1) {
-        res.data.msg.current = 0;
+        res.data.msg.current = '';
         this.setData({
           getCategory:  res.data.msg
         })
