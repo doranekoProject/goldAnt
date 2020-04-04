@@ -36,8 +36,12 @@ Component({
   observers: {
     'isShow': function (val) {
       let type = this.data.method;
+      
       if (val && !this._hasLoadData) {
-        this[type]();
+        setTimeout(() => {
+          this[type](this.data.methodType);
+        }, 20);
+        
       }
       let show = !val ? 'tab-hide' : ''
       this.setData({
@@ -167,14 +171,15 @@ Component({
       });
     },
     // 获取我的账单
-    getOrder() {
+    getOrder(methodType) {
       var that = this;
       this._hasLoadData = true;
       if (this.isEnd) {
         return false;
       }
       console.log(this.methodType);
-      let OrderType = this.data.methodType === 'ads' ? 1 : 2;
+      let OrderType = methodType === 'ads' ? 1 : 2;
+      console.log(OrderType)
       app.ajax({
         data: {
           begin: '',

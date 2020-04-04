@@ -21,7 +21,7 @@
         </view>
       </navigator>
     </view>
-    <view wx:if="{{methodType === 'ads' && infoList.length > 0}}" class="ads-list" wx:key="index" wx:for="{{infoList}}">
+    <view wx:if="{{(methodType === 'ads' || methodType === 'goods') && infoList.length > 0}}" class="ads-list" wx:key="index" wx:for="{{infoList}}">
       <navigator  url="/pages/adOrder/details?id={{item.ID}}">
         <view class="state">{{type[item.Status]}}</view>
         <view class="ads-wrap">

@@ -69,10 +69,10 @@ Page({
       method: 'POST',
     }).then((data) => {
       if (data.data.code == 1) {
-        let data = data.data.msg;
-        data.totalPrice = addNumber(d.Price, d.Fee);
+        data = data.data.msg;
+        data.totalPrice = addNumber(data.Price, data.Fee);
         this.setData({
-          dataItem: data.data.msg
+          dataItem: data
         });
       }
     });
