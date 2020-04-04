@@ -15,14 +15,14 @@
   <block wx:if="{{type == 'other'}}">
       <view class="cash-out_box">
         <view>
-          ￥<view class="cash-out_number">1000</view>
+          ￥<view class="cash-out_number">{{cashValue}}</view>
           <view class="cash-out_text">可提现金额</view>
         </view>
       </view>
       <view class="cash-out_info">
         <view>到账账户: 微信零钱</view>
         <view class="cash-out_text">请输入提现金额</view>
-        <view class="cash-out_input">￥<input type="number" bindinput="inputValue"></input></view>
+        <view class="cash-out_input">￥<input type="number" bindinput="inputValue" value="{{value}}"></input></view>
         <view class="cash-out_orange" bindtap="submit">确定</view>
         <view class="cash-out_text">备注：提现24小时内到账微信零钱钱包，请注意查看</view>
       </view>

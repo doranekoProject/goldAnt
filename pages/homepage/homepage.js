@@ -12,6 +12,7 @@ Page({
   data: {
     list: [],
     height: 0,
+    winHeight: wx.getSystemInfoSync().windowHeight,
     quantity: 1,
     tabType: 0,
     adsPage: 1,
@@ -27,9 +28,9 @@ Page({
     query.select('.home-bar').boundingClientRect()
     query.select('.home-filter').boundingClientRect().exec(res => {
       that.setData({
-        height: wx.getSystemInfoSync().windowHeight - res[0].height - res[1].height
+        height: wx.getSystemInfoSync().windowHeight - res[0].height - res[1].height -20
       })
-    })
+    });
   },
   lower: function () {
     if(this.data.isNext)  this.getAds();
@@ -87,8 +88,11 @@ Page({
       method: 'POST'
     }).then((res) => {
       if (res.data.code === 1) {
-        const data = res.data;
+        const data = res.data.msg;
         const obj = {};
+        for(let i = 0; i < data.list.length; i += 1) {
+          data.list[i].Img = `${app.host}${data.list[i].Img}`;
+        }
         obj.list = that.data.list.length > 0 ? that.data.list.concat(data.list) : data.list;
         if(obj.list.length > 10 ) obj.adsPage = obj.adsPage  + 1;
         this.setData(obj)
@@ -177,6 +181,12 @@ Page({
       address: [provinceName[5], cityName[17]]
     })
   },
+  bindToPage: function (e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `../detail/detail?type=adsinfo&id=${id}`,
+    })
+  },
   onLoad: function () {
     if (!wx.getStorageSync('position')) {
       this.getArea();
@@ -192,7 +202,6 @@ Page({
         const longitude = res.longitude
         const speed = res.speed
         const accuracy = res.accuracy
-        console.log(res);
         globalData.location = res;
       },
       fail: function(res) {

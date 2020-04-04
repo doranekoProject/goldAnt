@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/homepage/homepage",
+    "pages/detail/detail",
     "pages/merchantsSettled/merchants-settled",
     "pages/merchantCenter/center",
     "pages/bill/bill",
@@ -10,7 +11,6 @@
     "pages/shopCart/shop-cart",
     "pages/logistics/logistics-info",
     "pages/showroom/index",
-    "pages/detail/detail",
     "pages/shop/index",
     "pages/allBusiness/index",
     "pages/membership/open-membership",

@@ -1,45 +1,65 @@
 <!--submit order.wxml-->
 <view>
-  <view class="add-address">
-    <view>
-      <view>请添加收货地址</view>
-       <view class="add-address_add"></view>
-    </view>
-  </view>
+  <block wx:if="{{!address.ID}}">
+    <navigator url="../address/edit?action=order" class="add-address">
+      <view>
+        <view>请添加收货地址</view>
+        <view class="add-address_add"></view>
+      </view>
+    </navigator>
+  </block>
+  <block wx:if="{{!!address.ID}}">
+    <navigator url="../address/list?action=order" class="address-box">
+      <view class="address-list">
+        <view class="form">
+          <text class="label">收货人:</text>
+          <text>{{address.TrueName}}</text>
+        </view>
+        <view class="form">
+          <text class="label">收货地址:</text>
+          <text>{{address.detailsInfo}}</text>
+        </view>
+        <view class="form">
+          <text class="label">手机号:</text>
+          <text>{{address.Phone}}</text>
+        </view>
+      </view>
+    </navigator>
+  </block>
   <view class="order-info">
-    <image class="order-info_img" src="{{list.cover}}"></image>
+    <image class="order-info_img" src="{{detail.Img}}"></image>
     <view class="order-info_box">
-      <view class="order-info_box--title">{{list.title}}</view>
+      <view class="order-info_box--title">{{detail.Name}}</view>
       <view class="order-info_box--bot">
-        <view>￥<text class="order-info_box--cost">{{list.cost}}</text></view>
+        <view>￥<text class="order-info_box--cost">{{detail.Price}}</text></view>
         <view class="order-info_box--quantity">
-          <view class="order-info_box--reduce"></view>
-          <input class="order-info_box--input" placeholder-class="placeholder" value="{{quantity}}"></input>
-          <view class="order-info_box--add"></view>
+          <view class="order-info_box--reduce"  data-type="reduce"  bindtap="bindQuantity"></view>
+          <input class="order-info_box--input" placeholder-class="placeholder" value="{{quantity}}" type="number" bindinput="bindQuantity" data-type="input"></input>
+          <view class="order-info_box--add" bindtap="bindQuantity" data-type="add"></view>
         </view>
       </view>
     </view>
   </view>
   <view class="order-other">
-    <view class="order-other_item">
+    <view class="order-other_item {{walletType === 'balance' ? 'order-other_item--active' : ''}}" bindtap="bindWallet" data-type="balance">
       <view class="order-other_item--name">使用余额</view>
-      <view class="order-other_item--desc">￥0</view>
+      <view class="order-other_item--desc">￥ {{userInfo.balance}}</view>
     </view>
-    <view class="order-other_item order-other_item--active">
+    <view class="order-other_item {{walletType === 'score' ? 'order-other_item--active' : ''}}" bindtap="bindWallet" data-type="score">
       <view class="order-other_item--name">使用积分</view>
-      <view class="order-other_item--desc">0</view>
+      <view class="order-other_item--desc">{{userInfo.score}}</view>
     </view>
     <view class="order-other_item">
       <view class="order-other_item--name">订单备注</view>
       <view class="order-other_item--desc">
-        <input placeholder="填写备注信息"></input>
+        <input placeholder="填写备注信息" bindinput="bindDesc" value="{{remark}}"></input>
       </view>
     </view>
   </view>
   <view class="order-bot">
     <view class="order-bot_right">
-      实付金额：<view class="order-bot_cost">￥288</view>
-      <view class="order-bot_btn btn-blue">提交订单</view>
+      实付金额：<view class="order-bot_cost">￥{{cost}}</view>
+      <view class="order-bot_btn btn-blue" bindtap="bindSumbit">提交订单</view>
     </view>
   </view>
 </view>

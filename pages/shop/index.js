@@ -90,8 +90,9 @@ Page({
     const id = e.currentTarget.dataset.id;
     const type = e.currentTarget.dataset.type;
     if (type === 'allBusiness') {
+      const name = e.currentTarget.dataset.name;
       wx.navigateTo({
-        url: `../allBusiness/index?id=${id}`,
+        url: `../allBusiness/index?id=${id}&name=${name}`,
       })
     } else {
       wx.navigateTo({

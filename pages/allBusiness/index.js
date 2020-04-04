@@ -1,45 +1,71 @@
 //homepage.js
-const app = getApp()
+const app = getApp();
+const api = app.api;
 
 Page({
   data: {
     list: [],
+    page: 1,
     height: wx.getSystemInfoSync().windowHeight
   },
-  onReady: function () {
-  },
-  onLoad: function () {
-    const type = !e.type ? 0 : e.type;
-    const dataList = [];
-    const data = {
-      cover: 'https://profile.csdnimg.cn/5/D/E/3_a772116804',
-      title: '湛江市赤坎区安铺人鸡饭店',
-      desc: '广东省湛江市赤坎区金城新区127号',
-      cost: '38',
-      location: '0.88'
-    }
-    for (let i = 1; i < 20; i += 1) {
-      dataList.push(data);
-    }
-    this.setData({
-      list: dataList,
-    })
-    wx.setNavigationBarTitle({
-      title: type == 0 ? '所属商家' : type
+  getList: function () {
+    app.ajax({
+      url: api.pros,
+      data: {
+        key: '',
+        area: '',
+        category: this.data.id,
+        otype:'',
+        index: this.data.page
+      },
+      method: 'POST'
+    }).then((res) => {
+      if (res.data.code === 1) {
+        const data = res.data.msg;
+        const obj = {};
+        for(let i = 0; i < data.list.length; i += 1) {
+          data.list[i].Img = `${app.host}${data.list[i].Img}`;
+        }
+        obj.list = this.data.list.length > 0 ? this.data.list.concat(data.list) : data.list;
+        if (data.list.length >= 10) {
+          obj.page = this.data.page + 1;
+        } else {
+          obj.lastPage = true;
+        }
+        this.setData(obj)
+      } else {
+        wx.showModal({
+          title: '获取列表失败',
+          content: res.data.msg
+        });
+      }
+    }).catch((res) => {
+      console.log(res)
     });
   },
-  lower: function () {
-    const list = this.data.list;
-    const data = {
-      cover: 'https://profile.csdnimg.cn/5/D/E/3_a772116804',
-      title: '1湛江市赤坎区安铺人鸡饭店',
-      desc: '广东省湛江市赤坎区金城新区127号',
-      cost: '38',
-      location: '0.88'
-    }
-    list.push(data)
-    this.setData({
-      list: list,
+  bindToPage: function (e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `../detail/detail?type=proinfo&id=${id}`,
     })
+  },
+  onLoad: function (e) {
+    if (!e.id) return wx.showToast({
+      title: '商家ID不存在',
+      icon: "none"
+    })
+    const name = !e.name ? 0 : e.name;
+    const dataList = [];
+    wx.setNavigationBarTitle({
+      title: name == 0 ? '所属商家' : name
+    });
+    this.setData({
+      id: e.id
+    })
+    this.getList();
+  },
+  lower: function () {
+    console.log(this.data.lastPage)
+    if(!this.data.lastPage) this.getList();
   }
 })

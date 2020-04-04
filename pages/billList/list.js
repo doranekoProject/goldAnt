@@ -16,9 +16,9 @@ Page({
       'account': '账单明细',
       'other': '提现'
     };
-    const type = !e.type ? 0 : e.type;
+    const type = !e.type ? 'other' : e.type;
     let title = typeText[type];
-    let inout = type; 
+    let inout = type;
     if (type == 'account') {
       inout = '';
     }
@@ -27,11 +27,18 @@ Page({
     });
     this.setData ({
       type,
-      inout
+      inout,
+      cashValue: e.type === 'other' ? e.value : 0
     });
     if (type != 'other') {
       this.getAccountList();
     }
+  },
+  inputValue: function (e) {
+    const v = e.detail.value;
+    this.setData({
+      value: v > this.data.cashValue ? this.data.cashValue : v
+    })
   },
   // 获取账单明细
   getAccountList: function (e) {
@@ -65,6 +72,38 @@ Page({
           icon: "none",
           title: res.data.msg
         })
+      }
+    }).catch(res => {
+      console.log(res);
+    });
+  },
+  submit: function () {
+    if (this.data.value === 0 || this.data.value > this.data.cashValue) {
+      return wx.showToast({
+        title: '请检查提现金额',
+        icon: "none"
+      })
+    }
+    app.ajax({
+      url: api.transferout,
+      data: {
+        money: this.data.value,
+        remark: ""
+      },
+      method: 'POST',
+    }).then(res => {
+      if(res.data.code === 1) {
+        wx.showToast({
+          title: '提现成功'
+        });
+        wx.navigateBack({
+          delta: 1
+        });
+      } else  {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none'
+        });
       }
     }).catch(res => {
       console.log(res);

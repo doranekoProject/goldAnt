@@ -1,19 +1,19 @@
 <!--bill.wxml-->
 <view class="bill">
   <view class="bill-box">
-    <navigator url="/pages/billList/list?type=0" class="bill-box_head">余额 <view class="bill-box_head--right">充值记录</view></navigator>
+    <navigator url="/pages/billList/list?type=1" class="bill-box_head">余额 <view class="bill-box_head--right">充值记录</view></navigator>
     <view class="bill-box_main">
       <view>
-        ￥<text class="bill-box_number">0</text>
+        ￥<text class="bill-box_number">{{userInfo.balance}}</text>
         <view class="bill-btn_blue" bindtap='bindBtn' data-type="0">充值</view>
       </view>
     </view>
   </view>
-   <view class="bill-box">
-    <navigator url="/pages/billList/list?type=1" class="bill-box_head">金币 <view class="bill-box_head--right">兑换记录</view></navigator>
+   <view class="bill-box" style="display:none">
+    <navigator url="/pages/billList/list?type=0" class="bill-box_head">金币 <view class="bill-box_head--right">兑换记录</view></navigator>
     <view class="bill-box_main">
       <view>
-        <text class="bill-box_number">0</text>
+        <text class="bill-box_number">{{userInfo.MScore}}</text>
         <view class="bill-btn_orange" bindtap='bindBtn' data-type="1">兑换</view>
       </view>
     </view>
@@ -22,8 +22,9 @@
     <navigator url="/pages/billList/list?type=4" class="bill-box_head">佣金 <view class="bill-box_head--right">提现记录</view></navigator>
     <view class="bill-box_main">
       <view>
-        ￥<text class="bill-box_number">0</text>
-        <navigator url="/pages/billList/list?type=other" class="bill-btn_yellow">提现</navigator>
+        ￥<text class="bill-box_number">{{userInfo.score}}</text>
+        <view class="bill-btn_yellow" bindtap='bindBtn' data-type="2">提现</view>
+        <!--<navigator url="/pages/billList/list?type=other" class=""></navigator>-->
       </view>
     </view>
   </view>
@@ -33,6 +34,6 @@
       <view class="pop-recharge_main--title">请输入{{typeText}}金额</view>
       <view class="pop-recharge_main--input">￥<input type="number" bindinput="inputValue"></input></view>
       <view class="bill-btn_blue" bindtap="submit">确定</view>
-    </view> 
+    </view>
   </view>
 </view>

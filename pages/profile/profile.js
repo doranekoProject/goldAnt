@@ -22,29 +22,19 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad: function (e) {
+    const action = e.action;
     if (!!wx.getStorageSync('userid')) {
       this.userInfo();
       this.setData({
         isLogin: true
       });
     }
+    this.setData({
+      action: action
+    })
   },
   userInfo: function (e) {
-    // wx.request({
-    //   url: api.userinfo,
-    //   data: {
-    //     id: wx.getStorageSync('userid')
-    //   },
-    //   method: 'POST',
-    //   success: function (data) {
-    //     if (data.data.code === 1) {
-         
-    //     }
-    //   },
-    //   fail: function (faildata) {
-    //   },
-    // });
     app.ajax({
       url: api.userinfo,
       data: {
@@ -86,12 +76,21 @@ Page({
                   phone: ''
                 },
                 method: 'POST',
-                success: function (data) {
-                  if(data.data.code === 1) {
-                    wx.setStorageSync('userid', data.data.msg.id);
+                success: function (res) {
+                  if(res.data.code === 1) {
+                    wx.setStorageSync('userid', res.data.msg.id);
                     that.setData({
-                      isLogin: true
-                    })
+                      isLogin: true,
+                      userInfo: {
+                        img: data.userInfo.avatarUrl,
+                        nickname: data.userInfo.nickName
+                      }
+                    });
+                    if (that.data.action === 'back') {
+                      wx.navigateBack({
+                        delta: 1
+                      });
+                    }
                   }
                 },
                 fail: function (faildata) {

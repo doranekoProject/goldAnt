@@ -1,4 +1,10 @@
 /**homepage.wxss**/
+page {
+  padding-bottom: 0 !important;
+}
+.home {
+  overflow: hidden;
+}
 .home-bar {
   position: relative;
   width:100%;
@@ -23,6 +29,12 @@
   border-width: 10rpx;
   border-color: #fff transparent transparent;
   border-style: solid;
+}
+.picker {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100rpx;
+  overflow: hidden;
 }
 .home-bar_seach {
   margin: 0 120rpx 0 180rpx;
@@ -91,6 +103,9 @@
 .home-list {
   margin-top: 10rpx;
   background: #fff;
+}
+.home-list_main {
+  padding-bottom: 100rpx;
 }
 .home-list_item {
   padding: 20rpx 20rpx 0;
@@ -188,7 +203,7 @@
   padding: 28rpx 38rpx;
   border: 0;
   margin: 0;
-} 
+}
 .drop-down_bot {
   margin:  0 38rpx;
   font-size: 28rpx;

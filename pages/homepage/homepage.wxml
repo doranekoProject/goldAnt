@@ -1,5 +1,5 @@
 <!--homepage.wxml-->
-<view>
+<view> <!-- class="home" style="height:{{winHeight}}px"-->
   <view class="home-bar">
     <view class="home-bar_area">
     <view class="section">
@@ -20,15 +20,17 @@
     <!--<view class="home-filter_item {{tabType == 4 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="4"><text>批量购买</text></view>-->
   </view>
   <scroll-view wx:if="{{list.length > 0}}" class="home-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
-    <view class="home-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item" data-id="{{item.ID}}" data-shopID="{{item.shopID}}">
-      <image class="home-list_item--img" src="{{item.Img}}"></image>
-      <view class="home-list_info">
-        <view class="home-list_title">{{item.Name}}</view>
-        <view class="home-list_desc">{{item.desc}}</view>
-        <view>￥<text class="home-list_cost">{{item.Price}}</text></view>
-        <view class="home-list_bot">
-          距离{{item.location}}km
-          <view class="home-list_bot--cart"></view>
+    <view class="home-list_main">
+      <view class="home-list_item"  wx:for="{{list}}" wx:key="item" data-id="{{item.ID}}" data-shopID="{{item.shopID}}" bindtap="bindToPage">
+        <image class="home-list_item--img" src="{{item.Img}}" mode="widthFix"></image>
+        <view class="home-list_info">
+          <view class="home-list_title">{{item.Name}}</view>
+          <view class="home-list_desc">{{item.desc}}</view>
+          <view>￥<text class="home-list_cost">{{item.Price}}</text></view>
+          <view class="home-list_bot" wx:if="{{item.X != 0 && item.Y != 0}}">
+            距离{{item.location}}km
+            <!--<view class="home-list_bot--cart"></view>-->
+          </view>
         </view>
       </view>
     </view>

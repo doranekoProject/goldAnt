@@ -9,7 +9,7 @@
       </block>
     </swiper>
     <view class="shop-sort">
-      <view class="shop-sort_item" wx:for="{{getCategory}}" wx:key="item" bindtap="bindToPage" data-type="allBusiness" data-id="{{item.ID}}">
+      <view class="shop-sort_item" wx:for="{{getCategory}}" wx:key="item" bindtap="bindToPage" data-type="allBusiness" data-id="{{item.ID}}" data-name="{{item.Name}}">
         <image src="{{item.Img}}" mode="widthFix"></image>
         <view>{{item.Name}}</view>
       </view>

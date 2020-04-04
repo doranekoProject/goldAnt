@@ -17,13 +17,9 @@
     <view class="detail-type_title">商家</view> 
     <view class="detail-type_text">湛江市祥顺机动车检测有限公司</view>
    </view>
-  <view class="detail-type">
+  <view class="detail-type" wx:if="{{detail.list.length > 0}}" >
     <view class="detail-type_title">选择</view>
-    <view class="detail-type_text" bindtap="seletePop">{{!page ? '尺寸' : '选择尺寸、颜色规格'}}尺寸</view>
-    <view wx:if="{{!page}}" class="detail-mian">
-      <view class="detail-mian_desc"><view>行业</view> 娱乐休闲</view>
-      <view class="detail-mian_desc"><view>屏幕</view> 1980 x 1024</view>   
-    </view>
+    <view class="detail-type_text" bindtap="seletePop" data-type="options">{{detail.list[0].SPName}}</view>
   </view>
   <view class="detail-desc">
     <view class="detail-desc_title"><text>详情介绍</text></view>
@@ -33,55 +29,30 @@
     <button open-type="contact" class="home-bar_contact">客服</button>
     <view class="detail-favorite" bindtap="bindAddcollect">收藏</view>
     <view class="detail-bot_right">
-      <view class="detail-bot_btn btn-orange" bindtap="seletePop">加入购物车</view>
-      <view class="detail-bot_btn btn-blue">立即购买</view>
+      <view class="detail-bot_btn btn-orange" bindtap="seletePop" data-type="0">加入购物车</view>
+      <view class="detail-bot_btn btn-blue" bindtap="seletePop" data-type="1">立即购买</view>
     </view>
   </view>
   <view class="selete-pop" hidden="{{!isSeletePop}}">
     <view class="selete-pop_main">
-      <view class="selete-pop_main--title">
-        {{!page ? "选择尺寸时长" : "选择尺码颜色"}}
+      <view class="selete-pop_main--title">选项
         <view class="selete-pop_main--close" bindtap="seletePop"></view>
       </view>
-      <block wx:if="{{!page}}">
-        <view class="selete-pop_main--row">
-          <view class="selete-pop_main--name">展示尺寸：</view>
-          <view class="selete-pop_main--item">1080*1920</view>
-        </view>
-        <view class="selete-pop_main--row">
-          <view class="selete-pop_main--name">投放周期：</view>
-          <view class="selete-pop_main--item">周/7天</view>
-        </view>
-        <view class="selete-pop_main--row">
-          <view class="selete-pop_main--name">投放时长：</view>
-          <view class="selete-pop_main--item">15秒</view>
-          <view class="selete-pop_main--item">30秒</view>
-          <view class="selete-pop_main--item">45秒</view>
-          <view class="selete-pop_main--item">60秒</view>
-        </view>
-        <view class="selete-pop_main--btn" bindtap="seletePop">加入购物车</view>
-      </block>
-      <block wx:if="{{page}}">
-        <view class="selete-pop_main--row">
-          <view class="selete-pop_main--name">尺寸</view>
-          <view class="selete-pop_main--item">XL</view>
-          <view class="selete-pop_main--item">L</view>
-          <view class="selete-pop_main--item">M</view>
-        </view>
-        <view class="selete-pop_main--row">
-          <view class="selete-pop_main--name">颜色</view>
-          <view class="selete-pop_main--item">红色</view>
-          <view class="selete-pop_main--item">黑色</view>
-          <view class="selete-pop_main--item">黄色</view>
-          <view class="selete-pop_main--item">白色</view>
-        </view>
-        <view class="selete-pop_main--row">
-          <view class="selete-pop_main--name">数量</view>
-          <view class="selete-pop_main--reduce"></view>
-          <input class="selete-pop_main--input" value="{{quantity}}"></input>
-          <view class="selete-pop_main--add"></view>
-        </view>
-        <view class="selete-pop_main--btn" bindtap="seletePop">确定</view>
+      <block wx:if="{{detail.list.length > 0}}">
+      <view class="selete-pop_main--row" wx:for="{{itemOption.sortData}}" wx:key="item" wx:for-index="idx"  >
+        <view class="selete-pop_main--name">{{itemOption.name[idx]}}</view>
+        <view class="selete-pop_main--item {{itemOption.curData[idx][index] === 1 ? 'selete-pop_main--item_active' : (itemOption.curData[idx][index] == -1 ? 'selete-pop_main--item_disable' : '')}}" wx:for="{{itemOption.showData[idx]}}" wx:key="item" data-parents="{{idx}}" data-index="{{index}}" data-key="{{item}}" bindtap="bindOption">{{item}}</view>
+      </view>
+      <view class="selete-pop_main--row">
+        <view class="selete-pop_main--name">数量</view>
+        <view class="selete-pop_main--reduce" bindtap="bindQuantity" data-type="reduce"></view>
+        <input class="selete-pop_main--input" value="{{quantity}}" type="number" bindinput="bindQuantity" data-type="input"></input>
+        <view class="selete-pop_main--add" bindtap="bindQuantity" data-type="add"></view>
+      </view>
+      <view class="{{isBuy === 'options' ? 'selete-pop_main--bot' : ''}}">
+        <view wx:if="{{isBuy === 'options'}}" class="selete-pop_main--btn selete-pop_main--btncat" bindtap="bindConfirm" data-type="0">加入购物车</view>
+        <view class="selete-pop_main--btn" bindtap="bindConfirm" data-type="1">确定</view>
+      </view>
       </block>
     </view>
   </view>

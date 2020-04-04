@@ -32,7 +32,7 @@
         <view class="profile-module_row--item">
           <view class="profile-module_row--cost">￥{{userInfo.balance}}</view>余额
         </view>
-        <view class="profile-module_row--item">
+        <view class="profile-module_row--item" style="display:none">
           <view class="profile-module_row--cost">￥{{userInfo.MScore}}</view>金币
         </view>
         <view class="profile-module_row--item">

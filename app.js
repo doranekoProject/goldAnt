@@ -22,11 +22,13 @@ App({
     paylist: `${apiUrl}?t=paylist`, // 账单列表
     addcart: `${apiUrl}?t=addcart`, // 添加购物车
     addcollect: `${apiUrl}?t=addcollect`, // 添加购物车
+    order: `${apiUrl}?t=order`, // 下单
     orderlist: `${apiUrl}?t=orderlist`, // 订单列表
     collects: `${apiUrl}?t=collects`, // 我的收藏
     applyshop: `${apiUrl}?t=applyshop`, // 商家入驻
     updord: `${apiUrl}?t=updord`, // 更新状态
-    proads: `${apiUrl}?t=proads` // 商品首页中的广告图 
+    proads: `${apiUrl}?t=proads`, // 商品首页中的广告图
+    transferout: `${apiUrl}?t=transferout` // 提现
   },
   onLaunch: function () {
     // 展示本地存储能力
@@ -122,6 +124,9 @@ App({
             title: '未登录',
             content: data.data.msg,
             success: function(){
+              wx.navigateTo({
+                url: `../profile/profile?action=back`,
+              })
              // _this.getUser();
             },
             fail: function() {

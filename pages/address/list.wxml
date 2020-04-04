@@ -1,6 +1,6 @@
 <!-- 组件模板 -->
 <view class="address-wrap">
-  <view class="address-list" wx:key="{{item.ID}}" wx:for="{{addressList}}">
+  <view class="address-list" wx:key="{{item.ID}}" wx:for="{{addressList}}" bindtap="toPage" data-index="{{index}}">
     <view class="form">
       <text class="label">收货人:</text>
       <text>{{item.TrueName}}</text>
@@ -20,8 +20,8 @@
       </view>
       <view class="right flex-item">
         <!-- <navigator class="button" url="/pages/address/edit">编辑</navigator> --> 
-        <text class="button" data-item="{{item}}" bindtap="edit">编辑</text>
-        <text bindtap="remove" data-aid="{{item.ID}}" class="button">删除</text>
+        <text class="button" data-item="{{item}}" catchtap="edit">编辑</text>
+        <text catchtap="remove" data-aid="{{item.ID}}" class="button">删除</text>
       </view>
     </view>
   </view>

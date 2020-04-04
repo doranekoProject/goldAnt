@@ -6,11 +6,24 @@ Page({
     addressList: []
   },
   onShow: function() {
-    
     this.getData();
   },
-  onLoad: function () {
+  onLoad: function (e) {
+    if (e.action === 'order') {
+      this.setData({
+        type: e.action
+      });
+    }
     // this.getData();
+  },
+  toPage (e) {
+    if (this.data.type === 'order') {
+      const index = e.currentTarget.dataset.index;
+      wx.setStorageSync('curAddrIndex', index);
+      wx.navigateBack({
+        delta: 1
+      });
+    }
   },
   getData() {
     app.ajax({

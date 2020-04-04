@@ -28,8 +28,11 @@ Page({
         addressInfo: data,
         region: region
       })
+    } else if (options.action === 'order') {
+      this.setData({
+        type: options.action
+      })
     }
-    
   },
   bindRegionChange: function (e) {
     this.setData({
@@ -44,6 +47,7 @@ Page({
       method: 'POST'
     }).then((res)=>{
       if (res.data.code == 1) {
+        if (this.data.type === 'order') wx.setStorageSync('curAddrIndex', 0);
         wx.showToast({
           title: '成功',
           icon: 'success',
@@ -68,7 +72,7 @@ Page({
         console.log(res);
         var data = Object.assign({}, this.data.addressInfo, {
           name: res.userName,
-          adress: res.detailInfo,
+          address: res.detailInfo,
           phone: res.telNumber
         });
         this.setData({

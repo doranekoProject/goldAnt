@@ -1,24 +1,18 @@
 <!--all business.wxml-->
 <view>
   <scroll-view class="business-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
-    <view class="business-list_item" mode="widthFix" wx:for="{{list}}" wx:key="item">
-      <image class="business-list_item--img" src="{{item.cover}}"></image>
+    <view class="business-list_item" wx:for="{{list}}" wx:key="item" bindtap="bindToPage"  data-id="{{item.ID}}" data-shopID="{{item.shopID}}" >
+      <image class="business-list_item--img" src="{{item.Img}}" mode="widthFix"></image>
       <view class="business-list_info">
-        <view class="business-list_title">{{item.title}}</view>
+        <view class="business-list_title">{{item.Name}}</view>
         <view class="business-list_desc">{{item.desc}}</view>
-        <view>￥<text class="business-list_cost">{{item.cost}}</text></view>
-        <view class="business-list_bot">
+        <view>￥<text class="business-list_cost">{{item.Price}}</text></view>
+        <view class="business-list_bot" wx:if="{{!!item.location}}">
           距离{{item.location}}km
-          <view class="business-list_bot--cart"></view>
+          <!--<view class="business-list_bot--cart"></view>-->
         </view>
       </view>
     </view>
   </scroll-view>
-  <view class="aaaa">
-    <view>
-      <image src="https://profile.csdnimg.cn/5/D/E/3_a772116804"></image>
-      <view class="close">x</view>
-    </view>
-  </view>
   <footer-menu number="0"></footer-menu>
 </view>
