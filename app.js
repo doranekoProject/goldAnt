@@ -20,12 +20,14 @@ App({
     deladdr: `${apiUrl}?t=delcart`, // 删除购物车:
     recharge:`${apiUrl}?t=recharge`, // 充值
     paylist: `${apiUrl}?t=paylist`, // 账单列表
+    pay: `${apiUrl}?t=pay`, // 支付
     addcart: `${apiUrl}?t=addcart`, // 添加购物车
     addcollect: `${apiUrl}?t=addcollect`, // 添加购物车
     order: `${apiUrl}?t=order`, // 下单
     orderlist: `${apiUrl}?t=orderlist`, // 订单列表
     collects: `${apiUrl}?t=collects`, // 我的收藏
     applyshop: `${apiUrl}?t=applyshop`, // 商家入驻
+    orderinfo: `${apiUrl}?t=orderinfo`, // 订单详情
     updord: `${apiUrl}?t=updord`, // 更新状态
     proads: `${apiUrl}?t=proads`, // 商品首页中的广告图
     transferout: `${apiUrl}?t=transferout` // 提现

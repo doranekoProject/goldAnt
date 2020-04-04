@@ -1,17 +1,28 @@
 <!-- 组件模板 -->
 <view class="tab-content" class="{{showClass}}">
   <scroll-view bindscrolltolower='lower' scroll-y="true" class="scroll-view"  style="height:{{listHeight}}px">
-    <navigator wx:if="{{methodType === 'list'}}" class="tab-list" wx:key="index" wx:for="{{infoList}}" url="/pages/infoList/details">
-      <image class="tab-img" src="{{item.Img}}"></image>
-      <view class="tab-left-info">
-        <text class="title">{{item.Name}}</text>
-        <text class="address">
-          {{item.address}}
-        </text>
-      </view>
-    </navigator>
+    <view wx:if="{{methodType === 'list'}}" class="tab-list" wx:key="index" wx:for="{{infoList}}" url="">
+      <navigator wx:if="{{item.Type == 1}}" url="../detail/detail?type=adsinfo&id={{item.ProductID}}">
+        <image class="tab-img" src="{{item.Img}}"></image>
+        <view class="tab-left-info">
+          <text class="title">{{item.Name}}</text>
+          <text class="address">
+            {{item.address}}
+          </text>
+        </view>
+      </navigator>
+      <navigator wx:if="{{item.Type == 0}}" url="../detail/detail?type=proinfo&id={{item.ProductID}}">
+        <image class="tab-img" src="{{item.Img}}"></image>
+        <view class="tab-left-info">
+          <text class="title">{{item.Name}}</text>
+          <text class="address">
+            {{item.address}}
+          </text>
+        </view>
+      </navigator>
+    </view>
     <view wx:if="{{methodType === 'ads' && infoList.length > 0}}" class="ads-list" wx:key="index" wx:for="{{infoList}}">
-      <navigator  url="/pages/adOrder/details">
+      <navigator  url="/pages/adOrder/details?id={{item.ID}}">
         <view class="state">{{type[item.Status]}}</view>
         <view class="ads-wrap">
           <image class="tab-img" src="{{item.ImgList}}"></image>

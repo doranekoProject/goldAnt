@@ -82,6 +82,23 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    bindSumbit: function (data) {
+      app.orderDetails = data;
+      app.ajax({
+        data: {
+          id: data.ID,
+          paytyte: 0
+        },
+        url: app.api.pay,
+        method: 'POST',
+      }).then((data) => {
+        if (data.data.code == 1) {
+          wx.navigateTo({
+            url: '/pages/adOrder/details?id=${data.ID}'
+          });
+        }
+      });
+    },
     // 滚动到底部获取数据
     lower() {
       let method = this.data.method;
@@ -113,14 +130,14 @@ Component({
     onTap(e) {
       let data = e.currentTarget.dataset.item;
       switch (data.Status) {
-        case '0': // 待付款
-          this.pay(data);
+        case 0: // 待付款
+          this.bindSumbit(data);
           break;
-        case '1': // 待发货
-        case '2': // 待收货
+        case 1: // 待发货
+        case 2: // 待收货
           this.submitPay(data);
           break;
-        case '4': // 已完成
+        case 4: // 已完成
           app.orderListItem = data;
           wx.navigateTo({
             url: '/pages/logistics/logistics-info'
@@ -137,14 +154,14 @@ Component({
         url: app.api.collects,
         method: 'POST',
       }).then((data) => {
-        if (res.data.code == 1) {
+        if (data.data.code == 1) {
           this.setData({
-            infoList: res.data.msg
+            infoList: data.data.msg
           });
         } else {
           wx.showModal({
             title: '获取数据失败',
-            content: res.data.msg
+            content: data.data.msg
           });
         }
       });
@@ -156,10 +173,13 @@ Component({
       if (this.isEnd) {
         return false;
       }
+      console.log(this.methodType);
+      let OrderType = this.data.methodType === 'ads' ? 1 : 2;
       app.ajax({
         data: {
           begin: '',
           end: '',
+          OrderType,
           status: this.data.status,
           index: this.data.adsPage
         },

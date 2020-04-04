@@ -21,11 +21,11 @@
   </view>
   <view class="price-list clearfix">
     <text class="text-left">运费</text>
-    <text class="text-right">￥{{dataItem.Fee}}</text>
+    <text class="text-right">￥{{dataItem.proPrice}}</text>
   </view>
   <view class="price-list clearfix">
     <text class="text-left">实际付款</text>
-    <text class="text-right">￥{{dataItem.total}}</text>
+    <text class="text-right">￥{{dataItem.totalPrice}}</text>
   </view>
 </view>
 <view class="price-details">
