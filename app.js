@@ -30,7 +30,8 @@ App({
     orderinfo: `${apiUrl}?t=orderinfo`, // 订单详情
     updord: `${apiUrl}?t=updord`, // 更新状态
     proads: `${apiUrl}?t=proads`, // 商品首页中的广告图
-    transferout: `${apiUrl}?t=transferout` // 提现
+    transferout: `${apiUrl}?t=transferout`, // 提现
+    ordercart: `${apiUrl}?t=ordercart`// 购物车下单
   },
   onLaunch: function () {
     // 展示本地存储能力

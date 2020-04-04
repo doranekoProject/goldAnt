@@ -26,20 +26,36 @@
       </view>
     </navigator>
   </block>
-  <view class="order-info">
-    <image class="order-info_img" src="{{detail.Img}}"></image>
-    <view class="order-info_box">
-      <view class="order-info_box--title">{{detail.Name}}</view>
-      <view class="order-info_box--bot">
-        <view>￥<text class="order-info_box--cost">{{detail.Price}}</text></view>
-        <view class="order-info_box--quantity">
-          <view class="order-info_box--reduce"  data-type="reduce"  bindtap="bindQuantity"></view>
-          <input class="order-info_box--input" placeholder-class="placeholder" value="{{quantity}}" type="number" bindinput="bindQuantity" data-type="input"></input>
-          <view class="order-info_box--add" bindtap="bindQuantity" data-type="add"></view>
+  <block wx:if="{{type === 'list'}}">
+  <view class="order-info order-info_list" wx:for="{{list}}" wx:key="item">
+      <image class="order-info_img" src="{{item.Img}}"></image>
+      <view class="order-info_box">
+        <view class="order-info_box--title">{{item.Name}}</view>
+        <view class="order-info_box--bot">
+          <view>￥<text class="order-info_box--cost">{{item.Price}}</text></view>
+          <view class="order-info_box--quantity">
+           X {{item.Count}}
+          </view>
         </view>
       </view>
     </view>
-  </view>
+  </block>
+  <block wx:if="{{type != 'list'}}">
+    <view class="order-info">
+      <image class="order-info_img" src="{{detail.Img}}"></image>
+      <view class="order-info_box">
+        <view class="order-info_box--title">{{detail.Name}}</view>
+        <view class="order-info_box--bot">
+          <view>￥<text class="order-info_box--cost">{{detail.Price}}</text></view>
+          <view class="order-info_box--quantity">
+            <view class="order-info_box--reduce"  data-type="reduce"  bindtap="bindQuantity"></view>
+            <input class="order-info_box--input" placeholder-class="placeholder" value="{{quantity}}" type="number" bindinput="bindQuantity" data-type="input"></input>
+            <view class="order-info_box--add" bindtap="bindQuantity" data-type="add"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
   <view class="order-other">
     <view class="order-other_item {{walletType === 'balance' ? 'order-other_item--active' : ''}}" bindtap="bindWallet" data-type="balance">
       <view class="order-other_item--name">使用余额</view>
