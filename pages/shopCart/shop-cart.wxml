@@ -13,11 +13,11 @@
   <scroll-view bindscrolltoupper="upper" bindscrolltolower="lower" scroll-y="true" class="scroll-view" bindscrolltoupper="upper" bindscrolltolower="lower" style="height:{{listHeight}}px">
     <view class="cart-list"  wx:for-index="idx" wx:for="{{cartList}}">
       <view bindtap="onTap"  data-index="{{idx}}" class="radio {{item.IsBuy == 1 ? 'selected' : ''}}" ></view>
-      <navigator wx:if="item.Type == 1" url="../detail/detail?type=adsinfo&id={{item.ProductID}}"><image class="img" src="{{item.Img}}"></image></navigator>
-      <navigator wx:if="item.Type == 0" url="../detail/detail?type=proinfo&id={{item.ProductID}}"><image class="img" src="{{item.Img}}"></image></navigator>
+      <navigator wx:if="{{item.Type == 1}}" url="../detail/detail?type=adsinfo&id={{item.ProductID}}"><image class="img" src="{{item.Img}}"></image></navigator>
+      <navigator wx:if="{{item.Type == 0}}" url="../detail/detail?type=proinfo&id={{item.ProductID}}"><image class="img" src="{{item.Img}}"></image></navigator>
       <view class="left-con">
-        <navigator wx:if="item.Type == 1" class="title" url="../detail/detail?type=adsinfo&id={{item.ProductID}}">{{item.Name}}</navigator>
-        <navigator wx:if="item.Type == 0" class="title" url="../detail/detail?type=proinfo&id={{item.ProductID}}">{{item.Name}}</navigator>
+        <navigator wx:if="{{item.Type == 1}}" class="title" url="../detail/detail?type=adsinfo&id={{item.ProductID}}">{{item.Name}}</navigator>
+        <navigator wx:if="{{item.Type == 0}}" class="title" url="../detail/detail?type=proinfo&id={{item.ProductID}}">{{item.Name}}</navigator>
         <view class="box">
           <view class="price">￥{{item.Price}}</view>
           <view class="num-wrap">
