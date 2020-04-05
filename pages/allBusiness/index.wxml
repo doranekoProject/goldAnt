@@ -1,6 +1,6 @@
 <!--all business.wxml-->
 <view>
-  <scroll-view class="business-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
+  <scroll-view wx:if="{{list.length > 0}}" class="business-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
     <view class="business-list_item" wx:for="{{list}}" wx:key="item" bindtap="bindToPage"  data-id="{{item.ID}}" data-shopID="{{item.shopID}}" >
       <image class="business-list_item--img" src="{{item.Img}}" mode="widthFix"></image>
       <view class="business-list_info">
@@ -14,5 +14,8 @@
       </view>
     </view>
   </scroll-view>
+  <view wx:if="{{list.length <= 0}}" class="no-data">
+    该商品列表还没有数据哦！
+  </view>
   <footer-menu number="0"></footer-menu>
 </view>

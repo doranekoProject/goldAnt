@@ -6,6 +6,8 @@ Page({
   data: {
     list: [],
     page: 1,
+    id: '',
+    shopid: '',
     height: wx.getSystemInfoSync().windowHeight
   },
   getList: function () {
@@ -16,7 +18,8 @@ Page({
         area: '',
         category: this.data.id,
         otype:'',
-        index: this.data.page
+        index: this.data.page,
+        shopid: this.data.shopid,
       },
       method: 'POST'
     }).then((res) => {
@@ -50,17 +53,18 @@ Page({
     })
   },
   onLoad: function (e) {
-    if (!e.id) return wx.showToast({
+    if (!e.id && !e.shopid) return wx.showToast({
       title: '商家ID不存在',
       icon: "none"
-    })
+    });
     const name = !e.name ? 0 : e.name;
     const dataList = [];
     wx.setNavigationBarTitle({
       title: name == 0 ? '所属商家' : name
     });
     this.setData({
-      id: e.id
+      id: !!e.id ? e.id : '',
+      shopid: !!e.shopid ? e.shopid : ''
     })
     this.getList();
   },

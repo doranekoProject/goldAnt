@@ -66,7 +66,8 @@ Page({
       url: api.pros,
       data: {
         key: this.data.key,
-        index: this.data.page
+        index: this.data.page,
+        shopid: ''
       },
       method: 'POST'
     }).then(res => {

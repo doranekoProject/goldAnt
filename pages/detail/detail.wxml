@@ -13,10 +13,10 @@
     <view wx:if="{{!page}}" class="detail-info_desc">{{detail.Title}}</view>
     <view class="detail-info_cost">￥<text>{{detail.Price}}</text></view>
   </view>
-  <view wx:if="{{page === 'adsinfo'}}" class="detail-type">
+  <navigator url="../allBusiness/index?shopid={{detail.ShopID}}" wx:if="{{page === 'adsinfo'}}" class="detail-type">
     <view class="detail-type_title">商家</view> 
     <view class="detail-type_text">{{nickname}}</view>
-   </view>
+  </navigator>
   <view class="detail-type" wx:if="{{detail.list.length > 0}}" >
     <view class="detail-type_title">选择</view>
     <view class="detail-type_text" bindtap="seletePop" data-type="options">{{detail.list[0].SPName}}</view>

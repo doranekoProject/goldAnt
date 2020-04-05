@@ -84,7 +84,8 @@ Page({
         area: addr,
         category: !!this.data.getCategory ? this.data.getCategory.current : '',
         otype: !!this.data.otype ? this.data.otype.current : '',
-        index: this.data.adsPage
+        index: this.data.adsPage,
+        shopid: ''
       },
       method: 'POST'
     }).then((res) => {
