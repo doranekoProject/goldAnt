@@ -43,7 +43,7 @@ Page({
     app.ajax({
       url: api.category,
       data: {
-        type: 0
+        type: 1
       },
       method: 'POST',
     }).then(res => {
