@@ -28,6 +28,10 @@ Component({
       type: String,
       value: 'getCollects' // getCollects：我的收藏， getList：资讯列表， getOrder：订单列表
     },
+    listStatus: {
+      type: Number,
+      value: 1
+    },
     paddingTop: {
       type: Number,
       value: 50
@@ -132,6 +136,42 @@ Component({
         show: false
       })
     },
+    getList() {
+      var that = this;
+      this._hasLoadData = true;
+      if (this.isEnd) {
+        return false;
+      }
+      app.ajax({
+        data: {
+          type: this.data.listStatus
+        },
+        url: app.api.infolist,
+        method: 'POST',
+      }).then((res) => {
+        if (res.data.code == 1) {
+          let data = res.data.msg;
+          const obj = {
+            adsPage: that.data.adsPage
+          };
+          obj.list = that.data.infoList.concat(data);
+          if (data.length >= 10) {
+            obj.adsPage = obj.adsPage + 1;
+          } else {
+            this.isEnd = true;
+          }
+          this.setData({
+            infoList: obj.list,
+            adsPage: obj.adsPage
+          });
+        } else {
+          wx.showModal({
+            title: '获取订单失败',
+            content: res.data.msg
+          });
+        }
+      });
+    },
     bindSumbit: function () {
       let _this = this;
       let data = this.currentData;
@@ -145,6 +185,16 @@ Component({
         method: 'POST',
       }).then((res) => {
         if (res.data.code == 1) {
+          if (paytype !== 0) {
+            _this.setData({
+              adsPage: 1,
+              infoList: [],
+              show: false
+            });
+            _this.currentData = null;
+            _this.getOrder();
+            return false;
+          }
           const obj = res.data.msg;
           obj.success = function (e) {
             _this.setData({
@@ -275,7 +325,7 @@ Component({
             adsPage: that.data.adsPage
           };
           obj.list = that.data.infoList.concat(data.list);
-          if (obj.list.length > 10) {
+          if (data.list.length >= 10) {
             obj.adsPage = obj.adsPage + 1;
           } else {
             this.isEnd = true;

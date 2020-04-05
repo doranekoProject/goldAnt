@@ -3,8 +3,8 @@ page{
 }
 .tab-warp {
   position: relative;
-  height: calc(100% - 100rpx);
-  padding-top: 100rpx;
+  height: calc(100% - 105rpx);
+  padding-top: 105rpx;
 }
 .tab-header {
   position:absolute;
@@ -12,6 +12,7 @@ page{
   left: 0;
   top: 0;
   display: flex;
+  background: #fff;
 }
 .tab-header .title {
   flex-grow: 1; /* default 0 */

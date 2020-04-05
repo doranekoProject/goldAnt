@@ -2,8 +2,8 @@
 <view class="membership-wrap">
   <view class="vip-wrap">
     <view class="user-warp">
-      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1581832505992&di=ed169e70a96fc8f7caaf430e0e9d445b&imgtype=0&src=http%3A%2F%2Fd.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Fa9d3fd1f4134970a133ba3c699cad1c8a6865d8a.jpg" class="img"></image>
-      <text class="name">李先生</text>
+      <image src="{{img}}" class="img"></image>
+      <text class="name">{{nickname}}</text>
       <text class="state">未开通</text>
     </view>
     <text class="vip-tag">VIP</text>
@@ -13,5 +13,5 @@
     </view>
     
   </view>
-  <view class="open-vip">365元立即开通</view>
+  <view bindtap="onTap" class="open-vip">365元立即开通</view>
 </view>

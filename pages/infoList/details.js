@@ -4,15 +4,29 @@ const app = getApp()
 
 Page({
   data: {
-    title: '',
-    date: '',
-    content: ''
+    info: {
+      Img: '',//图片
+      Title: '',//标题
+      Content: '', //详细内容
+      UpdateTime: '' //发布时间
+
+    }
   },
-  onLoad: function () {
-    this.setData({
-      title: '北欧现代简约餐厅吊灯创意三头餐厅灯具艺术',
-      date: '2019-01-01',
-      content: '<img src="https://img-blog.csdnimg.cn/20190927151132530.png"></img><p>内容内容</p>'
+  onLoad: function (e) {
+    app.ajax({
+      url: app.api.infodetail,
+      data: {
+        id: e.id
+      },
+      method: 'POST'
+    }).then((res) => {
+      if (res.data.code === 1) {
+        this.setData({
+          info: res.data.msg
+        });
+      }
+    }).catch((res) => {
+      console.log(res)
     });
   },
 })

@@ -1,3 +1,6 @@
+page {
+  background: #fff;
+}
 .details-warp {
   font-family: Source Han Sans CN;
   padding: 38rpx;

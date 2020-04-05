@@ -5,6 +5,9 @@ App({
   api: {
     reg: `${apiUrl}?t=reg`,
     login: `${apiUrl}?t=login`,
+    uplv: `${apiUrl}?t=uplv`, // vip会员
+    infolist: `${apiUrl}?t=infolist`, // 资讯列表
+    infodetail: `${apiUrl}?t=infodetail`, // 资讯详情
     userinfo: `${apiUrl}?t=userinfo`,
     collects: `${apiUrl}?t=collects`, // 收藏列表
     category: `${apiUrl}?t=category`, // 获取所有商品或广告分类类型
