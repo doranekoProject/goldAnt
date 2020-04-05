@@ -4,14 +4,16 @@
     <view class="user-warp">
       <image src="{{img}}" class="img"></image>
       <text class="name">{{nickname}}</text>
-      <text class="state">未开通</text>
+      <text wx:if="{{lv==0}}" class="state">未开通</text>
+      <text wx:if="{{lv==1}}" class="state">已开通</text>
     </view>
     <text class="vip-tag">VIP</text>
     <view class="msg-wrap">
       <view class="mask"></view>
-      <text class="msg">赶快成为店长！获取分销资格吧！</text>
+      <text wx:if="{{lv==0}}" class="msg">赶快成为店长！获取分销资格吧！</text>
     </view>
     
   </view>
-  <view bindtap="onTap" class="open-vip">365元立即开通</view>
+  <view wx:if="{{lv==0}}" bindtap="onTap" class="open-vip">365元立即开通</view>
+  <view wx:if="{{buttonShow}}" bindtap="onTap" class="open-vip">365元立即续费</view>
 </view>

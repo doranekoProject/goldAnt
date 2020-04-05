@@ -5,7 +5,9 @@ const app = getApp()
 Page({
   data: {
     img: '',
-    nickname: ''
+    nickname: '',
+    buttonShow: false,
+    lv: 0
   },
   onLoad: function () {
     this.getInfo();
@@ -44,11 +46,20 @@ Page({
       method: 'POST'
     }).then((res) => {
       if (res.data.code === 1) {
-        const data = res.data;
-        console.log(data.msg);
+        const data = res.data.msg;
+        let show = false;
+        if (data.endtime) {
+          var time = new Date().getTime() - new Date(data.endtime).getTime();
+          time = parseInt(time / (1000 * 60 * 60 * 24));
+          if (time <= 30) {
+            show = true;
+          }
+        }
         this.setData({
-          img: data.msg.img,
-          nickname: data.msg.nickname
+          img: data.img,
+          nickname: data.nickname,
+          buttonShow: show,
+          lv: data.lv
         });
       }
     }).catch((res) => {

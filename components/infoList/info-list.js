@@ -40,17 +40,23 @@ Component({
   observers: {
     'isShow': function (val) {
       let type = this.data.method;
-      
-      if (val && !this._hasLoadData) {
-        setTimeout(() => {
-          this[type](this.data.methodType);
-        }, 0);
-        
-      }
       let show = !val ? 'tab-hide' : ''
       this.setData({
+        infoList: [],
+        adsPage: 1,
         showClass: show
-      })
+      });
+      this.isEnd = false;
+      
+      setTimeout(() => {
+        if (val) {
+          if (this.data.methodType == 'ads' || this.data.methodType == 'goods') {
+            this.getInfo();
+          }
+          console.log(type);
+          this[type](this.data.methodType);
+        }
+      }, 10);
     }
   },
   /**
@@ -67,7 +73,8 @@ Component({
       '0': '待付款',
       '1': '待发货',
       '2': '待收货',
-      '4': '已完成'
+      '4': '已完成',
+      '5': '已退货'
     },
     actions: {
       '0': '去付款',
@@ -78,17 +85,14 @@ Component({
       getCollects: '亲，你的收藏为空哦！',
       getList: '暂无数据',
       getOrder: '亲，你还没有相关订单哟！'
-    },
-    _hasLoadData: false
+    }
   },
   ready: function() {
     const systemInfo = wx.getSystemInfoSync();
     this.setData({
       listHeight: systemInfo.windowHeight - this.data.paddingTop
     });
-    if (this.data.methodType == 'ads' || this.data.methodType == 'goods') {
-      this.getInfo();
-    }
+    
   },
   /**
    * 组件的方法列表
@@ -138,7 +142,6 @@ Component({
     },
     getList() {
       var that = this;
-      this._hasLoadData = true;
       if (this.isEnd) {
         return false;
       }
@@ -191,6 +194,7 @@ Component({
               infoList: [],
               show: false
             });
+            this.isEnd = false;
             _this.currentData = null;
             _this.getOrder();
             return false;
@@ -202,6 +206,7 @@ Component({
               infoList: [],
               show: false
             });
+            this.isEnd = false;
             _this.currentData = null;
             _this.getOrder();
           }
@@ -250,6 +255,7 @@ Component({
             adsPage: 1,
             infoList: []
           });
+          this.isEnd = false;
           _this.getOrder();
         }
       });
@@ -257,7 +263,7 @@ Component({
     onTap(e) {
       let data = e.currentTarget.dataset.item;
       let type = e.currentTarget.dataset.type;
-      let action = data ? data.Status : type;
+      let action = type ? type : data.Status;
       switch (action) {
         case 0: // 待付款
           this.setData({
@@ -269,10 +275,10 @@ Component({
           this.submitPay(data, 4);
           break;
         case 4: // 已完成
-          this.submitPay(data, t);
+          this.submitPay(data, 5);
           break;
         case 'wu':
-          app.orderListItem = data;
+          app.detailsAddress = data;
           wx.navigateTo({
             url: '/pages/logistics/logistics-info'
           });
@@ -281,7 +287,6 @@ Component({
     },
     // 获取我的收藏
     getCollects() {
-      this._hasLoadData = true;
       app.ajax({
         data: {
         },
@@ -303,16 +308,15 @@ Component({
     // 获取我的账单
     getOrder() {
       var that = this;
-      this._hasLoadData = true;
       if (this.isEnd) {
         return false;
       }
-      let OrderType = this.data.methodType === 'ads' ? 1 : 2;
+      let ordertype = this.data.methodType === 'ads' ? 2 : 1;
       app.ajax({
         data: {
           begin: '',
           end: '',
-          OrderType,
+          ordertype,
           status: this.data.status,
           index: this.data.adsPage
         },

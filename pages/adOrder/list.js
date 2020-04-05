@@ -29,6 +29,7 @@ Page({
       }]
   },
   onLoad: function (e) {
+    this.currentTarget = 0;
     const title = e.type == 'ads' ? '广告订单': '商品订单';
     wx.setNavigationBarTitle({
       title
@@ -43,7 +44,11 @@ Page({
     if (this.data.currentTab == cur) {
       return false;
     } else {
+      this.tab = true;
       this.data.menuData[cur].isShow = true;
+      this.data.menuData[this.currentTarget].isShow = false;
+      this.currentTarget = cur;
+      console.log(this.data.menuData);
       this.setData({
         currentTab: cur,
         menuData: this.data.menuData
@@ -51,8 +56,15 @@ Page({
     }
   },
   switchTab(event) {
+    if (this.tab) {
+      this.tab = false;
+      return;
+    }
+    console.log('cccc');
     var cur = event.detail.current;
     this.data.menuData[cur].isShow = true;
+    this.data.menuData[this.currentTarget].isShow = false;
+    this.currentTarget = cur;
     this.setData({
       currentTab: cur,
       menuData: this.data.menuData
