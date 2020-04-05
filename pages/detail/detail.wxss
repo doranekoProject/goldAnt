@@ -150,14 +150,14 @@
   font-size: 28rpx;
   margin-left: 16rpx;
   vertical-align: middle;
-  opacity: 0.8;
+  background-color: #A5A5A5;
 }
 .selete-pop_main--item_active {
-  opacity: 1;
+  background: #4987D8;
 }
 .selete-pop_main--item_disable {
   pointer-events: none;
-  background-color: #A5A5A5;
+   opacity: 0.2;
 }
 .selete-pop_main--btn {
   background: #4987D8;

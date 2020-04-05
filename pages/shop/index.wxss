@@ -4,20 +4,24 @@
   justify-content: center;
   align-items: center;
   text-align: center; */
-  padding: 28rpx 0;
-  white-space: nowrap;
-  overflow: scroll;
+  padding: 18rpx 0 0 18rpx;
+  /* white-space: nowrap;
+  overflow: scroll; */
+  max-height: 400rpx;
+  overflow: hidden;
 }
 .shop-sort_item {
   /* flex: 1; */
   color: #A5A5A5;
   font-size: 28rpx;
+  text-align: center;
   display: inline-block;
-  margin: 0 10rpx;
+  margin: 10rpx 10rpx;
+  width: 160rpx;
 }
 .shop-sort_item image {
-  width: 125rpx;
-  height: 125rpx;
+  width: 140rpx;
+  height: 140rpx;
   background: #ACACAC;
   border-radius: 50%;
 }

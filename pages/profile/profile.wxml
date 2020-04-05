@@ -17,7 +17,7 @@
       <view class="profile-header_bar--main">
         <view class="profile-header_bar--tag"><view class="profile-header_bar--icon"></view>VIP店长</view>
           <block wx:if="{{userInfo.lv > 0}}">
-            <view class="profile-header_bar--right profile-header_bar--yellow">到期时间： {{userInfo.endtime}}</view>
+            <navigator url="../membership/open-membership" class="profile-header_bar--right profile-header_bar--yellow">到期时间： {{userInfo.endtime}}</navigator>
           </block>
           <block wx:else>
             <navigator url="../membership/open-membership" class="profile-header_bar--right">立即开通</navigator>

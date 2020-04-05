@@ -35,12 +35,7 @@ Page({
     })
   },
   onShow: function (e) {
-    if (!this.data.isLogin && !!wx.getStorageSync('userid')) {
-      this.userInfo();
-      this.setData({
-        isLogin: true
-      });
-    }
+    this.userInfo();
   },
   userInfo: function (e) {
     app.ajax({
