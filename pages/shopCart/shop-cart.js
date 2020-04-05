@@ -128,9 +128,18 @@ Page({
   },
   goCount() {
     let index = [];
+    let select = [];
     this.data.cartList.forEach((item, i) => {
       if (item.IsBuy == 1) {
         index.push(i);
+        select.push(item)
+      }
+    });
+    let type = select[0].Type;
+    let agreed = true;
+    select.forEach((item, i) => {
+      if (item.Type != type) {
+        agreed = false;
       }
     });
     if (index.length < 0) {
@@ -140,9 +149,16 @@ Page({
       });
       return false;
     }
+    if (!agreed) {
+      wx.showModal({
+        title: '提示',
+        content: '广告和商品不能一起结算！'
+      });
+      return false;
+    }
     let cartIndex = index.join('-')
     wx.navigateTo({
-      url: `../submitOrder/index?cartIndex=${index}`
+      url: `../submitOrder/index?cartIndex=${index}?subType=${type}`
     })
   },
   modified(e) {
