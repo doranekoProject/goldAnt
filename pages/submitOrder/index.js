@@ -136,6 +136,12 @@ Page({
     })
   },
   bindSumbit: function () {
+    if (!this.data.aid || this.data.aid === 0) {
+      return wx.showToast({
+        icon: "none",
+        title: '请添加收货地址'
+      }); 
+    }
     if (this.data.type === 'list') {
       app.ajax({
         url: api.ordercart,

@@ -35,7 +35,7 @@ Page({
     })
   },
   onShow: function (e) {
-    this.userInfo();
+    if (!!wx.getStorageSync('userid')) this.userInfo();
   },
   userInfo: function (e) {
     app.ajax({
