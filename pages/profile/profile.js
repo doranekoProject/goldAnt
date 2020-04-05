@@ -47,7 +47,7 @@ Page({
     }).then((res) => {
       if (res.data.code === 1) {
         const data = res.data;
-        data.msg.endtime = data.msg.endtime.split('T')[0];
+        if (!!data.msg.endtime) data.msg.endtime = data.msg.endtime.split(' ')[0];
         this.setData({
           userInfo: data.msg
         });
