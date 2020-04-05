@@ -158,7 +158,7 @@ Page({
     }
     let cartIndex = index.join('-')
     wx.navigateTo({
-      url: `../submitOrder/index?cartIndex=${index}?subType=${type}`
+      url: `../submitOrder/index?cartIndex=${index}&subType=${type}`
     })
   },
   modified(e) {

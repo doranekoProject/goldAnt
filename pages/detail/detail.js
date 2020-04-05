@@ -31,6 +31,11 @@ Page({
     })
   },
   onShow: function (e) {
+    if (!!wx.getStorageSync('nickname')) {
+      this.setData({
+        nickname: wx.getStorageSync('nickname')
+      })
+    }
     app.ajax({
       url: api[this.data.page],
       data: {

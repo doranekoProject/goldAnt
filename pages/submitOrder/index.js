@@ -11,8 +11,9 @@ Page({
     quantity: 1,
     remark: '',
     address: {},
-    aid: 0,
+    aid: '',
     totle: 0,
+    subType: ''
   },
   getItem: function () {
     app.ajax({
@@ -136,7 +137,7 @@ Page({
     })
   },
   bindSumbit: function () {
-    if (!this.data.aid || this.data.aid === 0) {
+    if ((this.data.type === 'proinfo' && this.data.subType != 1) && (!this.data.aid || this.data.aid === 0)) {
       return wx.showToast({
         icon: "none",
         title: '请添加收货地址'
@@ -265,7 +266,8 @@ Page({
     if (!!e.cartIndex) {
       this.setData({
         cartIndex: e.cartIndex.split(','),
-        type: 'list'
+        type: 'list',
+        subType: e.subType
       });
       this.getList();
     } else {
@@ -273,7 +275,8 @@ Page({
         type: e.type,
         spid: e.spid == 0 ? '':  e.spid,
         itemId: e.id,
-        quantity: e.quantity
+        quantity: e.quantity,
+        subType: ''
       });
       this.getItem();
     }

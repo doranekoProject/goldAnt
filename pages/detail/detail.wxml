@@ -13,9 +13,9 @@
     <view wx:if="{{!page}}" class="detail-info_desc">{{detail.Title}}</view>
     <view class="detail-info_cost">￥<text>{{detail.Price}}</text></view>
   </view>
-  <view wx:if="{{!page}}" class="detail-type">
+  <view wx:if="{{page === 'adsinfo'}}" class="detail-type">
     <view class="detail-type_title">商家</view> 
-    <view class="detail-type_text">湛江市祥顺机动车检测有限公司</view>
+    <view class="detail-type_text">{{nickname}}</view>
    </view>
   <view class="detail-type" wx:if="{{detail.list.length > 0}}" >
     <view class="detail-type_title">选择</view>

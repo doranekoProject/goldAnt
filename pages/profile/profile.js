@@ -25,7 +25,7 @@ Page({
   onLoad: function (e) {
     const action = e.action;
     if (!!wx.getStorageSync('userid')) {
-      this.userInfo();
+     // this.userInfo();
       this.setData({
         isLogin: true
       });
@@ -51,6 +51,7 @@ Page({
         this.setData({
           userInfo: data.msg
         });
+        wx.setStorageSync('nickname', data.msg.nickname);
       } else {
         wx.showModal({
           title: '获取用户信息失败',
@@ -89,6 +90,7 @@ Page({
                         nickname: data.userInfo.nickName
                       }
                     });
+                    wx.setStorageSync('nickname', data.userInfo.nickName);
                     if (that.data.action === 'back') {
                       wx.setStorageSync('islong', true);
                       setTimeout(() => {

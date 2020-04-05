@@ -1,6 +1,6 @@
 <!--submit order.wxml-->
 <view>
-  <block wx:if="{{!address.ID}}">
+  <block wx:if="{{!address.ID && (type != 'adsinfo' && subType != 1)}}">
     <navigator url="../address/edit?action=order" class="add-address">
       <view>
         <view>请添加收货地址</view>
@@ -8,7 +8,7 @@
       </view>
     </navigator>
   </block>
-  <block wx:if="{{!!address.ID}}">
+  <block wx:if="{{!!address.ID && (type != 'adsinfo' && subType != 1)}}">
     <navigator url="../address/list?action=order" class="address-box">
       <view class="address-list">
         <view class="form">
