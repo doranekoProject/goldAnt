@@ -28,6 +28,7 @@
   background:#fff;
   position: relative;
   font-size: 32rpx;
+  min-height: 42rpx;
 }
 .detail-type_title {
   position: absolute;

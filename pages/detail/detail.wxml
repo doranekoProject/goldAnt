@@ -10,12 +10,12 @@
   <view wx:if="{{detail.ImgList.length <= 1}}"  class="detail-banner"><image mode="widthFix" src="{{detail.ImgList}}"></image></view>
   <view class="detail-info">
     <view class="detail-info_title">{{detail.Name}}</view>
-    <view wx:if="{{!page}}" class="detail-info_desc">{{detail.Title}}</view>
+    <view wx:if="{{!!detail.Title}}" class="detail-info_desc">{{detail.Title}}</view>
     <view class="detail-info_cost">￥<text>{{detail.Price}}</text></view>
   </view>
   <navigator url="../allBusiness/index?shopid={{detail.ShopID}}" wx:if="{{page === 'adsinfo'}}" class="detail-type">
     <view class="detail-type_title">商家</view> 
-    <view class="detail-type_text">{{nickname}}</view>
+    <view class="detail-type_text">{{detail.ShopName}}</view>
   </navigator>
   <view class="detail-type" wx:if="{{detail.list.length > 0}}" >
     <view class="detail-type_title">选择</view>

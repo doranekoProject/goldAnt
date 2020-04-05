@@ -25,7 +25,7 @@
         <image class="home-list_item--img" src="{{item.Img}}" mode="widthFix"></image>
         <view class="home-list_info">
           <view class="home-list_title">{{item.Name}}</view>
-          <view class="home-list_desc">{{item.desc}}</view>
+          <!--<view class="home-list_desc" wx:if="{{item.Title}}">{{item.Title}}</view>-->
           <view>￥<text class="home-list_cost">{{item.Price}}</text></view>
           <view class="home-list_bot" wx:if="{{!!item.location || item.location == 0}}">
             距离{{item.location}}km
