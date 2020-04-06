@@ -10,7 +10,7 @@
       </view>
     </view>
   </view>
-  <view class="button-warp">
+  <view wx:if="{{dataItem.OrderType != 2 && dataItem.Status == 2}}" class="button-warp">
     <button bindtap="getAddress" class="button">查看物流</button>
   </view>
 </view>

@@ -30,7 +30,31 @@ Page({
   },
   onLoad: function (e) {
     this.currentTarget = 0;
-    const title = e.type == 'ads' ? '广告订单': '商品订单';
+    let title = '商品订单';
+    let menuData;
+    if (e.type == 'ads') {
+      title = '广告订单';
+      menuData = [{
+        title: '全部',
+        value: '',
+        isShow: true
+      }, {
+        title: '待付款',
+        value: '0',
+        isShow: false
+      }, {
+        title: '待收货',
+        value: '2',
+        isShow: false
+      }, {
+        title: '已完成',
+        value: '4',
+        isShow: false
+      }];
+      this.setData({
+        menuData
+      });
+    }
     wx.setNavigationBarTitle({
       title
     });

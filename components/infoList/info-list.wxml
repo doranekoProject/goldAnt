@@ -44,7 +44,7 @@
         </view>
       </navigator>
       <view class="button-warp">
-        <button bindtap="onTap" wx:if="{{item.Status == 2}}" data-type="wu" data-item="{{item}}" class="button">查看物流</button>
+        <button bindtap="onTap" wx:if="{{item.Status == 2 && item.OrderType != 2}}" data-type="wu" data-item="{{item}}" class="button">查看物流</button>
         <button wx:if="{{item.Status == 0 || item.Status ==2 || item.Status ==4}}" bindtap="onTap" data-item="{{item}}" class="button">{{actions[item.Status]}}</button>
       </view>
     </view>
