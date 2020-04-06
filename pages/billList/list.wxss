@@ -72,7 +72,9 @@ page {
   width: 450rpx;
   font-size: 60rpx;
   font-weight: bold;
-  vertical-align: bottom
+  vertical-align: bottom;
+  min-height: 70rpx;
+  line-height: 1.5;
 }
 .cash-out_orange {
   width: 500rpx;
