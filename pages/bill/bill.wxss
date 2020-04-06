@@ -95,6 +95,8 @@
   width: 450rpx;
   font-size: 60rpx;
   font-weight: bold;
+  min-height: 70rpx;
+  line-height: 1.5;
 }
 .pop-recharge_main .bill-btn_blue {
   width: 500rpx;

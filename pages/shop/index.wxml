@@ -4,7 +4,7 @@
     <swiper wx:if="{{banner.length > 0}}" class="shop-banner" indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}">
       <block wx:for="{{banner}}" wx:key="item">
         <swiper-item>
-          <navigator url="../wrap/wrap?url={{item.LinkTo}}" class="swiper-item"><image mode="widthFix" src="{{item.Img}}"></image></navigator>
+          <navigator url="../wrap/wrap?url={{item.LinkTo}}" class="swiper-item"><image class="swiper-item_img" src="{{item.Img}}"></image></navigator>
         </swiper-item>
       </block>
     </swiper>

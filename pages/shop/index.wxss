@@ -1,4 +1,11 @@
 /**shop.wxss**/
+.shop-banner {
+  height: 360rpx;
+}
+.swiper-item_img {
+  width: 100%;
+  height: 360rpx;
+}
 .shop-sort {
   /* display: flex;
   justify-content: center;
