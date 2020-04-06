@@ -1,6 +1,6 @@
 <!--homepage.wxml-->
 <view>
-  <swiper wx:if="{{detail.ImgList.length > 1}}" class="detail-banner" indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}">
+  <swiper wx:if="{{detail.ImgList.length > 1}}" class="detail-banner" indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}" style="height:{{bannerHeight}}px">
     <block wx:for="{{detail.ImgList}}" wx:key="*this">
       <swiper-item>
         <view class="swiper-item"><image mode="widthFix" src="{{item}}"></image></view>

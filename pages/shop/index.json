@@ -2,5 +2,5 @@
   "usingComponents": {
     "footer-menu": "../components/menu/menu"
   },
-  "navigationBarTitleText" : "广告商城"
+  "navigationBarTitleText" : "商品商城"
 }

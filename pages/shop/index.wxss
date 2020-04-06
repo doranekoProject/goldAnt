@@ -33,6 +33,9 @@
   padding: 20rpx 20rpx 0;
   display: flex;
 }
+.shop-list_item:last-child {
+  margin-bottom: 100rpx;
+}
 .shop-list_item--img {
   width: 200rpx;
   height: 200rpx;

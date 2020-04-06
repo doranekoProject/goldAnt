@@ -1,6 +1,6 @@
   <view class="menu">
      <navigator url="/pages/homepage/homepage" open-type="redirect" class="menu-item {{number == 0 ? ' menu-item_active' : ''}}">广告</navigator>
     <navigator url="/pages/shop/index" open-type="redirect" class="menu-item {{number == 1 ? ' menu-item_active' : ''}}">商场</navigator>
-    <navigator url="/pages/shopCart/shop-cart" class="menu-item {{number == 2 ? ' menu-item_active' : ''}}">购物车</navigator>
+    <navigator url="/pages/shopCart/shop-cart" open-type="redirect" class="menu-item {{number == 2 ? ' menu-item_active' : ''}}">购物车</navigator>
     <navigator url="/pages/profile/profile" open-type="redirect" class="menu-item {{number == 3 ? ' menu-item_active' : ''}}">我的</navigator>
 </view>

@@ -9,6 +9,7 @@ Page({
     interval: 2000,
     duration: 500,
     isSeletePop: false,
+    bannerHeight: wx.getSystemInfoSync().windowWidth,
     quantity: 1,
     stock: 0,
     SPID:0,

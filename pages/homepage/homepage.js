@@ -17,7 +17,7 @@ Page({
     quantity: 1,
     tabType: 0,
     adsPage: 1,
-    curCity: '湛江',
+    curCity: '湛江市',
     key:"",
     address:[],
     multiArray: [],
@@ -76,7 +76,8 @@ Page({
   },
   getAds: function () {
     const that = this;
-    const addr = this.data.address.toString().replace(/\,/ig, '')
+    let addr = this.data.address.toString().replace(/\,/ig, '');
+    if (/全部/.test(addr)) addr = addr.replace(/全部/ig, '');
     app.ajax({
       url: api.ads,
       data: {
@@ -140,13 +141,14 @@ Page({
     if (e.detail.column === 0) {
       const position = wx.getStorageSync('position');
       const cityName =  this.getName(position.city[position.province[index].ID]);
+      console.log(this.data.multiArray[0], cityName)
       this.setData({
-        multiArray: [this.data.multiArray[0], cityName],
-
+        multiArray: [this.data.multiArray[0], cityName]
       })
     }
   },
   bindCityChange: function (e) {
+    console.log(e)
     const position = wx.getStorageSync('position');
     curCityID.province = position.province[e.detail.value[0]].ID;
     curCityID.city = position.city[curCityID.province][e.detail.value[1]].ID;
@@ -156,8 +158,11 @@ Page({
       select: [0,0]
     }
     const obj = {};
+    const multiIndex = e.detail.value;
+    const multiArray = this.data.multiArray;
     obj.curCity = this.data.multiArray[1][e.detail.value[1]],
     obj.area = area;
+    obj.address = [multiArray[0][multiIndex[0]], multiArray[1][multiIndex[1]]];
     if (this.data.tabType == 1) obj.downList = area;
     this.setData(obj);
     this.getAds();
