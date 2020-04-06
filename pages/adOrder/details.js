@@ -51,6 +51,7 @@ let addNumber = function (num1, num2) {
 };
 Page({
   data: {
+    host: '',
     type: {
       '0': '待付款',
       '1': '待发货',
@@ -78,7 +79,8 @@ Page({
         data = data.data.msg;
         data.totalPrice = addNumber(data.Price, data.Fee);
         this.setData({
-          dataItem: data
+          dataItem: data,
+          host: app.host
         });
       }
     });

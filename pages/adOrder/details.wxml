@@ -2,7 +2,7 @@
 <view class="ads-list">
   <view class="state">{{type[dataItem.Status]}}</view>
   <view class="ads-wrap">
-    <image class="tab-img" src="{{dataItem.ImgList}}"></image>
+    <image class="tab-img" src="{{host + dataItem.Img}}"></image>
     <view class="tab-left-info">
       <text class="title">{{dataItem.proName}}</text>
       <view class="price-wrap">
