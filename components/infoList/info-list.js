@@ -64,6 +64,7 @@ Component({
    */
   data: {
     showClass: '',
+    host: '',
     infoList: [],
     userinfo: {},
     walletType: '',
@@ -90,6 +91,7 @@ Component({
   ready: function() {
     const systemInfo = wx.getSystemInfoSync();
     this.setData({
+      host: app.host,
       listHeight: systemInfo.windowHeight - this.data.paddingTop
     });
     

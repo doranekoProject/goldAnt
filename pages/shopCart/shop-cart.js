@@ -6,6 +6,7 @@ Page({
     isLogin: true,
     allSelect: false,
     totalCount: '',
+    host: '',
     cartList: []
   },
   onLoad: function () {
@@ -31,6 +32,7 @@ Page({
     });
     const systemInfo = wx.getSystemInfoSync();
     this.setData({
+      host: app.host,
       listHeight: systemInfo.windowHeight - 100
     });
   },

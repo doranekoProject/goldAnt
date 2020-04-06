@@ -3,7 +3,7 @@
   <scroll-view bindscrolltolower='lower' scroll-y="true" class="scroll-view"  style="height:{{listHeight}}px">
     <view wx:if="{{methodType === 'list' || methodType == 'favorite'}}" class="tab-list" wx:key="index" wx:for="{{infoList}}" url="">
       <navigator wx:if="{{methodType == 'list'}}" url="../infoList/details?id={{item.ID}}">
-        <image class="tab-img" src="{{item.Img}}"></image>
+        <image class="tab-img" src="{{host + item.Img}}"></image>
         <view class="tab-left-info">
           <text class="title">{{item.Title}}</text>
           <text class="address">
@@ -12,7 +12,7 @@
         </view>
       </navigator>
       <navigator wx:if="{{methodType == 'favorite' && item.Type == 1}}" url="../detail/detail?type=adsinfo&id={{item.ProductID}}">
-        <image class="tab-img" src="{{item.Img}}"></image>
+        <image class="tab-img" src="{{host + item.Img}}"></image>
         <view class="tab-left-info">
           <text class="title">{{item.Name}}</text>
           <text class="address">
@@ -21,7 +21,7 @@
         </view>
       </navigator>
       <navigator wx:if="{{methodType == 'favorite' && item.Type == 0}}" url="../detail/detail?type=proinfo&id={{item.ProductID}}">
-        <image class="tab-img" src="{{item.Img}}"></image>
+        <image class="tab-img" src="{{host + item.Img}}"></image>
         <view class="tab-left-info">
           <text class="title">{{item.Name}}</text>
           <text class="address">
@@ -34,7 +34,7 @@
       <navigator  url="/pages/adOrder/details?id={{item.ID}}">
         <view class="state">{{type[item.Status]}}</view>
         <view class="ads-wrap">
-          <image class="tab-img" src="{{item.ImgList}}"></image>
+          <image class="tab-img" src="{{host + item.ImgList}}"></image>
           <view class="tab-left-info">
             <text class="title">{{item.proName}}</text>
             <view class="price-wrap">
