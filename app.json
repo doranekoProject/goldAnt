@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/business/index",
+    "pages/businessList/list",
     "pages/homepage/homepage",
     "pages/detail/detail",
     "pages/merchantsSettled/merchants-settled",

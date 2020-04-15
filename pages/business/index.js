@@ -1,4 +1,4 @@
-//homepage.js
+//business.js
 const app = getApp();
 const api = app.api;
 const utils = require('../../utils/util.js');
@@ -12,6 +12,7 @@ const curCityID = {
 Page({
   data: {
     list: [],
+    banner: [],
     height: 0,
     winHeight: wx.getSystemInfoSync().windowHeight,
     quantity: 1,
@@ -29,12 +30,12 @@ Page({
     query.select('.home-bar').boundingClientRect()
     query.select('.home-filter').boundingClientRect().exec(res => {
       that.setData({
-        height: wx.getSystemInfoSync().windowHeight - res[0].height - res[1].height -20
+        height: wx.getSystemInfoSync().windowHeight - res[0].height - res[1].height
       })
     });
   },
   lower: function () {
-    if(this.data.isNext)  this.getAds();
+    if(this.data.isNext)  this.getList();
   },
   getArea: function () {
     app.ajax({
@@ -74,7 +75,27 @@ Page({
       console.log(res)
     })
   },
-  getAds: function () {
+  getBanner: function (e) {
+    app.ajax({
+      url: api.proads,
+      method: 'POST',
+    }).then(res => {
+      if (res.data.code === 1) {
+        for (let i = 0; i < res.data.msg.list.length; i += 1) {
+          res.data.msg.list[i].Img = `${app.host}${res.data.msg.list[i].Img}`;
+          if (location != null && (data.list[i].X > 0 || data.list[i].Y > 0)) {
+            data.list[i].location = utils.distanceCheck(data.list[i].X, location.longitude, data.list[i].Y, location.latitude);
+          }
+        }
+        this.setData({
+          banner: res.data.msg.list
+        });
+      }
+    }).catch(res => {
+      console.log(res)
+    });
+  },
+  getList: function () {
     const that = this;
     let addr = this.data.address.toString().replace(/\,/ig, '');
     if (/全部/.test(addr)) addr = addr.replace(/全部/ig, '');
@@ -94,6 +115,7 @@ Page({
         const data = res.data.msg;
         const obj = {};
         const location = wx.getStorageSync('location');
+        if (data.list.length < 10) obj.isNext = false; 
         for(let i = 0; i < data.list.length; i += 1) {
           data.list[i].Img = `${app.host}${data.list[i].Img}`;
           if (location != null && (data.list[i].X > 0 || data.list[i].Y > 0)) {
@@ -101,8 +123,7 @@ Page({
           }
         }
         obj.list = that.data.adsPage > 1 ? that.data.list.concat(data.list) : data.list;
-        if (data.list.length < 10) obj.isNext = false; 
-        if(obj.list.length >= 10 ) obj.adsPage = obj.adsPage  + 1;
+        if(obj.list.length > 10 ) obj.adsPage = obj.adsPage  + 1;
         this.setData(obj)
       } else {
         wx.showModal({
@@ -291,7 +312,7 @@ Page({
     obj.address = [multiArray[0][multiIndex[0]], multiArray[1][multiIndex[1]]];
     if (this.data.tabType == 1) obj.downList = area;
     this.setData(obj);
-    this.getAds();
+    this.getList();
   },
   getName: function (data, type) {
     let result = [];
@@ -320,11 +341,12 @@ Page({
   bindToPage: function (e) {
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: `../detail/detail?type=adsinfo&id=${id}`,
+      url: `../detail/detail?type=adsinfo&id=${id}&form=business`,
     })
   },
   onLoad: function () {
     const that = this;
+    this.getBanner();
     if (!wx.getStorageSync('position')) {
       this.getArea();
     } else {
@@ -335,7 +357,7 @@ Page({
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.userLocation'] && wx.getStorageSync('location')) {
-          that.getAds();
+          that.getList();
         } else {
           wx.getLocation({
             type: 'wgs84',
@@ -345,7 +367,7 @@ Page({
               const speed = res.speed
               const accuracy = res.accuracy
               wx.setStorageSync('location', res);
-              that.getAds();
+              that.getList();
             },
             fail: function(res) {
               wx.showToast({
@@ -353,7 +375,7 @@ Page({
                 icon: "none"
               });
               wx.setStorageSync('location', null);
-              that.getAds();
+              that.getList();
             }
           })
         }
@@ -387,7 +409,7 @@ Page({
       tabType: 0,
       adsPage: 1
     });
-    this.getAds();
+    this.getList();
   },
   bindLayer: function(e) {
     this.setData({
@@ -419,14 +441,14 @@ Page({
     obj.downList = list;
     obj.adsPage = 1;
     this.setData(obj);
-    this.getAds();
+    this.getList();
   },
   bindSearch: function(e) {
     this.setData({
       key: e.detail.value,
       adsPage: 1
     })
-    this.getAds();
+    this.getList();
   },
   tab: function(e) {
     const type = e.currentTarget.dataset.type;

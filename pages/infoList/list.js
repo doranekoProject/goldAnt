@@ -17,7 +17,12 @@ Page({
       isShow: false
     }]
   },
-  onLoad: function () {
+  onLoad: function (e) {
+    if (e.index > 0) {
+      this.setData({
+        currentTab: e.index
+      })
+    }
   },
   // 处理事件
   onTab(event) {

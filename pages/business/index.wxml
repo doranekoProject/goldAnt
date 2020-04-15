@@ -15,18 +15,23 @@
   </view>
   <view class="home-filter">
     <view class="home-filter_item {{tabType == 1 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="1"><text>地区</text></view>
-    <view class="home-filter_item {{tabType == 2 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="2"><text>场所</text></view>
-    <view class="home-filter_item {{tabType == 3 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="3"><text>线下</text></view>
-    <view class="home-filter_item {{tabType == 4 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="4"><text>批量购买</text></view>
+    <view class="home-filter_item {{tabType == 2 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="2"><text>行业</text></view>
+    <navigator url="/pages/businessList/list" class="home-filter_item"><text>招商加盟</text></navigator>
+    <navigator url="/pages/infoList/list?index=3" class="home-filter_item"><text>招聘</text></navigator>
   </view>
   <scroll-view wx:if="{{list.length > 0}}" class="home-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
-    <view class="home-list_main">
+    <swiper wx:if="{{banner.length > 0}}" class="shop-banner" indicator-dots="{{indicatorDots}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{banner}}" wx:key="item">
+        <swiper-item>
+          <navigator url="../wrap/wrap?url={{item.LinkTo}}" class="swiper-item"><image class="swiper-item_img" src="{{item.Img}}"></image></navigator>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="home-list_main list-col">
       <view class="home-list_item"  wx:for="{{list}}" wx:key="item" data-id="{{item.ID}}" data-shopID="{{item.shopID}}" bindtap="bindToPage">
         <image class="home-list_item--img" src="{{item.Img}}" mode="widthFix"></image>
         <view class="home-list_info">
           <view class="home-list_title">{{item.Name}}</view>
-          <!--<view class="home-list_desc" wx:if="{{item.Title}}">{{item.Title}}</view>-->
-          <view>￥<text class="home-list_cost">{{item.Price}}</text></view>
           <view class="home-list_bot" wx:if="{{!!item.location || item.location == 0}}">
             距离{{item.location}}km
             <!--<view class="home-list_bot--cart"></view>-->
@@ -95,5 +100,4 @@
       </view>
     </view>
   </view>
-  <footer-menu number="0"></footer-menu>
 </view>

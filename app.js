@@ -25,6 +25,7 @@ App({
     paylist: `${apiUrl}?t=paylist`, // 账单列表
     pay: `${apiUrl}?t=pay`, // 支付
     addcart: `${apiUrl}?t=addcart`, // 添加购物车
+    batchaddcart: `${apiUrl}?t=batchaddcart`, //批量添加购物车
     addcollect: `${apiUrl}?t=addcollect`, // 添加购物车
     order: `${apiUrl}?t=order`, // 下单
     orderlist: `${apiUrl}?t=orderlist`, // 订单列表
@@ -34,7 +35,8 @@ App({
     updord: `${apiUrl}?t=updord`, // 更新状态
     proads: `${apiUrl}?t=proads`, // 商品首页中的广告图
     transferout: `${apiUrl}?t=transferout`, // 提现
-    ordercart: `${apiUrl}?t=ordercart`// 购物车下单
+    ordercart: `${apiUrl}?t=ordercart`,// 购物车下单
+    shoplist: `${apiUrl}?t=shoplist`, // 商家列表
   },
   onLaunch: function () {
     // 展示本地存储能力

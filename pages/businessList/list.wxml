@@ -1,0 +1,13 @@
+<!-- 组件模板 -->
+<view class="business-list">
+  <navigator url="../detail/detail?id={{item.id}}&type=business" class="tab-list" wx:key="index" wx:for="{{infoList}}">
+  <image class="tab-img" src="{{host + item.img}}"></image>
+  <view class="tab-left-info">
+    <text class="title">{{item.shopname}}</text>
+    <text class="address">
+      {{item.address}}
+    </text>
+  </view>
+</navigator>
+  <view wx:if="{{infoList.length <1}}" class="no-data">没有更多数据哦~</view>
+</view>

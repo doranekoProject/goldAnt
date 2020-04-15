@@ -32,59 +32,85 @@ Page({
     })
   },
   onShow: function (e) {
-    app.ajax({
-      url: api[this.data.page],
-      data: {
-        pid: this.data.id
-      },
-      method: 'POST',
-    }).then(res => {
-      if (res.data.code === 1) {
-        const itemOption = {
-          original: [],
-          allData : [],
-          sortData : [],
-          showData: [],
-          curData : [],
-          name: []
+    if (this.data.page === 'business') {
+      wx.setNavigationBarTitle({
+        title: '商家详情'
+      });
+      app.ajax({
+        url: api.userinfo,
+        data: {
+          id: this.data.id
+        },
+        method: 'POST',
+      }).then(res => {
+        if (res.data.code === 1) {
+          this.setData({
+            detail: res.data.msg
+          })
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: "none"
+          })
         }
-        const list = res.data.msg.list;
-        res.data.msg.ImgList = res.data.msg.ImgList.split(';')
-        for (let i = 0; i < res.data.msg.ImgList.length; i += 1) {
-          res.data.msg.ImgList[i] = `${app.host}${res.data.msg.ImgList[i]}`;
-        }
-        if (list.length > 0) {
-          itemOption.name = list[0].SPName.split(',');
-          itemOption.original = list;
-          const len = itemOption.name.length;
-          for (let i = 0; i < list.length; i += 1) {
-            const desc = list[i].SPDesc.split(',');
-            for (let j = 0; j < len; j += 1) {
-              if (!itemOption.sortData[j]) itemOption.sortData[j] = [];
-              if (!itemOption.curData[j]) itemOption.curData[j] = [];
-              if (!itemOption.sortData[j].includes(desc[j])) {
-                itemOption.sortData[j].push(desc[j]);
-                itemOption.curData[j].push(0); // 0未选/1选中/-1不可选
-              }
-              if (!itemOption.allData[j]) itemOption.allData[j] = [];
-              itemOption.allData[j].push(desc[j]);
-            }
+      }).catch(res => {
+        console.log(res)
+      })
+    } else {
+      app.ajax({
+        url: api[this.data.page],
+        data: {
+          pid: this.data.id
+        },
+        method: 'POST',
+      }).then(res => {
+        if (res.data.code === 1) {
+          const itemOption = {
+            original: [],
+            allData : [],
+            sortData : [],
+            showData: [],
+            curData : [],
+            name: []
           }
-          itemOption.showData = itemOption.sortData;
+          const list = res.data.msg.list;
+          res.data.msg.ImgList = res.data.msg.ImgList.split(';')
+          for (let i = 0; i < res.data.msg.ImgList.length; i += 1) {
+            res.data.msg.ImgList[i] = `${app.host}${res.data.msg.ImgList[i]}`;
+          }
+          if (list.length > 0) {
+            itemOption.name = list[0].SPName.split(',');
+            itemOption.original = list;
+            const len = itemOption.name.length;
+            for (let i = 0; i < list.length; i += 1) {
+              const desc = list[i].SPDesc.split(',');
+              for (let j = 0; j < len; j += 1) {
+                if (!itemOption.sortData[j]) itemOption.sortData[j] = [];
+                if (!itemOption.curData[j]) itemOption.curData[j] = [];
+                if (!itemOption.sortData[j].includes(desc[j])) {
+                  itemOption.sortData[j].push(desc[j]);
+                  itemOption.curData[j].push(0); // 0未选/1选中/-1不可选
+                }
+                if (!itemOption.allData[j]) itemOption.allData[j] = [];
+                itemOption.allData[j].push(desc[j]);
+              }
+            }
+            itemOption.showData = itemOption.sortData;
+          }
+          this.setData({
+            detail: res.data.msg,
+            itemOption
+          });
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: "none"
+          })
         }
-        this.setData({
-          detail: res.data.msg,
-          itemOption
-        });
-      } else {
-        wx.showToast({
-          title: res.data.msg,
-          icon: "none"
-        })
-      }
-    }).catch(res => {
-      console.log(res)
-    })
+      }).catch(res => {
+        console.log(res)
+      })
+    }
   },
   optionFilter: function (key, index) {
     const result = [];
