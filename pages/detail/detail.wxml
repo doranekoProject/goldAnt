@@ -12,24 +12,24 @@
   <view class="detail-info" wx:if="{{page !== 'business'}}">
     <view class="detail-info_title">{{detail.Name}}</view>
     <!--<view wx:if="{{!!detail.Title}}" class="detail-info_desc">{{detail.Title}}</view>-->
-    <view class="detail-info_cost" >￥<text>{{detail.Price}}</text></view>
+    <view class="detail-info_cost" wx:if="{{form != 'business'}}" >￥<text>{{detail.Price}}</text></view>
   </view>
-  <view class="detail-info" wx:if="{page === 'business'}">
+  <view class="detail-info" wx:if="{{page === 'business'}}">
     <view class="detail-info_title">{{detail.shopname}}</view>
   </view>
-  <navigator url="../allBusiness/index?shopid={{detail.ShopID}}" wx:if="{{page === 'adsinfo'}}" class="detail-type" >
+  <navigator url="../allBusiness/index?shopid={{detail.ShopID}}" wx:if="{{page === 'adsinfo' && form != 'business'}}" class="detail-type" >
     <view class="detail-type_title">商家</view> 
     <view class="detail-type_text">{{detail.ShopName}}</view>
   </navigator>
-  <view wx:if="{page === 'business'}" class="detail-type detail-addr">
+  <view wx:if="{{page === 'business'}}" class="detail-type detail-addr">
     <view class="detail-type_title">地址</view> 
     <view class="detail-type_text">{{detail.address}}</view>
   </view>
-  <view wx:if="{page === 'business'}" class="detail-type">
+  <view wx:if="{{page === 'business'}}" class="detail-type">
     <view class="detail-type_title">电话</view> 
     <view class="detail-type_text">{{detail.phone}}</view>
   </view>
-  <view class="detail-type" wx:if="{{detail.list.length > 0}}" >
+  <view class="detail-type" wx:if="{{detail.list.length > 0 && form != 'business'}}" >
     <view class="detail-type_title">选择</view>
     <view class="detail-type_text" bindtap="seletePop" data-type="options">{{detail.list[0].SPName}}</view>
   </view>
@@ -37,7 +37,7 @@
     <view class="detail-desc_title"><text>详情介绍</text></view>
     <rich-text nodes="{{detail.Descrition}}" bindtap="tap"></rich-text>
   </view>
-  <view class="detail-bot" wx:if="{{page !== 'business'}}">
+  <view class="detail-bot" wx:if="{{page !== 'business' && form !== 'business'}}">
     <button open-type="contact" class="home-bar_contact">客服</button>
     <view class="detail-favorite" bindtap="bindAddcollect">收藏</view>
     <view class="detail-bot_right">

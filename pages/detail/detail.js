@@ -28,7 +28,8 @@ Page({
     const id = e.id; // 'd9a9fcd7-5f04-4e8c-b482-e70e1f265b0d' //
     this.setData({
       page,
-      id
+      id,
+      form: !!e.form ? e.form : ''
     })
   },
   onShow: function (e) {
