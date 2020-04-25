@@ -37,6 +37,7 @@ App({
     transferout: `${apiUrl}?t=transferout`, // 提现
     ordercart: `${apiUrl}?t=ordercart`,// 购物车下单
     shoplist: `${apiUrl}?t=shoplist`, // 商家列表
+    infocategory: `${apiUrl}?t=infocategory`, // 资讯栏目列表
   },
   onLaunch: function () {
     // 展示本地存储能力

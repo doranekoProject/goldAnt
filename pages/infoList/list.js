@@ -6,16 +6,9 @@ Page({
   data: {
     isShow: true,
     currentTab: 0,
-    menuData: ['新闻', '资讯', '视频', '招聘'],
-    tabItem: [{
-      isShow: true
-    }, {
-      isShow: false
-    }, {
-      isShow: false
-    }, {
-      isShow: false
-    }]
+    listWidth: '',
+    menuData: [],
+    tabItem: []
   },
   onLoad: function (e) {
     if (e.index > 0) {
@@ -23,10 +16,43 @@ Page({
         currentTab: e.index
       })
     }
+    const systemInfo = wx.getSystemInfoSync();
+    this.setData({
+      listWidth: systemInfo.windowWidth
+    });
+    app.ajax({
+      url: app.api.infocategory,
+      data: {
+      },
+      method: 'POST'
+    }).then((res) => {
+      if (res.data.code === 1) {
+        let data = res.data.msg;
+        let menuData = [];
+        let tabItem = [];
+        data.forEach((item) => {
+          menuData.push(item.Name);
+          tabItem.push({
+            isShow: false,
+            index: item.ID
+          });
+        });
+        tabItem = tabItem.concat(tabItem);
+        menuData = menuData.concat(menuData);
+        if (tabItem.length > 0) {
+          tabItem[0].isShow = true;
+        }
+        this.setData({
+          menuData,
+          tabItem
+        })
+      }
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   // 处理事件
   onTab(event) {
-    console.log('ddd')
     var cur = event.currentTarget.dataset.current;
     if (this.data.currentTab == cur) {
       return false;

@@ -145,9 +145,6 @@ Component({
     },
     getList() {
       var that = this;
-      if (this.isEnd) {
-        return false;
-      }
       app.ajax({
         data: {
           type: this.data.listStatus
@@ -156,19 +153,8 @@ Component({
         method: 'POST',
       }).then((res) => {
         if (res.data.code == 1) {
-          let data = res.data.msg;
-          const obj = {
-            adsPage: that.data.adsPage
-          };
-          obj.list = that.data.infoList.concat(data);
-          if (data.length >= 10) {
-            obj.adsPage = obj.adsPage + 1;
-          } else {
-            this.isEnd = true;
-          }
           this.setData({
-            infoList: obj.list,
-            adsPage: obj.adsPage
+            infoList: res.data.msg
           });
         } else {
           wx.showModal({

@@ -1,3 +1,12 @@
+::-webkit-scrollbar{
+
+width: 0;
+
+height: 0;
+
+color: transparent;
+
+}
 page{
   height: 100%;
 }
@@ -8,15 +17,15 @@ page{
 }
 .tab-header {
   position:absolute;
-  width: 100%;
   left: 0;
   top: 0;
-  display: flex;
+  white-space: nowrap;
   background: #fff;
 }
 .tab-header .title {
-  flex-grow: 1; /* default 0 */
   height: 100rpx;
+  display: inline-block;
+  width: 186rpx;
   line-height: 100rpx;
   font-size: 30rpx;
   color: #262626;
