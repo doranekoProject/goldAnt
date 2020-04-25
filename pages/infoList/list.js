@@ -37,8 +37,6 @@ Page({
             index: item.ID
           });
         });
-        tabItem = tabItem.concat(tabItem);
-        menuData = menuData.concat(menuData);
         if (tabItem.length > 0) {
           tabItem[0].isShow = true;
         }
