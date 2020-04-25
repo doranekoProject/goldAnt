@@ -100,12 +100,11 @@ Page({
     let addr = this.data.address.toString().replace(/\,/ig, '');
     if (/全部/.test(addr)) addr = addr.replace(/全部/ig, '');
     app.ajax({
-      url: api.ads,
+      url: api.companypro,
       data: {
         key: this.data.key || '',
         area: addr,
         category: !!this.data.getCategory && this.data.getCategory.current > 0 ? this.data.getCategory.current : '',
-        otype: !!this.data.otype ? this.data.otype.current : '',
         index: this.data.adsPage,
         shopid: ''
       },

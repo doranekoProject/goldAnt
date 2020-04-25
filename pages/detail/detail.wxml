@@ -21,13 +21,13 @@
     <view class="detail-type_title">商家</view> 
     <view class="detail-type_text">{{detail.ShopName}}</view>
   </navigator>
-  <view wx:if="{{page === 'business'}}" class="detail-type detail-addr">
+  <view wx:if="{{form === 'business'}}" class="detail-type detail-addr">
     <view class="detail-type_title">地址</view> 
-    <view class="detail-type_text">{{detail.address}}</view>
+    <view class="detail-type_text">{{detail.ProAddr}}</view>
   </view>
-  <view wx:if="{{page === 'business'}}" class="detail-type">
+  <view wx:if="{{form === 'business'}}" class="detail-type">
     <view class="detail-type_title">电话</view> 
-    <view class="detail-type_text">{{detail.phone}}</view>
+    <view class="detail-type_text">{{detail.Phone}}</view>
   </view>
   <view class="detail-type" wx:if="{{detail.list.length > 0 && form != 'business'}}" >
     <view class="detail-type_title">选择</view>

@@ -38,6 +38,8 @@ App({
     ordercart: `${apiUrl}?t=ordercart`,// 购物车下单
     shoplist: `${apiUrl}?t=shoplist`, // 商家列表
     infocategory: `${apiUrl}?t=infocategory`, // 资讯栏目列表
+    companypro: `${apiUrl}?t=companypro`, // 企业展示列表
+    companyproinfo: `${apiUrl}?t=companyproinfo`, // 企业展示列表
   },
   onLaunch: function () {
     // 展示本地存储能力
