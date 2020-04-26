@@ -17,7 +17,7 @@
     <view class="home-filter_item {{tabType == 1 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="1"><text>地区</text></view>
     <view class="home-filter_item {{tabType == 2 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="2"><text>场所</text></view>
     <view class="home-filter_item {{tabType == 3 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="3"><text>线下</text></view>
-    <view class="home-filter_item {{tabType == 4 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="4"><text>批量购买</text></view>
+    <!-- <view class="home-filter_item {{tabType == 4 ? 'home-filter_item--active' : ''}}" bindtap="tab" data-type="4"><text>批量购买</text></view> -->
   </view>
   <scroll-view wx:if="{{list.length > 0}}" class="home-list" scroll-y='true' style="height:{{height}}px" bindscrolltolower='lower'>
     <view class="home-list_main">
