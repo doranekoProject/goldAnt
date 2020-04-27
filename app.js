@@ -1,7 +1,7 @@
 //app.js
-const apiUrl = 'http://hzkzd.com:8050/Services/c_server.aspx';
+const apiUrl = 'https://jinyitongcheng.com/Services/c_server.aspx';
 App({
-  host: 'http://hzkzd.com:8050',
+  host: 'https://jinyitongcheng.com',
   api: {
     reg: `${apiUrl}?t=reg`,
     login: `${apiUrl}?t=login`,
