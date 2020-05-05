@@ -111,6 +111,6 @@ Page({
     this.getBanner();
   },
   onShow: function () {
-    this.getList()
+    if (!this.data.lastPage) this.getList()
   }
 })
