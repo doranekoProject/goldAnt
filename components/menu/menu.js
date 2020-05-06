@@ -4,6 +4,10 @@ Component({
     number: {
       type: Number,
       value: 0
+    },
+    type: {
+      type: String,
+      value: 'default'
     }
   },
   data: {

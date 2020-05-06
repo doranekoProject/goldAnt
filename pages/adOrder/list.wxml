@@ -7,7 +7,7 @@
   </view>
   <swiper class="tab-box" current="{{currentTab}}" duration="300" bindchange="switchTab">        
     <swiper-item wx:for="{{menuData}}" data-current="{{index}}" wx:for-index="index" wx:key="index" class="tab-content">
-      <info-list methodType="{{methodType}}" method="getOrder" isShow="{{item.isShow}}" status="{{item.value}}"></info-list>
+      <info-list listHeight="{{listHeight}}" methodType="{{methodType}}" method="getOrder" isShow="{{item.isShow}}" status="{{item.value}}"></info-list>
     </swiper-item>
   </swiper>
   

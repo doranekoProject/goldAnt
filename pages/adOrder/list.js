@@ -6,6 +6,7 @@ Page({
     isShow: true,
     methodType: 'ads',
     currentTab: 0,
+    listHeight: 0,
     menuData: [{
       title: '全部',
       value: '',
@@ -27,6 +28,15 @@ Page({
         value: '4',
         isShow: false
       }]
+  },
+  onReady: function () {
+    const that = this;
+    let query = wx.createSelectorQuery().in(this)
+    query.select('.tab-header').boundingClientRect().exec(res => {
+      that.setData({
+        listHeight: wx.getSystemInfoSync().windowHeight - res[0].height
+      })
+    });
   },
   onLoad: function (e) {
     this.currentTarget = 0;

@@ -8,8 +8,8 @@
   </scroll-view>
   <swiper class="tab-box" current="{{currentTab}}" duration="300" bindchange="switchTab">        
     <swiper-item wx:for="{{tabItem}}" data-current="{{index}}" wx:for-index="index" wx:key="index" class="tab-content">
-      <info-list method="getList" listStatus="{{item.index}}" methodType="list" isShow="{{item.isShow}}"></info-list>
+      <info-list listHeight="{{listHeight}}" paddingTop="85" method="getList" listStatus="{{item.index}}" methodType="list" isShow="{{item.isShow}}"></info-list>
     </swiper-item>
   </swiper>
-  
+  <footer-menu class="footer" type="list"></footer-menu>
 </view>

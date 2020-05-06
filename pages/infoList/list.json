@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "info-list": "../components/infoList/info-list"
+    "info-list": "../components/infoList/info-list",
+    "footer-menu": "../components/menu/menu"
   },
   "navigationBarTitleText": "资讯列表"
 }

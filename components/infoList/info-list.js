@@ -32,9 +32,9 @@ Component({
       type: Number,
       value: 1
     },
-    paddingTop: {
+    listHeight: {
       type: Number,
-      value: 50
+      value: wx.getSystemInfoSync().windowHeight - 50
     }
   },
   observers: {
@@ -90,12 +90,6 @@ Component({
     }
   },
   ready: function() {
-    const systemInfo = wx.getSystemInfoSync();
-    this.setData({
-      host: app.host,
-      listHeight: systemInfo.windowHeight - this.data.paddingTop
-    });
-    
   },
   /**
    * 组件的方法列表

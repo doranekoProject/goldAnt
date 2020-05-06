@@ -8,7 +8,11 @@ Page({
     currentTab: 0,
     listWidth: '',
     menuData: [],
-    tabItem: []
+    tabItem: [],
+    listHeight: 0
+  },
+  onReady: function () {
+    
   },
   onLoad: function (e) {
     if (e.index > 0) {
@@ -43,7 +47,8 @@ Page({
         this.setData({
           menuData,
           tabItem
-        })
+        });
+        this.setHeight();
       }
     }).catch((res) => {
       console.log(res)
@@ -61,6 +66,16 @@ Page({
         tabItem: this.data.tabItem
       })
     }
+  },
+  setHeight() {
+    const that = this;
+    let query = wx.createSelectorQuery().in(this)
+    query.select('.tab-header').boundingClientRect()
+    query.select('.footer').boundingClientRect().exec(res => {
+      that.setData({
+        listHeight: wx.getSystemInfoSync().windowHeight - res[0].height - res[1].height
+      })
+    });
   },
   switchTab(event) {
     var cur = event.detail.current;
