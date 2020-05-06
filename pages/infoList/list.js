@@ -5,7 +5,7 @@ const app = getApp()
 Page({
   data: {
     isShow: true,
-    currentTab: 0,
+    currentTab: 1,
     listWidth: '',
     menuData: [],
     tabItem: [],
@@ -42,7 +42,7 @@ Page({
           });
         });
         if (tabItem.length > 0) {
-          tabItem[0].isShow = true;
+          tabItem[1].isShow = true;
         }
         this.setData({
           menuData,
@@ -60,6 +60,8 @@ Page({
     if (this.data.currentTab == cur) {
       return false;
     } else {
+      this.isTab = true;
+      this.data.tabItem[this.data.currentTab].isShow = false;
       this.data.tabItem[cur].isShow = true;
       this.setData({
         currentTab: cur,
@@ -78,8 +80,13 @@ Page({
     });
   },
   switchTab(event) {
+    if (this.isTab) {
+      this.isTab = false;
+      return;
+    }
     var cur = event.detail.current;
     this.data.tabItem[cur].isShow = true;
+    this.data.tabItem[this.data.currentTab].isShow = false;
     this.setData({
       currentTab: cur,
       tabItem: this.data.tabItem

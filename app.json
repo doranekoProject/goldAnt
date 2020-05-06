@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/infoList/list",
     "pages/homepage/homepage",
     "pages/business/index",
     "pages/businessList/list",
@@ -21,7 +22,6 @@
     "pages/address/edit",
     "pages/adOrder/list",
     "pages/adOrder/details",
-    "pages/infoList/list",
     "pages/infoList/details",
     "pages/billList/list",
     "pages/submitOrder/index",
