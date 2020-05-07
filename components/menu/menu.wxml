@@ -7,6 +7,6 @@
 <view id="footerMenu" wx:if="{{type=='list'}}" class="menu">
      <navigator url="/pages/infoList/list" open-type="redirect" class="menu-item {{number == 0 ? ' menu-item_active' : ''}}">蚁族生活</navigator>
     <navigator url="/pages/homepage/homepage" open-type="redirect" class="menu-item {{number == 1 ? ' menu-item_active' : ''}}">金蚁商城</navigator>
-    <navigator url="/pages/showroom/index" open-type="redirect" class="menu-item {{number == 2 ? ' menu-item_active' : ''}}">企业展厅</navigator>
+    <navigator url="/pages/business/index" open-type="redirect" class="menu-item {{number == 2 ? ' menu-item_active' : ''}}">企业展厅</navigator>
     <navigator url="/pages/profile/profile" open-type="redirect" class="menu-item {{number == 3 ? ' menu-item_active' : ''}}">我的</navigator>
 </view>
