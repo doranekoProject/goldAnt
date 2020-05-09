@@ -16,7 +16,7 @@ page {
   flex: 1;
   color: #A5A5A5;
   padding: 60rpx 0 10rpx;
-  font-size: 20rpx;
+  font-size: 28rpx;
   background-position: center 10rpx;
   background-size: auto 40rpx;
   background-repeat: no-repeat;
@@ -50,6 +50,5 @@ page {
 }
 .menu-list .menu-item {
   background: none;
-  font-size: 29rpx;
   padding-top: 16rpx;
 }
