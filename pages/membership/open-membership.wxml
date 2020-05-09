@@ -14,6 +14,6 @@
     </view>
     
   </view>
-  <view wx:if="{{lv==0}}" bindtap="onTap" class="open-vip">365元立即开通</view>
-  <view wx:if="{{buttonShow}}" bindtap="onTap" class="open-vip">365元立即续费</view>
+  <view wx:if="{{lv==0}}" bindtap="onTap" class="open-vip">立即开通</view>
+  <view wx:if="{{buttonShow}}" bindtap="onTap" class="open-vip">立即续费</view>
 </view>
